@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Hugo 0.18">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="liuhuimin">
+
+    <title>painterliu</title>
+
+    <link href="http://painterliu.com/index.xml" rel="alternate" type="application/rss+xml" title="painterliu">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="http://painterliu.com/img/@.ico" rel="shortcut icon">
+
+    
+</head>
+<body>
+<div id="wrapper">
+<div id="sidebar-wrapper">
+    <div class="sidebar-title">
+        <h1 id="site-title"><a href="http://painterliu.com/">@</a></h1>
+        <p class="lead blog-description">好好学习, 天天向上</p>
+    </div>
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af">技术</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%9d%82%e7%b1%bb">杂类</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%94%9f%e6%b4%bb">生活</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b">编程</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e8%af%bb%e4%b9%a6">读书</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/tag/">标签</a></li>
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/about/">关于</a></li>
+    </ul>
+</div>
+<div id="content-wrapper">
+    <div class="post">
+      <h1 class="post-title">java调用matlab返回值为struct类型的处理</h1>
+      <div class="post-date">
+      2014年07月08日
+      &nbsp;<a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b"> 编程</a>
+      </div>
+           <p>因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。
+具体java调用matlab函数的过程这里不多说，具体可以看这里:<a href="http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/">Java和matlab混合编程</a>，<a href="http://xiaolongfeixiang.iteye.com/blog/1893621">Java调用Matlab方法的三种方式</a>，<a href="http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html">java中调用Matlab的函数+注意事项</a>，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
+这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。
+我这里函数返回的结构体直接java输出如下：</p>
+
+<pre><code>      Comment: 'Mean: ARMAX(0,0,0); Variance: GARCH(1,1) '
+ Distribution: 'Gaussian'
+            C: 0.0195
+VarianceModel: 'GARCH'
+            P: 1
+            Q: 1
+            K: 0.0055
+        GARCH: 0.8004
+         ARCH: 0
+      Display: 'off'
+</code></pre>
+
+<p>一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：<code>作为字符串处理</code>。
+代码如下：</p>
+
+<pre><code>MWStructArray result=(MWStructArray)resultObjects[0];//取matlab导出函数的第一个返回值
+String string=result.toString();//转化为字符串
+String[] list=string.split(&quot;\n&quot;);//以换行符分割
+c=Double.parseDouble(list[2].split(&quot;:&quot;)[1]);//以':'分割第3行取C值
+k=Double.parseDouble(list[6].split(&quot;:&quot;)[1]);//以':'分割第7行取k值
+garch=Double.parseDouble(list[7].split(&quot;:&quot;)[1]);//以':'分割第8行取GARCH值
+arch=Double.parseDouble(list[8].split(&quot;:&quot;)[1]);//以':'分割第9行取ARCH值
+</code></pre>
+
+<p>方法很简单，提供个处理思路，大家可按照自己返回的内容处理。</p>
+
+    </div>
+    <ul class="pager">
+    
+         &nbsp;<li class="previous"><a href="http://painterliu.com/tag/2014-08-05-silence/"> 《沉默的大多数》读后感</a></li> 
+        
+    
+          &nbsp;<li class="next"><a href="http://painterliu.com/post/2014-06-23-flower/"> 成功的花儿</a></li>
+
+      
+      
+    </ul>
+    
+    <div class="ds-thread" data-thread-key="/post/2014-07-28-javamatlab/" data-title="java调用matlab返回值为struct类型的处理" data-url="http://painterliu.com/post/2014-07-28-javamatlab/"></div>
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"painterliu"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+ </div>
+
+
+</body></html>

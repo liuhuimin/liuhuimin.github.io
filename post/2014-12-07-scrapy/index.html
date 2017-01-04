@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Hugo 0.18">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="liuhuimin">
+
+    <title>painterliu</title>
+
+    <link href="http://painterliu.com/index.xml" rel="alternate" type="application/rss+xml" title="painterliu">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="http://painterliu.com/img/@.ico" rel="shortcut icon">
+
+    
+</head>
+<body>
+<div id="wrapper">
+<div id="sidebar-wrapper">
+    <div class="sidebar-title">
+        <h1 id="site-title"><a href="http://painterliu.com/">@</a></h1>
+        <p class="lead blog-description">好好学习, 天天向上</p>
+    </div>
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af">技术</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%9d%82%e7%b1%bb">杂类</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%94%9f%e6%b4%bb">生活</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b">编程</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e8%af%bb%e4%b9%a6">读书</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/tag/">标签</a></li>
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/about/">关于</a></li>
+    </ul>
+</div>
+<div id="content-wrapper">
+    <div class="post">
+      <h1 class="post-title">用Scrapy写爬虫</h1>
+      <div class="post-date">
+      2014年12月07日
+      &nbsp;<a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b"> 编程</a>
+      </div>
+           
+
+<p>最近懒，没怎么更新博客，赶紧在周末抽出时间写写。</p>
+
+<p>前一段时间想翻翻<a href="http://www.freebuf.com/">freebuf网站</a>的内容（黑客与画家^_^），一页一页翻太麻烦，本着黑客精神，就想着写个爬虫把网站内容题目爬下来，对感兴趣的题目可以点进去看。</p>
+
+<p>先声明，原来从来没写过爬虫，于是为了偷懒，找到了Python的爬虫框架<a href="http://scrapy.org/">Scrapy</a>,官方文档看<a href="https://scrapy-chs.readthedocs.org/zh_CN/latest/">这里</a>。</p>
+
+<p>有框架就是快，突击学习了两天就把爬虫写出来了。</p>
+
+<h3 id="scrapy安装">Scrapy安装</h3>
+
+<p>自己搜索吧，这里不提。
+我用的是Ubuntu系统，刚学会了一个小技巧。安装过程中报错缺少头文件，可试着用一下命令:</p>
+
+<pre><code>sudo apt-get install apt-file 
+apt-file update 
+apt-file search /***  #这里代表提示缺少的文件及路径
+</code></pre>
+
+<p>通过上面的命令找到相关的包、软件后安装即可，注意会搜索出来很多，一般为后几个字母为lib的包。
+###创建项目
+选择合适的目录，创建freebuf项目:</p>
+
+<pre><code>scrapy startproject freebuftools
+</code></pre>
+
+<p>该命令将创建如下目录文件:</p>
+
+<pre><code>freebuftools/
+    scrapy.cfg
+    freebuftools/
+        __init__.py
+        items.py
+        pipelines.py
+        settings.py
+        spiders/
+            __init__.py
+            ...
+</code></pre>
+
+<p>这些文件分别是:</p>
+
+<ul>
+<li>scrapy.cfg: 项目的配置文件</li>
+<li>freebuftools/: 该项目的python模块。之后您将在此加入代码。</li>
+<li>freebuftools/items.py: 项目中的item文件.</li>
+<li>freebuftools/pipelines.py: 项目中的pipelines文件.</li>
+<li>freebuftools/settings.py: 项目的设置文件.</li>
+<li>freebuftools/spiders/: 放置spider代码的目录.</li>
+</ul>
+
+<h3 id="定义item">定义Item</h3>
+
+<p>Item 是保存爬取到的数据的容器；其使用方法和python字典类似， 并且提供了额外保护机制来避免拼写错误导致的未定义字段错误。</p>
+
+<p>由于我只想获得freebuf里文章的题目和链接，于是只定义了两个相应字段:</p>
+
+<pre><code>import scrapy
+class FreebuftoolsItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    title=scrapy.Field()#用于保存题目
+    link =scrapy.Field()#用于保存链接
+
+</code></pre>
+
+<h3 id="分析网站结构">分析网站结构</h3>
+
+<p>使用浏览器的审查元素功能查看freebuf网站分类浏览下的html代码，可以发现文章目录一条一条的都被包含在<code>&lt;div class=&quot;news_inner news-list&quot;&gt;&lt;/div&gt;</code>标签里面</p>
+
+<p>具体结构如下图:</p>
+
+<p><img src="/img/html.jpg" alt="文章题目结构" /></p>
+
+<p>通过目录结构可以提取出文章题目的xpath:</p>
+
+<pre><code>//div[@class='news_inner news-list']/div[@class='news-info']/dl/dt/a/text()
+</code></pre>
+
+<p>文章链接的xpath：</p>
+
+<pre><code>//div[@class='news_inner news-list']/div[@class='news-info']/dl/dt/a/@href
+</code></pre>
+
+<p>光有文章题目和内容还不够，还要知道怎样进入下一页，查看html代码可知下一页的链接格式为</p>
+
+<pre><code>&lt;div class=&quot;news-more&quot; id=&quot;pagination&quot;&gt;
+    &lt;a href=&quot;http://www.freebuf.com/xxx/page/xxx&quot;&gt;查看更多&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>提取出下一页链接xpath:<code>//div[@id='pagination']/a/@href</code>
+具体xpath的教程可以查看<a href="https://scrapy-chs.readthedocs.org/zh_CN/latest/">scrapy文档</a>，或者看这里<a href="http://www.w3school.com.cn/xpath/">xpath教程</a>。</p>
+
+<p>有一个小技巧，浏览器中看html代码时可以右键选择<code>复制xpath</code>，不过复制的路径比较死板。</p>
+
+<h3 id="编写spider">编写spider</h3>
+
+<p>首先在目录<code>freebuftools\freebuftools\spiders\</code>下新建文件<code>freebuftools_Spider.py</code>。
+代码如下:</p>
+
+<pre><code>#encoding=utf-8
+import scrapy
+from freebuftools.items import FreebuftoolsItem
+class FreeBufToolsSpider(scrapy.Spider):
+    name = &quot;freeBufTools&quot;
+    allowed_domains =[&quot;freebuf.com&quot;]#域名
+    start_urls =[&quot;http://www.freebuf.com/geek&quot;]#初始页面，可更改为相应分类首页
+    def parse(self,response):
+        file=open(&quot;freebufgeek.html&quot;,'a')#写入爬取内容的文件，注意文件为追加模式
+
+        for sel in response.xpath(&quot;//div[@class='news_inner news-list']/div[@class='news-info']/dl/dt/a&quot;):#xpath路径父节点
+            tools=FreebuftoolsItem()#新建保存item
+            tools['title']=sel.xpath(&quot;text()&quot;).extract()[0].encode('utf-8')#提取文章题目并转换格式保存
+            tools['link']=sel.xpath(&quot;@href&quot;).extract()[0].encode('utf-8')#提取文章链接并转换格式保存
+            html='''&lt;p&gt;&lt;a href=&quot;'''+tools['link']+'''&quot; target=&quot;_black&quot;&gt;'''+tools['title']+&quot;&lt;/a&gt;&lt;/p&gt;&quot;#拼接写入文件的html代码
+            file.writelines(html)#将爬取内容写入文件
+            yield tools#返回爬取内容
+        url=response.xpath(&quot;//div[@id='pagination']/a/@href&quot;).extract()[0]#获取下一页的链接
+        yield scrapy.Request(url,callback=self.parse)#回调本函数继续爬取下一页
+</code></pre>
+
+<p>上面代码写的比较清楚，内容也很简单，不懂的可以查看官方文档，另外有点需要注意，保存爬取内容的文件打开方式为<strong>追加</strong>，如果不这样只能保存一条爬取的数据。</p>
+
+<p>改变初始页面可以爬取不同分类下的文章题目。</p>
+
+<p>还有Python中yield的用法，简单来说就是yield可在函数中返回内容而仍使函数能继续执行。具体Google百度。</p>
+
+<h3 id="执行爬虫">执行爬虫</h3>
+
+<p>打开最外层freebuftools文件夹，运行命令<code>scrapy crawl freeBufTools</code>即可。运行完后可找到自己定义的爬取内容的文件。</p>
+
+<p>我这里有个问题就是记得创建项目时字母用的小写，但执行时发现小写不对，大家可以在执行前先运行一下<code>scrapy list</code>查看项目名称。
+###遇到的问题
+主要是文件的问题，一开始我是想直接通过管道导出json格式文件的，但是发现输出的文件内容是汉字对应的utf-8编码，如图:</p>
+
+<p><img src="/img/json.PNG" alt="json输出形式" /></p>
+
+<p>最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看<a href="http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086">这里</a>，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要<code>pipelines.py</code>文件和<code>settings.py</code>文件</p>
+
+    </div>
+    <ul class="pager">
+    
+    
+          &nbsp;<li class="next"><a href="http://painterliu.com/about/2014-11-01-book-js/"> JS自动加载豆瓣相关图书内容</a></li>
+
+      
+      
+    </ul>
+    
+    <div class="ds-thread" data-thread-key="/post/2014-12-07-scrapy/" data-title="用Scrapy写爬虫" data-url="http://painterliu.com/post/2014-12-07-scrapy/"></div>
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"painterliu"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+ </div>
+
+
+</body></html>

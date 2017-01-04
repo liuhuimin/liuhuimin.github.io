@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>杂类 on painterliu的博客</title>
+    <link>http://painterliu.com/categories/%E6%9D%82%E7%B1%BB/index.xml</link>
+    <description>Recent content in 杂类 on painterliu的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <atom:link href="http://painterliu.com/categories/%E6%9D%82%E7%B1%BB/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>在线学习工作工具推荐</title>
+      <link>http://painterliu.com/post/2014-10-19-onlinetools/</link>
+      <pubDate>Sun, 19 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-10-19-onlinetools/</guid>
+      <description>&lt;p&gt;这里推荐一下协助学习工作的在线工具：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackedit.io&#34;&gt;StackEdit&lt;/a&gt;：markdown编辑器，可导入导出本地文件&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://naotu.baidu.com&#34;&gt;百度脑图&lt;/a&gt;：百度的思维导图编辑工具，可存到百度网盘，很好用&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.processon.com&#34;&gt;processon&lt;/a&gt;：在线画各种图的工具，和visio功能差不多，当然和office其他工具结合肯定没这么好，能导出为png、pdf、pos文件。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.codecogs.com/latex/eqneditor.php&#34;&gt;在线LaTex公式编辑器&lt;/a&gt;：编辑公式生成LaTex、HTML等代码&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://webdemo.myscript.com/#/demo/equation&#34;&gt;公式手写识别&lt;/a&gt;：和上面的功能差不多，只不过这个是把公式画出来识别&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;再提一下在线Latex编辑器，没用过，有需要的可以看&lt;a href=&#34;http://www.zhihu.com/question/21375839&#34;&gt;这里&lt;/a&gt;,暂时列这么多，其他的一些在线工具和学习工作无关没有列。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

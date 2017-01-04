@@ -102,5 +102,72 @@
 </description>
     </item>
     
+    <item>
+      <title>Javascript备忘</title>
+      <link>http://painterliu.com/post/2014-10-18-js-dom/</link>
+      <pubDate>Sat, 18 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-10-18-js-dom/</guid>
+      <description>
+
+&lt;p&gt;看了两天《javascript DOM编程艺术(第二版)》，这里记录一下基本的内容，备忘。&lt;/p&gt;
+
+&lt;h4 id=&#34;语法&#34;&gt;语法&lt;/h4&gt;
+
+&lt;p&gt;var声明变量，弱类型&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var age=&amp;quot;thirty three&amp;quot;;
+age=33;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;字符串中可以用双引号里面含单引号，单引号里面含双引号，不需要转义，如果单引号里面有单引号，需要转义，如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var mood=&amp;quot;about 5&#39;10\&amp;quot; tall&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;数组用&lt;code&gt;Array()&lt;/code&gt;声明，可以&lt;code&gt;Array(4)&lt;/code&gt;设置数组长度，或者&lt;code&gt;Array(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;);&lt;/code&gt;直接初始化数组或者
+&lt;code&gt;var year =[1990,1991,1992]&lt;/code&gt;
+字符串、数字、变量、数组、等可以混合存入数组，也可以是变量。&lt;/p&gt;
+
+&lt;p&gt;关联数组(不推荐使用)：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var lennon=Array();
+lennon[&#39;name&#39;]=&amp;quot;John&amp;quot;;
+lennon[&#39;year&#39;]=1940;
+lennon[&#39;living&#39;]=false;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对象Object&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var lennon=Object();//var lennon={}
+lennon.name=&amp;quot;John&amp;quot;;
+lennon.year=1940
+lennon.living=false;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var lennon={name:&amp;quot;John&amp;quot;,year:1940,living:false};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;操作&#34;&gt;操作&lt;/h4&gt;
+
+&lt;p&gt;&amp;rdquo;+&amp;ldquo;连接字符串和数字时转为字符串&lt;/p&gt;
+
+&lt;h4 id=&#34;条件语句&#34;&gt;条件语句&lt;/h4&gt;
+
+&lt;p&gt;&amp;rdquo;==&amp;ldquo;不进行严格比较，严格比较用&amp;rdquo;===&amp;ldquo;，同样，“!==”对应于&amp;rdquo;!=&amp;rdquo;&lt;/p&gt;
+
+&lt;h4 id=&#34;函数&#34;&gt;函数&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;function name(arguments){
+     statements;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;函数内部局部变量不影响全局变量要用var声明才行，不声明则影响同名全局变量&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

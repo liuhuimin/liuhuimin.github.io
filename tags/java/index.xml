@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on painterliu的博客</title>
+    <link>http://painterliu.com/tags/java/index.xml</link>
+    <description>Recent content in Java on painterliu的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <atom:link href="http://painterliu.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>linux下java调用matlab</title>
+      <link>http://painterliu.com/post/2014-08-08-linux-java-matlab/</link>
+      <pubDate>Fri, 08 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-08-08-linux-java-matlab/</guid>
+      <description>
+
+&lt;p&gt;项目需要迁移到linux环境，准确的说是redhat系统，所以最近研究在redhat下java调用matlab的解决方法，期间遇到了各种问题，卡了好长时间，现在终于解决了。&lt;/p&gt;
+
+&lt;h3 id=&#34;redhat下matlab安装&#34;&gt;Redhat下matlab安装&lt;/h3&gt;
+
+&lt;p&gt;首先需要在redhat下安装matlab，我redhat是搭在虚拟机里的，大家也可以在虚拟机里搭建练手，可以保存快照，很方便回退。&lt;/p&gt;
+
+&lt;p&gt;这里不详细介绍安装过程，只提一些重点内容。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;安装时提示是否在线安装选否(询问是英文的)&lt;/li&gt;
+&lt;li&gt;报错：error while loading shared libraries: &lt;code&gt;libXp.so.6&lt;/code&gt;: cannot open shared object file: No such file or directory时，将安装文件中/update/bin/glnx86目录下的libmwins.so文件复制到/usr/lib/下，命名为libXp.so.6&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;安装就这两个需要注意的地方，下面是调用&lt;/p&gt;
+
+&lt;h3 id=&#34;java调用matlab&#34;&gt;java调用matlab&lt;/h3&gt;
+
+&lt;p&gt;matlab导出jar包这里就不提了，大家可以自己搜索。这里主要讲述过程中遇到的困难及解决办法&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;提示&lt;code&gt;MCR版本不对&lt;/code&gt;，这个报错很奇怪，明明一个matlab导出的，用的就是它的MCR，居然提示不对，解决方法就是配置环境变量LD_LIBRARY_PATH,XAPPLRESDIR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;LD_LIBRARY_PATH=/usr/local/MATLAB/bin/glnxa64
+XAPPLRESDIR=/usr/local/MATLAB/X11/app-defaults
+LD_PATH=/usr/local/MATLAB/runtime/glnxa64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将&lt;code&gt;&#39;/usr/local/MATLAB/&#39;&lt;/code&gt;换成自己的安装目录,如果还有问题，在eclipse里面配置运行的环境变量，方法是右键项目,选择&lt;code&gt;Run As&lt;/code&gt;下&lt;code&gt;Run Configurations&lt;/code&gt;,点击&lt;code&gt;Environment&lt;/code&gt;选项卡，新建上面两个环境变量。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;报错&lt;code&gt;Exception in thread &amp;quot;main&amp;quot; java.lang.LinkageError:/usr/lib/libXp.so.6:undefined symbol
+:SSL_connect&lt;/code&gt;，这里是缺少文件，解决方法是：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;mounts /dev/cdrom /media   （挂载盘）
+cd /media &amp;amp;&amp;amp; ls    （查看是否挂载成功）
+vim /etc/yum.repos.d/rhel-debuginfo.repo 打开该文件
+
+*****该文件中前两行不需要改，从baseurl开始修改成下文所示的值
+[xxxx]
+name=xxxx
+baseurl=file:///media/Server
+enable=1  （这里一定是1，启动服务）
+gpgchek=0  （这里一定是0，否则下面不能安装）
+保存该文件，执行下面操作就ok
+yum -y install *linbXp*  （安装需要的包）
+rpm -qa libXp  (查看是否安装成功）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后就可以java调用matlab了。
+&lt;code&gt;友情提示：&lt;/code&gt;上面对rhel-debuginfo.repo文件操作有什么影响不清楚，可以先备份一下供以后还原&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>java调用matlab返回值为struct类型的处理</title>
+      <link>http://painterliu.com/post/2014-07-28-javamatlab/</link>
+      <pubDate>Tue, 08 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-07-28-javamatlab/</guid>
+      <description>&lt;p&gt;因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。
+具体java调用matlab函数的过程这里不多说，具体可以看这里:&lt;a href=&#34;http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/&#34;&gt;Java和matlab混合编程&lt;/a&gt;，&lt;a href=&#34;http://xiaolongfeixiang.iteye.com/blog/1893621&#34;&gt;Java调用Matlab方法的三种方式&lt;/a&gt;，&lt;a href=&#34;http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html&#34;&gt;java中调用Matlab的函数+注意事项&lt;/a&gt;，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
+这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。
+我这里函数返回的结构体直接java输出如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;      Comment: &#39;Mean: ARMAX(0,0,0); Variance: GARCH(1,1) &#39;
+ Distribution: &#39;Gaussian&#39;
+            C: 0.0195
+VarianceModel: &#39;GARCH&#39;
+            P: 1
+            Q: 1
+            K: 0.0055
+        GARCH: 0.8004
+         ARCH: 0
+      Display: &#39;off&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：&lt;code&gt;作为字符串处理&lt;/code&gt;。
+代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;MWStructArray result=(MWStructArray)resultObjects[0];//取matlab导出函数的第一个返回值
+String string=result.toString();//转化为字符串
+String[] list=string.split(&amp;quot;\n&amp;quot;);//以换行符分割
+c=Double.parseDouble(list[2].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第3行取C值
+k=Double.parseDouble(list[6].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第7行取k值
+garch=Double.parseDouble(list[7].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第8行取GARCH值
+arch=Double.parseDouble(list[8].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第9行取ARCH值
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;方法很简单，提供个处理思路，大家可按照自己返回的内容处理。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,8 +5,157 @@
     <link>http://painterliu.com/post/index.xml</link>
     <description>Recent content in Posts on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 27 Oct 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Dec 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://painterliu.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>用Scrapy写爬虫</title>
+      <link>http://painterliu.com/post/2014-12-07-scrapy/</link>
+      <pubDate>Sun, 07 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-12-07-scrapy/</guid>
+      <description>
+
+&lt;p&gt;最近懒，没怎么更新博客，赶紧在周末抽出时间写写。&lt;/p&gt;
+
+&lt;p&gt;前一段时间想翻翻&lt;a href=&#34;http://www.freebuf.com/&#34;&gt;freebuf网站&lt;/a&gt;的内容（黑客与画家^_^），一页一页翻太麻烦，本着黑客精神，就想着写个爬虫把网站内容题目爬下来，对感兴趣的题目可以点进去看。&lt;/p&gt;
+
+&lt;p&gt;先声明，原来从来没写过爬虫，于是为了偷懒，找到了Python的爬虫框架&lt;a href=&#34;http://scrapy.org/&#34;&gt;Scrapy&lt;/a&gt;,官方文档看&lt;a href=&#34;https://scrapy-chs.readthedocs.org/zh_CN/latest/&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;有框架就是快，突击学习了两天就把爬虫写出来了。&lt;/p&gt;
+
+&lt;h3 id=&#34;scrapy安装&#34;&gt;Scrapy安装&lt;/h3&gt;
+
+&lt;p&gt;自己搜索吧，这里不提。
+我用的是Ubuntu系统，刚学会了一个小技巧。安装过程中报错缺少头文件，可试着用一下命令:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install apt-file 
+apt-file update 
+apt-file search /***  #这里代表提示缺少的文件及路径
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过上面的命令找到相关的包、软件后安装即可，注意会搜索出来很多，一般为后几个字母为lib的包。
+###创建项目
+选择合适的目录，创建freebuf项目:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;scrapy startproject freebuftools
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;该命令将创建如下目录文件:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;freebuftools/
+    scrapy.cfg
+    freebuftools/
+        __init__.py
+        items.py
+        pipelines.py
+        settings.py
+        spiders/
+            __init__.py
+            ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这些文件分别是:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;scrapy.cfg: 项目的配置文件&lt;/li&gt;
+&lt;li&gt;freebuftools/: 该项目的python模块。之后您将在此加入代码。&lt;/li&gt;
+&lt;li&gt;freebuftools/items.py: 项目中的item文件.&lt;/li&gt;
+&lt;li&gt;freebuftools/pipelines.py: 项目中的pipelines文件.&lt;/li&gt;
+&lt;li&gt;freebuftools/settings.py: 项目的设置文件.&lt;/li&gt;
+&lt;li&gt;freebuftools/spiders/: 放置spider代码的目录.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;定义item&#34;&gt;定义Item&lt;/h3&gt;
+
+&lt;p&gt;Item 是保存爬取到的数据的容器；其使用方法和python字典类似， 并且提供了额外保护机制来避免拼写错误导致的未定义字段错误。&lt;/p&gt;
+
+&lt;p&gt;由于我只想获得freebuf里文章的题目和链接，于是只定义了两个相应字段:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import scrapy
+class FreebuftoolsItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    title=scrapy.Field()#用于保存题目
+    link =scrapy.Field()#用于保存链接
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;分析网站结构&#34;&gt;分析网站结构&lt;/h3&gt;
+
+&lt;p&gt;使用浏览器的审查元素功能查看freebuf网站分类浏览下的html代码，可以发现文章目录一条一条的都被包含在&lt;code&gt;&amp;lt;div class=&amp;quot;news_inner news-list&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;标签里面&lt;/p&gt;
+
+&lt;p&gt;具体结构如下图:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/html.jpg&#34; alt=&#34;文章题目结构&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;通过目录结构可以提取出文章题目的xpath:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//div[@class=&#39;news_inner news-list&#39;]/div[@class=&#39;news-info&#39;]/dl/dt/a/text()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;文章链接的xpath：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//div[@class=&#39;news_inner news-list&#39;]/div[@class=&#39;news-info&#39;]/dl/dt/a/@href
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;光有文章题目和内容还不够，还要知道怎样进入下一页，查看html代码可知下一页的链接格式为&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;news-more&amp;quot; id=&amp;quot;pagination&amp;quot;&amp;gt;
+    &amp;lt;a href=&amp;quot;http://www.freebuf.com/xxx/page/xxx&amp;quot;&amp;gt;查看更多&amp;lt;/a&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;提取出下一页链接xpath:&lt;code&gt;//div[@id=&#39;pagination&#39;]/a/@href&lt;/code&gt;
+具体xpath的教程可以查看&lt;a href=&#34;https://scrapy-chs.readthedocs.org/zh_CN/latest/&#34;&gt;scrapy文档&lt;/a&gt;，或者看这里&lt;a href=&#34;http://www.w3school.com.cn/xpath/&#34;&gt;xpath教程&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;有一个小技巧，浏览器中看html代码时可以右键选择&lt;code&gt;复制xpath&lt;/code&gt;，不过复制的路径比较死板。&lt;/p&gt;
+
+&lt;h3 id=&#34;编写spider&#34;&gt;编写spider&lt;/h3&gt;
+
+&lt;p&gt;首先在目录&lt;code&gt;freebuftools\freebuftools\spiders\&lt;/code&gt;下新建文件&lt;code&gt;freebuftools_Spider.py&lt;/code&gt;。
+代码如下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#encoding=utf-8
+import scrapy
+from freebuftools.items import FreebuftoolsItem
+class FreeBufToolsSpider(scrapy.Spider):
+    name = &amp;quot;freeBufTools&amp;quot;
+    allowed_domains =[&amp;quot;freebuf.com&amp;quot;]#域名
+    start_urls =[&amp;quot;http://www.freebuf.com/geek&amp;quot;]#初始页面，可更改为相应分类首页
+    def parse(self,response):
+        file=open(&amp;quot;freebufgeek.html&amp;quot;,&#39;a&#39;)#写入爬取内容的文件，注意文件为追加模式
+
+        for sel in response.xpath(&amp;quot;//div[@class=&#39;news_inner news-list&#39;]/div[@class=&#39;news-info&#39;]/dl/dt/a&amp;quot;):#xpath路径父节点
+            tools=FreebuftoolsItem()#新建保存item
+            tools[&#39;title&#39;]=sel.xpath(&amp;quot;text()&amp;quot;).extract()[0].encode(&#39;utf-8&#39;)#提取文章题目并转换格式保存
+            tools[&#39;link&#39;]=sel.xpath(&amp;quot;@href&amp;quot;).extract()[0].encode(&#39;utf-8&#39;)#提取文章链接并转换格式保存
+            html=&#39;&#39;&#39;&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;&#39;&#39;&#39;+tools[&#39;link&#39;]+&#39;&#39;&#39;&amp;quot; target=&amp;quot;_black&amp;quot;&amp;gt;&#39;&#39;&#39;+tools[&#39;title&#39;]+&amp;quot;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;quot;#拼接写入文件的html代码
+            file.writelines(html)#将爬取内容写入文件
+            yield tools#返回爬取内容
+        url=response.xpath(&amp;quot;//div[@id=&#39;pagination&#39;]/a/@href&amp;quot;).extract()[0]#获取下一页的链接
+        yield scrapy.Request(url,callback=self.parse)#回调本函数继续爬取下一页
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面代码写的比较清楚，内容也很简单，不懂的可以查看官方文档，另外有点需要注意，保存爬取内容的文件打开方式为&lt;strong&gt;追加&lt;/strong&gt;，如果不这样只能保存一条爬取的数据。&lt;/p&gt;
+
+&lt;p&gt;改变初始页面可以爬取不同分类下的文章题目。&lt;/p&gt;
+
+&lt;p&gt;还有Python中yield的用法，简单来说就是yield可在函数中返回内容而仍使函数能继续执行。具体Google百度。&lt;/p&gt;
+
+&lt;h3 id=&#34;执行爬虫&#34;&gt;执行爬虫&lt;/h3&gt;
+
+&lt;p&gt;打开最外层freebuftools文件夹，运行命令&lt;code&gt;scrapy crawl freeBufTools&lt;/code&gt;即可。运行完后可找到自己定义的爬取内容的文件。&lt;/p&gt;
+
+&lt;p&gt;我这里有个问题就是记得创建项目时字母用的小写，但执行时发现小写不对，大家可以在执行前先运行一下&lt;code&gt;scrapy list&lt;/code&gt;查看项目名称。
+###遇到的问题
+主要是文件的问题，一开始我是想直接通过管道导出json格式文件的，但是发现输出的文件内容是汉字对应的utf-8编码，如图:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/json.PNG&#34; alt=&#34;json输出形式&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看&lt;a href=&#34;http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086&#34;&gt;这里&lt;/a&gt;，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要&lt;code&gt;pipelines.py&lt;/code&gt;文件和&lt;code&gt;settings.py&lt;/code&gt;文件&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>十八岁给我一个姑娘</title>
@@ -21,6 +170,93 @@
 &lt;p&gt;小说读下来有种感觉，就是把一个大人的灵魂放到一个高中生的身体里，去过高中生的生活，但思想又混杂着高中生的思想。&lt;/p&gt;
 
 &lt;p&gt;不多说，以后就不写读后感了，只列清单，最多一句话评价一下。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>在线学习工作工具推荐</title>
+      <link>http://painterliu.com/post/2014-10-19-onlinetools/</link>
+      <pubDate>Sun, 19 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-10-19-onlinetools/</guid>
+      <description>&lt;p&gt;这里推荐一下协助学习工作的在线工具：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackedit.io&#34;&gt;StackEdit&lt;/a&gt;：markdown编辑器，可导入导出本地文件&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://naotu.baidu.com&#34;&gt;百度脑图&lt;/a&gt;：百度的思维导图编辑工具，可存到百度网盘，很好用&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.processon.com&#34;&gt;processon&lt;/a&gt;：在线画各种图的工具，和visio功能差不多，当然和office其他工具结合肯定没这么好，能导出为png、pdf、pos文件。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.codecogs.com/latex/eqneditor.php&#34;&gt;在线LaTex公式编辑器&lt;/a&gt;：编辑公式生成LaTex、HTML等代码&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://webdemo.myscript.com/#/demo/equation&#34;&gt;公式手写识别&lt;/a&gt;：和上面的功能差不多，只不过这个是把公式画出来识别&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;再提一下在线Latex编辑器，没用过，有需要的可以看&lt;a href=&#34;http://www.zhihu.com/question/21375839&#34;&gt;这里&lt;/a&gt;,暂时列这么多，其他的一些在线工具和学习工作无关没有列。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Javascript备忘</title>
+      <link>http://painterliu.com/post/2014-10-18-js-dom/</link>
+      <pubDate>Sat, 18 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-10-18-js-dom/</guid>
+      <description>
+
+&lt;p&gt;看了两天《javascript DOM编程艺术(第二版)》，这里记录一下基本的内容，备忘。&lt;/p&gt;
+
+&lt;h4 id=&#34;语法&#34;&gt;语法&lt;/h4&gt;
+
+&lt;p&gt;var声明变量，弱类型&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var age=&amp;quot;thirty three&amp;quot;;
+age=33;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;字符串中可以用双引号里面含单引号，单引号里面含双引号，不需要转义，如果单引号里面有单引号，需要转义，如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var mood=&amp;quot;about 5&#39;10\&amp;quot; tall&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;数组用&lt;code&gt;Array()&lt;/code&gt;声明，可以&lt;code&gt;Array(4)&lt;/code&gt;设置数组长度，或者&lt;code&gt;Array(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;);&lt;/code&gt;直接初始化数组或者
+&lt;code&gt;var year =[1990,1991,1992]&lt;/code&gt;
+字符串、数字、变量、数组、等可以混合存入数组，也可以是变量。&lt;/p&gt;
+
+&lt;p&gt;关联数组(不推荐使用)：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var lennon=Array();
+lennon[&#39;name&#39;]=&amp;quot;John&amp;quot;;
+lennon[&#39;year&#39;]=1940;
+lennon[&#39;living&#39;]=false;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对象Object&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var lennon=Object();//var lennon={}
+lennon.name=&amp;quot;John&amp;quot;;
+lennon.year=1940
+lennon.living=false;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var lennon={name:&amp;quot;John&amp;quot;,year:1940,living:false};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;操作&#34;&gt;操作&lt;/h4&gt;
+
+&lt;p&gt;&amp;rdquo;+&amp;ldquo;连接字符串和数字时转为字符串&lt;/p&gt;
+
+&lt;h4 id=&#34;条件语句&#34;&gt;条件语句&lt;/h4&gt;
+
+&lt;p&gt;&amp;rdquo;==&amp;ldquo;不进行严格比较，严格比较用&amp;rdquo;===&amp;ldquo;，同样，“!==”对应于&amp;rdquo;!=&amp;rdquo;&lt;/p&gt;
+
+&lt;h4 id=&#34;函数&#34;&gt;函数&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;function name(arguments){
+     statements;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;函数内部局部变量不影响全局变量要用var声明才行，不声明则影响同名全局变量&lt;/p&gt;
 </description>
     </item>
     
@@ -62,12 +298,30 @@
     </item>
     
     <item>
+      <title>送东阳马生序</title>
+      <link>http://painterliu.com/post/2014-10-07-study/</link>
+      <pubDate>Tue, 07 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-10-07-study/</guid>
+      <description>&lt;p&gt;宋濂&lt;/p&gt;
+
+&lt;p&gt;　　余幼时即嗜学。家贫，无致书以观，每假借于藏书之家，手自笔录，计日以还。天大寒，观冰坚，手指不可屈伸，弗之怠。录毕，走送了，不敢销逾约。以是人多以书假余，余因得遍观群书。既加冠，益慕圣贤之道。又患无硕师名人与游，尝趋百里外从乡之先达执经叩问。先达德隆望尊，门人弟子填其室，未尝稍降辞色。余立侍左右，援疑质理，俯身倾耳以请；或遇其叱咄，色愈恭，礼愈至，不敢出一言以复；俟其欣悦，则又请焉。故余虽愚，卒获有所闻。&lt;/p&gt;
+
+&lt;p&gt;　　当余之从师也，负箧曳屣，行深山巨谷中，穷冬烈风，大雪深数尺，足肤皲裂而不知。至舍，四支僵劲不能动，媵人持汤沃灌，以衾拥覆，久而乃和。寓逆旅主人，日再食，无鲜肥滋味之享。同舍生皆被绮绣，戴朱缨宝饰之帽，腰白玉之环，左佩刀，右备容臭，烨然若神人；余则緼袍敝衣处其间，略无慕艳意，以中有足乐者，不知口体之奉不若人也。盖余之勤且艰苦此。&lt;/p&gt;
+
+&lt;p&gt;　　今诸生学于太学，县官日有禀销之供，父母岁有裘葛之遗，无冻馁之患矣；坐大厦之下而诵《诗》《书》，无奔走之劳矣；有司业、博士为之师，未有问而不告，求而不得者也；凡所宜有之书皆集于此，不必若余之手录，假诸人而后见也。其业有不精，德有不成者，非天质之卑，则心不若余之专耳，岂他人之过哉？&lt;/p&gt;
+
+&lt;p&gt;　　东阳马生君则，在太学已二年，流辈甚称其贤。余朝京师，生以乡人子谒余。撰长书以为贽，辞甚畅达。与之论辨，言和而色夷。自谓少时用心于学甚劳。是可谓善学者矣。其将归见其亲也，余故道为学之难以告之。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>沉默的大多数</title>
       <link>http://painterliu.com/post/2014-09-08-read-silence/</link>
       <pubDate>Mon, 08 Sep 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-09-08-read-silence/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://painterliu.com/public/img/silence.png&#34; alt=&#34;图片&#34; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/silence.png&#34; alt=&#34;图片&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;图有点大哈!&lt;/p&gt;
 
@@ -88,12 +342,12 @@
 &lt;p&gt;大概就上面这些，下面摘抄些书里的文字。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;世界不光有阳的一面，还有阴的一面。&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;我最赞成罗素先生的一句话：“须知参差多态，乃是幸福的本源。”&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;认真地思索，真诚的明辨是非，有这种态度，大概就可算是善良吧。&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;科学家维纳认为，人在做两种不同性质的事，一类如棋手，成败由他的最坏状态决定，还有一类如发明家，只要有一天状态好，做成了发明，就成功了。&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;科学家和圣贤的区别在于，前者不但寻求知识，还寻求知识的证明。&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;我们民族最重大的文化传统，不是孔孟程朱，而是这种钻研精神。&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;世界不光有阳的一面，还有阴的一面。&lt;/li&gt;
+&lt;li&gt;我最赞成罗素先生的一句话：“须知参差多态，乃是幸福的本源。”&lt;/li&gt;
+&lt;li&gt;认真地思索，真诚的明辨是非，有这种态度，大概就可算是善良吧。&lt;/li&gt;
+&lt;li&gt;科学家维纳认为，人在做两种不同性质的事，一类如棋手，成败由他的最坏状态决定，还有一类如发明家，只要有一天状态好，做成了发明，就成功了。&lt;/li&gt;
+&lt;li&gt;科学家和圣贤的区别在于，前者不但寻求知识，还寻求知识的证明。&lt;/li&gt;
+&lt;li&gt;我们民族最重大的文化传统，不是孔孟程朱，而是这种钻研精神。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;就摘抄这么多吧，最后对王小波也是一位程序员感到惊喜！&lt;/p&gt;
@@ -101,22 +355,187 @@
     </item>
     
     <item>
-      <title>《沉默的大多数》读后感</title>
-      <link>http://painterliu.com/post/2014-08-05-silence/</link>
-      <pubDate>Tue, 05 Aug 2014 00:00:00 +0000</pubDate>
+      <title>看了艾美奖的一些感慨</title>
+      <link>http://painterliu.com/post/2014-09-04-emmy/</link>
+      <pubDate>Thu, 04 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://painterliu.com/post/2014-08-05-silence/</guid>
-      <description>&lt;p&gt;今天看了《沉默的大多数》里面的《沉默的大多数》，对于文学素养不够高的我来说，杂文确实不好理解，王小波也不好理解。下面主要说一下我自己的感受。怎么想起原来被逼着写读后感的日子？&lt;/p&gt;
+      <guid>http://painterliu.com/post/2014-09-04-emmy/</guid>
+      <description>&lt;p&gt;不知道是什么时候喜欢上看美国的颁奖典礼的，像奥斯卡、格莱美、艾美奖、公告牌音乐大奖等等涉及电影、电视剧、音乐一类的颁奖典礼，一般看到资源都会下载下来看一下，虽然我基本不看美剧(国产剧也不怎么看)也不怎么听歌，虽然不是每一个颁奖典礼都必看，也不太执着于是否看，但大部分颁奖礼还是都看了的。&lt;/p&gt;
 
-&lt;p&gt;首先，看了沉默的大多数，发现自己也一直属于沉默的大多数，还好，是大多数，不过虽然是大多数，但彼此是孤立的，因为沉默，所以还是少数。&lt;/p&gt;
+&lt;p&gt;最近断断续续的把第66届艾美奖看完了，这里写些感想，主要有两点。&lt;/p&gt;
 
-&lt;p&gt;其次，文章中的问题依然存在。比如文章中说福柯先生的&lt;code&gt;话语即权利&lt;/code&gt;应该倒过来说即&lt;code&gt;权利即话语&lt;/code&gt;,感觉这句话说的很对，现在的中国依然是权利决定话语，只不过网络的发达使得这种现象逐渐改变，当然也使得大多数人不再沉默，开始&lt;code&gt;捐税&lt;/code&gt;了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;国外像艾美奖这样中间没什么表演节目的会在主持人嘉宾等台词上下功夫，使得语言很幽默风趣，偶尔找嘉宾开下玩笑，不让人感觉枯燥，而且邻居致辞也很有趣。而音乐类奖项等中间穿插各种表演的现场表演又是精彩纷呈，比如13年41届全美音乐奖的&lt;a href=&#34;http://v.youku.com/v_show/id_XNjM5Mzk1NDAw.html&#34;&gt;say somthing&lt;/a&gt;，确实精彩。国外一般是开发性的舞台，设计的很好，科技程度高，有些舞台深入到观众内部的，互动性强。&lt;/li&gt;
+&lt;li&gt;看艾美奖最感动的就是其中的缅怀环节，美国的大部分颁奖都有这个环节，我不清楚里面出现的人是不是都已逝去或者在这距离上届艾美奖一年的时间里逝去，但这个环节让人们记住、想起那些曾经在这一领域做出贡献的人，不忘老一辈电视人的贡献。虽然里面缅怀的人我基本都不认识，对简介上说的美剧也没印象，但就是很感动，这些人曾对这一领域做出贡献，这些人还不曾被遗忘，我想对一个人工作最好的肯定就是这了吧，当你老去或者死后，你的工作、贡献还能被人提起、回忆，还能留住人们心中。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>linux下java调用matlab</title>
+      <link>http://painterliu.com/post/2014-08-08-linux-java-matlab/</link>
+      <pubDate>Fri, 08 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-08-08-linux-java-matlab/</guid>
+      <description>
 
-&lt;p&gt;最后，王小波在文中多次说&lt;code&gt;世界不光有阳的一门，还有阴的一面&lt;/code&gt;,感觉这里不只代表好坏善恶，还代表了现实世界和个人内心想法，话语连接了内心与现实，但因为不自由的世界，人们又不想让它连接，所有沉默或者&lt;code&gt;捐税&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;项目需要迁移到linux环境，准确的说是redhat系统，所以最近研究在redhat下java调用matlab的解决方法，期间遇到了各种问题，卡了好长时间，现在终于解决了。&lt;/p&gt;
 
-&lt;p&gt;为什么沉默？因为不自由，因为不沉默改变不了什么？因为&lt;code&gt;沉默是一种生活方式&lt;/code&gt;，国内的人大多数选择了沉默而已。&lt;/p&gt;
+&lt;h3 id=&#34;redhat下matlab安装&#34;&gt;Redhat下matlab安装&lt;/h3&gt;
 
-&lt;p&gt;为了继续保持沉默，这里不多写了，另外，杂文是不是不应该这样，不应该这样写读后感？杂文，还是要联系实际问题来评价吧！我是评价不了，还是多看、多读。&lt;/p&gt;
+&lt;p&gt;首先需要在redhat下安装matlab，我redhat是搭在虚拟机里的，大家也可以在虚拟机里搭建练手，可以保存快照，很方便回退。&lt;/p&gt;
+
+&lt;p&gt;这里不详细介绍安装过程，只提一些重点内容。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;安装时提示是否在线安装选否(询问是英文的)&lt;/li&gt;
+&lt;li&gt;报错：error while loading shared libraries: &lt;code&gt;libXp.so.6&lt;/code&gt;: cannot open shared object file: No such file or directory时，将安装文件中/update/bin/glnx86目录下的libmwins.so文件复制到/usr/lib/下，命名为libXp.so.6&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;安装就这两个需要注意的地方，下面是调用&lt;/p&gt;
+
+&lt;h3 id=&#34;java调用matlab&#34;&gt;java调用matlab&lt;/h3&gt;
+
+&lt;p&gt;matlab导出jar包这里就不提了，大家可以自己搜索。这里主要讲述过程中遇到的困难及解决办法&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;提示&lt;code&gt;MCR版本不对&lt;/code&gt;，这个报错很奇怪，明明一个matlab导出的，用的就是它的MCR，居然提示不对，解决方法就是配置环境变量LD_LIBRARY_PATH,XAPPLRESDIR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;LD_LIBRARY_PATH=/usr/local/MATLAB/bin/glnxa64
+XAPPLRESDIR=/usr/local/MATLAB/X11/app-defaults
+LD_PATH=/usr/local/MATLAB/runtime/glnxa64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将&lt;code&gt;&#39;/usr/local/MATLAB/&#39;&lt;/code&gt;换成自己的安装目录,如果还有问题，在eclipse里面配置运行的环境变量，方法是右键项目,选择&lt;code&gt;Run As&lt;/code&gt;下&lt;code&gt;Run Configurations&lt;/code&gt;,点击&lt;code&gt;Environment&lt;/code&gt;选项卡，新建上面两个环境变量。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;报错&lt;code&gt;Exception in thread &amp;quot;main&amp;quot; java.lang.LinkageError:/usr/lib/libXp.so.6:undefined symbol
+:SSL_connect&lt;/code&gt;，这里是缺少文件，解决方法是：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;mounts /dev/cdrom /media   （挂载盘）
+cd /media &amp;amp;&amp;amp; ls    （查看是否挂载成功）
+vim /etc/yum.repos.d/rhel-debuginfo.repo 打开该文件
+
+*****该文件中前两行不需要改，从baseurl开始修改成下文所示的值
+[xxxx]
+name=xxxx
+baseurl=file:///media/Server
+enable=1  （这里一定是1，启动服务）
+gpgchek=0  （这里一定是0，否则下面不能安装）
+保存该文件，执行下面操作就ok
+yum -y install *linbXp*  （安装需要的包）
+rpm -qa libXp  (查看是否安装成功）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后就可以java调用matlab了。
+&lt;code&gt;友情提示：&lt;/code&gt;上面对rhel-debuginfo.repo文件操作有什么影响不清楚，可以先备份一下供以后还原&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>java调用matlab返回值为struct类型的处理</title>
+      <link>http://painterliu.com/post/2014-07-28-javamatlab/</link>
+      <pubDate>Tue, 08 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-07-28-javamatlab/</guid>
+      <description>&lt;p&gt;因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。
+具体java调用matlab函数的过程这里不多说，具体可以看这里:&lt;a href=&#34;http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/&#34;&gt;Java和matlab混合编程&lt;/a&gt;，&lt;a href=&#34;http://xiaolongfeixiang.iteye.com/blog/1893621&#34;&gt;Java调用Matlab方法的三种方式&lt;/a&gt;，&lt;a href=&#34;http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html&#34;&gt;java中调用Matlab的函数+注意事项&lt;/a&gt;，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
+这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。
+我这里函数返回的结构体直接java输出如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;      Comment: &#39;Mean: ARMAX(0,0,0); Variance: GARCH(1,1) &#39;
+ Distribution: &#39;Gaussian&#39;
+            C: 0.0195
+VarianceModel: &#39;GARCH&#39;
+            P: 1
+            Q: 1
+            K: 0.0055
+        GARCH: 0.8004
+         ARCH: 0
+      Display: &#39;off&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：&lt;code&gt;作为字符串处理&lt;/code&gt;。
+代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;MWStructArray result=(MWStructArray)resultObjects[0];//取matlab导出函数的第一个返回值
+String string=result.toString();//转化为字符串
+String[] list=string.split(&amp;quot;\n&amp;quot;);//以换行符分割
+c=Double.parseDouble(list[2].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第3行取C值
+k=Double.parseDouble(list[6].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第7行取k值
+garch=Double.parseDouble(list[7].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第8行取GARCH值
+arch=Double.parseDouble(list[8].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第9行取ARCH值
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;方法很简单，提供个处理思路，大家可按照自己返回的内容处理。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>成功的花儿</title>
+      <link>http://painterliu.com/post/2014-06-23-flower/</link>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-06-23-flower/</guid>
+      <description>
+
+&lt;h3 id=&#34;成功的花儿&#34;&gt;成功的花儿&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;成功的花儿，&lt;br /&gt;
+人们只惊羡她现时的明艳！&lt;br /&gt;
+然而当初她的芽儿，&lt;br /&gt;
+浸透了奋斗的泪泉，&lt;br /&gt;
+洒遍了牺牲的血雨。&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>我对分类的一些理解</title>
+      <link>http://painterliu.com/post/2014-07-02-understanding-of-the-classification/</link>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-07-02-understanding-of-the-classification/</guid>
+      <description>
+
+&lt;p&gt;最近一直在做阿里的大数据竞赛，对数据挖掘中的分类问题有了一些自己的理解，在这里总结记录一下。&lt;/p&gt;
+
+&lt;h4 id=&#34;特征&#34;&gt;&lt;strong&gt;特征&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;分类问题中有一个很重要的概念是&lt;code&gt;特征&lt;/code&gt;，特征代表了训练集中数据的各种属性。各种分类器模型以特征为参数进行训练，特征是分类问题中的关键。&lt;/p&gt;
+
+&lt;p&gt;在比赛的进行过程中，我逐渐领悟到&lt;code&gt;特征&lt;/code&gt;才是分类问题中的核心。特征的选取要保证&lt;code&gt;既能有效区别于其他类别的样本，又和所属类别的样本尽量近似或保持一致&lt;/code&gt;，所以特征不是越多越好，也不是越少越好，而是越能代表不同类别的差别越好。如果一个特征在所有类别的样本中是一样的数值，肯定不能使用它来分类，而一个特征在所有类别样本中无规律或者说近似随机，也不能有效的分类。特征的选取直接决定了使用算法或模型对数据进行分类的能达到的极限。&lt;/p&gt;
+
+&lt;h4 id=&#34;模型&#34;&gt;&lt;strong&gt;模型&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;前面说明的特征的重要性，那各种算法各种模型是干什么的呢？我现在的理解就是模型是为了学习特征，从特征的差别中区分类别。这里没说很明白，再解释一下。假设我有一个二类问题，我提取出样本的一个特征，我认为这个特征有用，即能区别与其他类别，又和所属类别高度统一。我把这个特征加入到模型的训练集中去，我不会想当然的认为这个新提取的特征值越高数据越有可能属于正类或负类，而是交给模型判断，让模型去学习，模型说这个特征值越高越有可能是正类，那就认为确实是这样，或者我不管是不是这样，交给模型去学习去，学出啥是啥。模型学的不好可能是模型本身的问题，如逻辑回归是线性的，不能判断一个特征值低中高三段两头类别一样中间不一样的情况，也可能是特征没选好，不能有效区分不同类别的差异。这里就弱化了模型的作用，&lt;code&gt;模型就是从特征中学习出类别的差异，或者推理出类别的差异，重点是特征能代表这种差异，而模型的选择主要是看其学习能力和推理能力&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h4 id=&#34;分类预测&#34;&gt;&lt;strong&gt;分类预测&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;提取特征、选择模型训练后就要对数据进行分类预测，而有些分类问题为什么不能做到很好的正确率和召回率？我认为主要有以下原因：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;1.问题本身有很大的随机性或不可预测性&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;像这次阿里的大数据竞赛，通过用户4个月的购买行为预测第5个月的用户会购买的品牌。一个用户的购买行为本身具有很大的随机性(当然也有一定的规律性)，用户在第5个月的购买行为受太多随机因素的影响，比如你看到别人穿的一件衣服感觉很好看也想购买，或者你看到别人穿的一件自己正打算买的衣服，由于撞衫决定不买了。这些问题本身的随机性导致不能准确预测。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;2.数据包含的信息有限&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;还是以阿里比赛为例吧，数据中只包含了品牌(注意不是商品)的id，没有其他关于品牌的任何信息如类别等,这些数据包含的信息有限，如果有品牌的类别信息，比如知道这个品牌是大家电，前4个月买了以后第五个月一般不会再次购买，如果还要买的话也要考虑换个品牌买了。通过这些有限的信息很难准确区分不同类别的差异。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;3.经验技术问题&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这个不是针对问题本身了，如果你对某一类分类问题有很多的经验和技术积累，你就可能得到较好的效果，没有则效果就可能差些。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 </description>
     </item>
     
