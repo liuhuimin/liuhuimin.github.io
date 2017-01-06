@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://painterliu.com/post/2016-02-29-starrysky/</loc>
+    <lastmod>2016-02-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://painterliu.com/post/2016-02-24-nian/</loc>
+    <lastmod>2016-02-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://painterliu.com/post/2014-12-07-scrapy/</loc>
     <lastmod>2014-12-07T00:00:00+00:00</lastmod>
   </url>
@@ -96,7 +106,7 @@
   
   <url>
     <loc>http://painterliu.com/post/</loc>
-    <lastmod>2014-12-07T00:00:00+00:00</lastmod>
+    <lastmod>2016-02-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -119,7 +129,7 @@
   
   <url>
     <loc>http://painterliu.com/</loc>
-    <lastmod>2014-12-07T00:00:00+00:00</lastmod>
+    <lastmod>2016-02-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -142,14 +152,26 @@
   </url>
   
   <url>
+    <loc>http://painterliu.com/tags/%E5%B9%B4%E4%BF%97/</loc>
+    <lastmod>2016-02-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://painterliu.com/categories/%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2014-07-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>http://painterliu.com/tags/%E6%98%9F%E7%A9%BA/</loc>
+    <lastmod>2016-02-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://painterliu.com/categories/%E6%9D%82%E7%B1%BB/</loc>
-    <lastmod>2014-10-19T00:00:00+00:00</lastmod>
+    <lastmod>2016-02-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -191,7 +213,7 @@
   
   <url>
     <loc>http://painterliu.com/categories/%E8%AF%BB%E4%B9%A6/</loc>
-    <lastmod>2014-10-27T00:00:00+00:00</lastmod>
+    <lastmod>2016-02-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
