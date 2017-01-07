@@ -5,8 +5,30 @@
     <link>http://painterliu.com/index.xml</link>
     <description>Recent content on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 29 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Jan 2017 15:29:05 +0800</lastBuildDate>
     <atom:link href="http://painterliu.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>博客改版</title>
+      <link>http://painterliu.com/post/newblogview/</link>
+      <pubDate>Sat, 07 Jan 2017 15:29:05 +0800</pubDate>
+      
+      <guid>http://painterliu.com/post/newblogview/</guid>
+      <description>&lt;p&gt;好久没更新过博客了，决定重新再出发，对博客进行了改变，以后多多更新。&lt;/p&gt;
+
+&lt;p&gt;博客原来的内容基本没删除（只所以说基本，是因为我忘了事前备份，而且直接使用的&lt;code&gt;push -f&lt;/code&gt;把之前github上的内容全覆盖了），不管之前写的内容多糟糕，想法看法对不对，还是留着当个纪念吧！&lt;/p&gt;
+
+&lt;p&gt;之所以好久没更新，除了这半年多家里出了些事情外，还有就是因为找不到更新的意义。我对这个博客的定位是一个技术博客，但大部分技术文章只是记录，缺少自己的看法和想法，另外目前我所可能遇到的技术问题基本都能在网上找到解决方法，或者我就是通过网上的方法解决的，缺乏原创性内容。我认为博客不应该是一些记录性的内容，博客主要还是给其他人看的，要不自己做笔记就可以了，个人也不应该通过看博客的记录性内容学习新的知识，缺乏系统性。&lt;/p&gt;
+
+&lt;p&gt;现在想法有点变化，对记录性的内容没有这么排斥了，有些记录性的内容可以为自己服务，容易找到，有些问题解决方案虽然网上有，但再次遇到重新搜索总是麻烦的。针对缺少原创性内容的问题，可以通过将记录性内容转化为总结来解决，不一味的记录详细内容，而是偏向总结供人参考。还有重要的一点，博客不仅仅是给其他人看的，还记录了自己的成长！&lt;/p&gt;
+
+&lt;p&gt;这次对博客进行改版，不仅仅是换了主题，而且换了静态博客生成工具，将博客从jekyll迁移到了Hugo。 &lt;a href=&#34;http://www.gohugo.io/&#34;&gt;Hugo&lt;/a&gt;是使用go语言编写的静态网站生成工具，得益于go语言的特性，hugo可以在大部分平台上运行，而且不需要安装依赖。我放弃jekyll的一个很大原因是我平时不用ruby，为了博客却要安装一大堆相关的ruby环境软件，而hugo只需要一个程序就可（好吧，我早就把jekyll环境给卸了，重新安装比较麻烦，但最后发现建新主题更麻烦，::&amp;gt;_&amp;lt;:: ）。&lt;/p&gt;
+
+&lt;p&gt;另外博客主题是使用&lt;a href=&#34;http://www.chingli.com/&#34;&gt;青砾&lt;/a&gt;的博客改造而来，未征得博主的同意，但毕竟是自己将其前端页面改造成了主题，有一些新增的内容，中间有自己的劳动，就擅自使用了，非常抱歉。另基于以上原因，主题暂时不放到github上了！&lt;/p&gt;
+
+&lt;p&gt;下一步计划将rss订阅功能添加到博客中！&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>《夜观星空》笔记</title>
@@ -327,6 +349,37 @@
 &lt;h3 id=&#34;总结&#34;&gt;总结&lt;/h3&gt;
 
 &lt;p&gt;在这里主要记录一下我们家这边过年的习俗，可能有遗漏的地方，另外由于在家待着的原因，文字里有些家乡话的语言习惯，见谅！&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>我的人生目标</title>
+      <link>http://painterliu.com/post/2015-06-14-lifegoal/</link>
+      <pubDate>Sun, 14 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2015-06-14-lifegoal/</guid>
+      <description>&lt;p&gt;前段时间身体不太好，导致心情比较低落，人也颓废，啥事都不想干。找暑假实习也无心情准备，各种被拒，暑假就只能呆在实验室了。&lt;/p&gt;
+
+&lt;p&gt;心情不好就喜欢想杂七杂八的东西(好的时候也想)，那段时间陷入了强烈的自我否定当中，感觉自己一无是处，各种缺点，而我又不是一个喜欢表达开放自己内心的人，也不习惯找人聊天排解。没事的时候(如果你心情不好任何时候都是没事的时候)就会想，自己想过什么样的生活，想有个什么样的未来。我知道自己从高考结束后一直以来都活的迷迷糊糊，没有明确的人生目标，也没想好这辈子活着是为了什么，迷茫着前进，却不知道远方到底有什么，或者说哪里才是远方。&lt;/p&gt;
+
+&lt;p&gt;感觉不能这样颓废下去，要给自己个奋斗的理由，于是试了试奶牛文章&lt;a href=&#34;http://blog.sina.com.cn/s/blog_6e8e05ac0100wu4h.html&#34;&gt;《给明年依然年轻的我们&amp;hellip;》&lt;/a&gt;中的方法，找找人生理想，PS.亲测不怎么有效!
+用文章里面的方法，列了一大堆内容，由于人生经历有限，也没找到啥感动的自己都要哭的人生目标，不过还是有收获的，最后确定的奋斗目标是：&lt;code&gt;可以不受限制的去做自己想做、喜欢做的事，快乐自由的去体验生活，感受更大世界！&lt;/code&gt;。这个人生目标受我过去的人生经历和现阶段对自我的认识所影响，也许以后会变，但确实是我现阶段的想法。我确实不是一个很有野心的人啊！&lt;/p&gt;
+
+&lt;p&gt;下面来具体说说我的人生目标。前面半句话是说要努力奋斗成长为高富帅(^o^)/，想去环游世界，就不能被工作压着，想去太空看看，就得有钱，想爬珠穆朗玛，身体要吃得消。后半句话意思是。。还是没找到啥确切的人生目标，到时候想到啥喜欢啥就做啥吧¯_(ツ)_/¯ (所以说不太有效)，活的自由快乐就好，最后的补充是想说&lt;code&gt;世界那么大，我想去看看！&lt;/code&gt;！&lt;/p&gt;
+
+&lt;p&gt;人怎样才算成功？一个人有能力去完成自己想做的事并付诸行动乐于其中就是成功！&lt;/p&gt;
+
+&lt;p&gt;有目标，就要努力实现，目标是结果，奋斗才是过程，目标虽然还不太具体，但过程可以具体些。所以，&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;实现人生目标第一步：&lt;code&gt;锻炼身体，实现财务自由&lt;/code&gt;！&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;赚钱赚钱赚大钱！具体计划就是好好准备秋招，找个好工作，认真工作个3-5年，努力扩展赚钱渠道，然后看情况决定下一步计划。工作学习的同时不能忽视身体锻炼，革命的本钱一定要保养好！(也真是够具体的)&lt;/p&gt;
+
+&lt;p&gt;少年，就是要在阳光下挥洒汗水！&lt;/p&gt;
+
+&lt;p&gt;一切随性而为!&lt;/p&gt;
 </description>
     </item>
     
@@ -868,65 +921,6 @@ rpm -qa libXp  (查看是否安装成功）
 &lt;p&gt;为什么沉默？因为不自由，因为不沉默改变不了什么？因为&lt;code&gt;沉默是一种生活方式&lt;/code&gt;，国内的人大多数选择了沉默而已。&lt;/p&gt;
 
 &lt;p&gt;为了继续保持沉默，这里不多写了，另外，杂文是不是不应该这样，不应该这样写读后感？杂文，还是要联系实际问题来评价吧！我是评价不了，还是多看、多读。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>java调用matlab返回值为struct类型的处理</title>
-      <link>http://painterliu.com/post/2014-07-28-javamatlab/</link>
-      <pubDate>Tue, 08 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://painterliu.com/post/2014-07-28-javamatlab/</guid>
-      <description>&lt;p&gt;因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。
-具体java调用matlab函数的过程这里不多说，具体可以看这里:&lt;a href=&#34;http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/&#34;&gt;Java和matlab混合编程&lt;/a&gt;，&lt;a href=&#34;http://xiaolongfeixiang.iteye.com/blog/1893621&#34;&gt;Java调用Matlab方法的三种方式&lt;/a&gt;，&lt;a href=&#34;http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html&#34;&gt;java中调用Matlab的函数+注意事项&lt;/a&gt;，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
-这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。
-我这里函数返回的结构体直接java输出如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;      Comment: &#39;Mean: ARMAX(0,0,0); Variance: GARCH(1,1) &#39;
- Distribution: &#39;Gaussian&#39;
-            C: 0.0195
-VarianceModel: &#39;GARCH&#39;
-            P: 1
-            Q: 1
-            K: 0.0055
-        GARCH: 0.8004
-         ARCH: 0
-      Display: &#39;off&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：&lt;code&gt;作为字符串处理&lt;/code&gt;。
-代码如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;MWStructArray result=(MWStructArray)resultObjects[0];//取matlab导出函数的第一个返回值
-String string=result.toString();//转化为字符串
-String[] list=string.split(&amp;quot;\n&amp;quot;);//以换行符分割
-c=Double.parseDouble(list[2].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第3行取C值
-k=Double.parseDouble(list[6].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第7行取k值
-garch=Double.parseDouble(list[7].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第8行取GARCH值
-arch=Double.parseDouble(list[8].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第9行取ARCH值
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;方法很简单，提供个处理思路，大家可按照自己返回的内容处理。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>成功的花儿</title>
-      <link>http://painterliu.com/post/2014-06-23-flower/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://painterliu.com/post/2014-06-23-flower/</guid>
-      <description>
-
-&lt;h3 id=&#34;成功的花儿&#34;&gt;成功的花儿&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;成功的花儿，&lt;br /&gt;
-人们只惊羡她现时的明艳！&lt;br /&gt;
-然而当初她的芽儿，&lt;br /&gt;
-浸透了奋斗的泪泉，&lt;br /&gt;
-洒遍了牺牲的血雨。&lt;/p&gt;
-&lt;/blockquote&gt;
 </description>
     </item>
     
