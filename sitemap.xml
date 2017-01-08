@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://painterliu.com/post/2016summary/</loc>
+    <lastmod>2017-01-08T11:01:59+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://painterliu.com/post/2017plan/</loc>
     <lastmod>2017-01-08T10:03:09+08:00</lastmod>
   </url>
@@ -98,7 +103,7 @@
   
   <url>
     <loc>http://painterliu.com/categories/--more--/</loc>
-    <lastmod>2017-01-08T10:03:09+08:00</lastmod>
+    <lastmod>2017-01-08T11:01:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -127,7 +132,7 @@
   
   <url>
     <loc>http://painterliu.com/post/</loc>
-    <lastmod>2017-01-08T10:03:09+08:00</lastmod>
+    <lastmod>2017-01-08T11:01:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -150,7 +155,7 @@
   
   <url>
     <loc>http://painterliu.com/</loc>
-    <lastmod>2017-01-08T10:03:09+08:00</lastmod>
+    <lastmod>2017-01-08T11:01:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -192,7 +197,7 @@
   
   <url>
     <loc>http://painterliu.com/categories/%E6%9D%82%E7%B1%BB/</loc>
-    <lastmod>2017-01-07T15:29:05+08:00</lastmod>
+    <lastmod>2017-01-08T10:03:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
