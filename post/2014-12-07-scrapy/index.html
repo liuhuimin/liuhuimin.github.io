@@ -24,6 +24,9 @@
     </div>
     <ul class="sidebar-nav">
         
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/--more--">--More--</a></li>
+
+        
         <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af">技术</a></li>
 
         
@@ -50,15 +53,14 @@
       2014年12月07日
       &nbsp;<a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b"> 编程</a>
       </div>
-           
-
-<p>最近懒，没怎么更新博客，赶紧在周末抽出时间写写。</p>
+           <p>最近懒，没怎么更新博客，赶紧在周末抽出时间写写。</p>
 
 <p>前一段时间想翻翻<a href="http://www.freebuf.com/">freebuf网站</a>的内容（黑客与画家^_^），一页一页翻太麻烦，本着黑客精神，就想着写个爬虫把网站内容题目爬下来，对感兴趣的题目可以点进去看。</p>
 
 <p>先声明，原来从来没写过爬虫，于是为了偷懒，找到了Python的爬虫框架<a href="http://scrapy.org/">Scrapy</a>,官方文档看<a href="https://scrapy-chs.readthedocs.org/zh_CN/latest/">这里</a>。</p>
 
-<p>有框架就是快，突击学习了两天就把爬虫写出来了。</p>
+<p>有框架就是快，突击学习了两天就把爬虫写出来了。
+</p>
 
 <h3 id="scrapy安装">Scrapy安装</h3>
 
@@ -190,7 +192,6 @@ class FreeBufToolsSpider(scrapy.Spider):
 <p><img src="/img/json.PNG" alt="json输出形式" /></p>
 
 <p>最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看<a href="http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086">这里</a>，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要<code>pipelines.py</code>文件和<code>settings.py</code>文件</p>
-
     </div>
     <ul class="pager">
     

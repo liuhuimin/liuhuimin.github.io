@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>  More   on painterliu的博客</title>
+    <link>http://painterliu.com/categories/--more--/index.xml</link>
+    <description>Recent content in   More   on painterliu的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <atom:link href="http://painterliu.com/categories/--more--/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>2017年新年计划</title>
+      <link>http://painterliu.com/post/2017plan/</link>
+      <pubDate>Sun, 08 Jan 2017 10:03:09 +0800</pubDate>
+      
+      <guid>http://painterliu.com/post/2017plan/</guid>
+      <description>&lt;p&gt;元旦已经过去一周了，忙着对博客改版，新年计划才出炉！&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

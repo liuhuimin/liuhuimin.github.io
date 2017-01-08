@@ -13,15 +13,14 @@
       <pubDate>Sun, 07 Dec 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-12-07-scrapy/</guid>
-      <description>
-
-&lt;p&gt;最近懒，没怎么更新博客，赶紧在周末抽出时间写写。&lt;/p&gt;
+      <description>&lt;p&gt;最近懒，没怎么更新博客，赶紧在周末抽出时间写写。&lt;/p&gt;
 
 &lt;p&gt;前一段时间想翻翻&lt;a href=&#34;http://www.freebuf.com/&#34;&gt;freebuf网站&lt;/a&gt;的内容（黑客与画家^_^），一页一页翻太麻烦，本着黑客精神，就想着写个爬虫把网站内容题目爬下来，对感兴趣的题目可以点进去看。&lt;/p&gt;
 
 &lt;p&gt;先声明，原来从来没写过爬虫，于是为了偷懒，找到了Python的爬虫框架&lt;a href=&#34;http://scrapy.org/&#34;&gt;Scrapy&lt;/a&gt;,官方文档看&lt;a href=&#34;https://scrapy-chs.readthedocs.org/zh_CN/latest/&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
 
-&lt;p&gt;有框架就是快，突击学习了两天就把爬虫写出来了。&lt;/p&gt;
+&lt;p&gt;有框架就是快，突击学习了两天就把爬虫写出来了。
+&lt;/p&gt;
 
 &lt;h3 id=&#34;scrapy安装&#34;&gt;Scrapy安装&lt;/h3&gt;
 
@@ -152,8 +151,7 @@ class FreeBufToolsSpider(scrapy.Spider):
 
 &lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/json.PNG&#34; alt=&#34;json输出形式&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看&lt;a href=&#34;http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086&#34;&gt;这里&lt;/a&gt;，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要&lt;code&gt;pipelines.py&lt;/code&gt;文件和&lt;code&gt;settings.py&lt;/code&gt;文件&lt;/p&gt;
-</description>
+&lt;p&gt;最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看&lt;a href=&#34;http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086&#34;&gt;这里&lt;/a&gt;，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要&lt;code&gt;pipelines.py&lt;/code&gt;文件和&lt;code&gt;settings.py&lt;/code&gt;文件&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -162,11 +160,12 @@ class FreeBufToolsSpider(scrapy.Spider):
       <pubDate>Sat, 01 Nov 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/about/2014-11-01-book-js/</guid>
-      <description>&lt;p&gt;为了偷懒，看了两天Javascript，网上又搜索了一下jquery，想着改写下博客模板，使得罗列读的图书时可以少写些内容，能根据ID自动添加豆瓣上的其他的相关内容。&lt;/p&gt;
+      <description>&lt;p&gt;为了偷懒，看了两天Javascript，网上又搜索了一下jquery，想着改写下博客模板，使得罗列读的图书时可以少写些内容，能根据ID自动添加豆瓣上的其他的相关内容。PS.这是改版前的内容，用于老博客的前端页面&lt;/p&gt;
 
 &lt;p&gt;下面总结一下:&lt;/p&gt;
 
-&lt;p&gt;首先用到了&lt;a href=&#34;http://developers.douban.com/wiki/?title=guide&#34;&gt;豆瓣API&lt;/a&gt;，另外推荐百度的&lt;a href=&#34;http://apistore.baidu.com/&#34;&gt;API Store&lt;/a&gt;，上面可以查找各个公司的提供的API接口。&lt;/p&gt;
+&lt;p&gt;首先用到了&lt;a href=&#34;http://developers.douban.com/wiki/?title=guide&#34;&gt;豆瓣API&lt;/a&gt;，另外推荐百度的&lt;a href=&#34;http://apistore.baidu.com/&#34;&gt;API Store&lt;/a&gt;，上面可以查找各个公司的提供的API接口。
+&lt;/p&gt;
 
 &lt;p&gt;其次在&lt;code&gt;book.html&lt;/code&gt;模板里面对要添加的地方&lt;code&gt;div&lt;/code&gt;标签增加类&lt;code&gt;book&lt;/code&gt;属性，并取markdown中&lt;code&gt;subject、image、description、status&lt;/code&gt;的值来设为属性。
 如下：&lt;/p&gt;
@@ -247,8 +246,7 @@ class FreeBufToolsSpider(scrapy.Spider):
 
 &lt;p&gt;因为是初学，中间遇到各种奇葩问题，不一一列举。&lt;/p&gt;
 
-&lt;p&gt;发现写着好简单，做着好难、、、&lt;/p&gt;
-</description>
+&lt;p&gt;发现写着好简单，做着好难、、、&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -257,9 +255,7 @@ class FreeBufToolsSpider(scrapy.Spider):
       <pubDate>Sat, 18 Oct 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-10-18-js-dom/</guid>
-      <description>
-
-&lt;p&gt;看了两天《javascript DOM编程艺术(第二版)》，这里记录一下基本的内容，备忘。&lt;/p&gt;
+      <description>&lt;p&gt;看了两天《javascript DOM编程艺术(第二版)》，这里记录一下基本的内容，备忘。&lt;/p&gt;
 
 &lt;h4 id=&#34;语法&#34;&gt;语法&lt;/h4&gt;
 
@@ -274,7 +270,8 @@ age=33;
 &lt;pre&gt;&lt;code&gt;var mood=&amp;quot;about 5&#39;10\&amp;quot; tall&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;数组用&lt;code&gt;Array()&lt;/code&gt;声明，可以&lt;code&gt;Array(4)&lt;/code&gt;设置数组长度，或者&lt;code&gt;Array(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;);&lt;/code&gt;直接初始化数组或者
+&lt;p&gt;
+数组用&lt;code&gt;Array()&lt;/code&gt;声明，可以&lt;code&gt;Array(4)&lt;/code&gt;设置数组长度，或者&lt;code&gt;Array(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;);&lt;/code&gt;直接初始化数组或者
 &lt;code&gt;var year =[1990,1991,1992]&lt;/code&gt;
 字符串、数字、变量、数组、等可以混合存入数组，也可以是变量。&lt;/p&gt;
 
@@ -314,8 +311,7 @@ lennon.living=false;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;函数内部局部变量不影响全局变量要用var声明才行，不声明则影响同名全局变量&lt;/p&gt;
-</description>
+&lt;p&gt;函数内部局部变量不影响全局变量要用var声明才行，不声明则影响同名全局变量&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -324,9 +320,8 @@ lennon.living=false;
       <pubDate>Fri, 08 Aug 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-08-08-linux-java-matlab/</guid>
-      <description>
-
-&lt;p&gt;项目需要迁移到linux环境，准确的说是redhat系统，所以最近研究在redhat下java调用matlab的解决方法，期间遇到了各种问题，卡了好长时间，现在终于解决了。&lt;/p&gt;
+      <description>&lt;p&gt;项目需要迁移到linux环境，准确的说是redhat系统，所以最近研究在redhat下java调用matlab的解决方法，期间遇到了各种问题，卡了好长时间，现在终于解决了。
+&lt;/p&gt;
 
 &lt;h3 id=&#34;redhat下matlab安装&#34;&gt;Redhat下matlab安装&lt;/h3&gt;
 
@@ -377,8 +372,7 @@ rpm -qa libXp  (查看是否安装成功）
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后就可以java调用matlab了。
-&lt;code&gt;友情提示：&lt;/code&gt;上面对rhel-debuginfo.repo文件操作有什么影响不清楚，可以先备份一下供以后还原&lt;/p&gt;
-</description>
+&lt;code&gt;友情提示：&lt;/code&gt;上面对rhel-debuginfo.repo文件操作有什么影响不清楚，可以先备份一下供以后还原&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -387,10 +381,14 @@ rpm -qa libXp  (查看是否安装成功）
       <pubDate>Tue, 08 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-07-28-javamatlab/</guid>
-      <description>&lt;p&gt;因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。
-具体java调用matlab函数的过程这里不多说，具体可以看这里:&lt;a href=&#34;http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/&#34;&gt;Java和matlab混合编程&lt;/a&gt;，&lt;a href=&#34;http://xiaolongfeixiang.iteye.com/blog/1893621&#34;&gt;Java调用Matlab方法的三种方式&lt;/a&gt;，&lt;a href=&#34;http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html&#34;&gt;java中调用Matlab的函数+注意事项&lt;/a&gt;，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
-这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。
-我这里函数返回的结构体直接java输出如下：&lt;/p&gt;
+      <description>&lt;p&gt;因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。&lt;/p&gt;
+
+&lt;p&gt;具体java调用matlab函数的过程这里不多说，具体可以看这里:&lt;a href=&#34;http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/&#34;&gt;Java和matlab混合编程&lt;/a&gt;，&lt;a href=&#34;http://xiaolongfeixiang.iteye.com/blog/1893621&#34;&gt;Java调用Matlab方法的三种方式&lt;/a&gt;，&lt;a href=&#34;http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html&#34;&gt;java中调用Matlab的函数+注意事项&lt;/a&gt;，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
+&lt;/p&gt;
+
+&lt;p&gt;这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。&lt;/p&gt;
+
+&lt;p&gt;我这里函数返回的结构体直接java输出如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;      Comment: &#39;Mean: ARMAX(0,0,0); Variance: GARCH(1,1) &#39;
  Distribution: &#39;Gaussian&#39;
@@ -404,8 +402,9 @@ VarianceModel: &#39;GARCH&#39;
       Display: &#39;off&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：&lt;code&gt;作为字符串处理&lt;/code&gt;。
-代码如下：&lt;/p&gt;
+&lt;p&gt;一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：&lt;code&gt;作为字符串处理&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;代码如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;MWStructArray result=(MWStructArray)resultObjects[0];//取matlab导出函数的第一个返回值
 String string=result.toString();//转化为字符串
@@ -416,8 +415,7 @@ garch=Double.parseDouble(list[7].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#3
 arch=Double.parseDouble(list[8].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第9行取ARCH值
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;方法很简单，提供个处理思路，大家可按照自己返回的内容处理。&lt;/p&gt;
-</description>
+&lt;p&gt;方法很简单，提供个处理思路，大家可按照自己返回的内容处理。&lt;/p&gt;</description>
     </item>
     
   </channel>

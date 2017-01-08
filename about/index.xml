@@ -14,11 +14,12 @@
       <pubDate>Sat, 01 Nov 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/about/2014-11-01-book-js/</guid>
-      <description>&lt;p&gt;为了偷懒，看了两天Javascript，网上又搜索了一下jquery，想着改写下博客模板，使得罗列读的图书时可以少写些内容，能根据ID自动添加豆瓣上的其他的相关内容。&lt;/p&gt;
+      <description>&lt;p&gt;为了偷懒，看了两天Javascript，网上又搜索了一下jquery，想着改写下博客模板，使得罗列读的图书时可以少写些内容，能根据ID自动添加豆瓣上的其他的相关内容。PS.这是改版前的内容，用于老博客的前端页面&lt;/p&gt;
 
 &lt;p&gt;下面总结一下:&lt;/p&gt;
 
-&lt;p&gt;首先用到了&lt;a href=&#34;http://developers.douban.com/wiki/?title=guide&#34;&gt;豆瓣API&lt;/a&gt;，另外推荐百度的&lt;a href=&#34;http://apistore.baidu.com/&#34;&gt;API Store&lt;/a&gt;，上面可以查找各个公司的提供的API接口。&lt;/p&gt;
+&lt;p&gt;首先用到了&lt;a href=&#34;http://developers.douban.com/wiki/?title=guide&#34;&gt;豆瓣API&lt;/a&gt;，另外推荐百度的&lt;a href=&#34;http://apistore.baidu.com/&#34;&gt;API Store&lt;/a&gt;，上面可以查找各个公司的提供的API接口。
+&lt;/p&gt;
 
 &lt;p&gt;其次在&lt;code&gt;book.html&lt;/code&gt;模板里面对要添加的地方&lt;code&gt;div&lt;/code&gt;标签增加类&lt;code&gt;book&lt;/code&gt;属性，并取markdown中&lt;code&gt;subject、image、description、status&lt;/code&gt;的值来设为属性。
 如下：&lt;/p&gt;
@@ -99,8 +100,7 @@
 
 &lt;p&gt;因为是初学，中间遇到各种奇葩问题，不一一列举。&lt;/p&gt;
 
-&lt;p&gt;发现写着好简单，做着好难、、、&lt;/p&gt;
-</description>
+&lt;p&gt;发现写着好简单，做着好难、、、&lt;/p&gt;</description>
     </item>
     
   </channel>

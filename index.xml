@@ -5,8 +5,18 @@
     <link>http://painterliu.com/index.xml</link>
     <description>Recent content on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 07 Jan 2017 15:29:05 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Jan 2017 10:03:09 +0800</lastBuildDate>
     <atom:link href="http://painterliu.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>2017年新年计划</title>
+      <link>http://painterliu.com/post/2017plan/</link>
+      <pubDate>Sun, 08 Jan 2017 10:03:09 +0800</pubDate>
+      
+      <guid>http://painterliu.com/post/2017plan/</guid>
+      <description>&lt;p&gt;元旦已经过去一周了，忙着对博客改版，新年计划才出炉！&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>博客改版</title>
@@ -18,6 +28,8 @@
 
 &lt;p&gt;博客原来的内容基本没删除（只所以说基本，是因为我忘了事前备份，而且直接使用的&lt;code&gt;push -f&lt;/code&gt;把之前github上的内容全覆盖了），不管之前写的内容多糟糕，想法看法对不对，还是留着当个纪念吧！&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;
+
 &lt;p&gt;之所以好久没更新，除了这半年多家里出了些事情外，还有就是因为找不到更新的意义。我对这个博客的定位是一个技术博客，但大部分技术文章只是记录，缺少自己的看法和想法，另外目前我所可能遇到的技术问题基本都能在网上找到解决方法，或者我就是通过网上的方法解决的，缺乏原创性内容。我认为博客不应该是一些记录性的内容，博客主要还是给其他人看的，要不自己做笔记就可以了，个人也不应该通过看博客的记录性内容学习新的知识，缺乏系统性。&lt;/p&gt;
 
 &lt;p&gt;现在想法有点变化，对记录性的内容没有这么排斥了，有些记录性的内容可以为自己服务，容易找到，有些问题解决方案虽然网上有，但再次遇到重新搜索总是麻烦的。针对缺少原创性内容的问题，可以通过将记录性内容转化为总结来解决，不一味的记录详细内容，而是偏向总结供人参考。还有重要的一点，博客不仅仅是给其他人看的，还记录了自己的成长！&lt;/p&gt;
@@ -27,7 +39,8 @@
 &lt;p&gt;另外博客主题是使用&lt;a href=&#34;http://www.chingli.com/&#34;&gt;青砾&lt;/a&gt;的博客改造而来，未征得博主的同意，但毕竟是自己将其前端页面改造成了主题，有一些新增的内容，中间有自己的劳动，就擅自使用了，非常抱歉。另基于以上原因，主题暂时不放到github上了！&lt;/p&gt;
 
 &lt;p&gt;下一步计划将rss订阅功能添加到博客中！&lt;/p&gt;
-</description>
+
+&lt;p&gt;希望一年能更新50篇左右吧！&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,9 +49,7 @@
       <pubDate>Mon, 29 Feb 2016 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2016-02-29-starrysky/</guid>
-      <description>
-
-&lt;p&gt;本笔记是看完书以后摘录的，由于在图书馆借的书，没做标记，可能有遗漏。&lt;/p&gt;
+      <description>&lt;p&gt;本笔记是看完书以后摘录的，由于在图书馆借的书，没做标记，可能有遗漏。&lt;/p&gt;
 
 &lt;h3 id=&#34;宇宙的层次&#34;&gt;宇宙的层次&lt;/h3&gt;
 
@@ -46,7 +57,8 @@
 
 &lt;p&gt;银河系属于室女座超星系团。&lt;/p&gt;
 
-&lt;p&gt;宇宙年龄137亿年&lt;/p&gt;
+&lt;p&gt;宇宙年龄137亿年
+&lt;/p&gt;
 
 &lt;h3 id=&#34;后院天文学&#34;&gt;后院天文学&lt;/h3&gt;
 
@@ -175,8 +187,7 @@
 &lt;p&gt;最后附个从《诺顿星图手册》截的著名梅西耶天体的图。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/梅西耶1.JPG&#34; alt=&#34;&#34; /&gt;
-&lt;img src=&#34;http://painterliu.com/img/梅西耶2.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-</description>
+&lt;img src=&#34;http://painterliu.com/img/梅西耶2.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -185,9 +196,8 @@
       <pubDate>Wed, 24 Feb 2016 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2016-02-24-nian/</guid>
-      <description>
-
-&lt;p&gt;我家住在鲁西南地区的一个小村庄里，可能是因为离孔子老家比较近，各种过年的风俗习惯和需要遵守的规矩比较多。最近几年年轻一辈由于偷懒都不太注意遵守各种风俗习惯了，这些风俗习惯或者说规矩是迷信也好、传统也罢，可能已经不太适应这个飞速发展的社会，也可能早已忘记这些风俗背后的意义内涵，但至少是祖祖辈辈传下来的，感觉有必要记录一下。需要说明的是，家乡这边各个村庄的年俗有细微差别，比如我姥爷家，骑自行车过去只需10多分钟，但他们那过年一些细节和我家就不太一样。&lt;/p&gt;
+      <description>&lt;p&gt;我家住在鲁西南地区的一个小村庄里，可能是因为离孔子老家比较近，各种过年的风俗习惯和需要遵守的规矩比较多。最近几年年轻一辈由于偷懒都不太注意遵守各种风俗习惯了，这些风俗习惯或者说规矩是迷信也好、传统也罢，可能已经不太适应这个飞速发展的社会，也可能早已忘记这些风俗背后的意义内涵，但至少是祖祖辈辈传下来的，感觉有必要记录一下。需要说明的是，家乡这边各个村庄的年俗有细微差别，比如我姥爷家，骑自行车过去只需10多分钟，但他们那过年一些细节和我家就不太一样。
+&lt;/p&gt;
 
 &lt;p&gt;首先需要说明的是，我们庄两三百户左右人家都姓刘，追根溯源都是一个祖先，但时间长了以后血脉关系自然又分远近，于是分成了一个个大的家族（我们这叫“门”，俗称“一门子人”就是指一个家族的，血脉关系比较近），每个家族都有一份家谱，整个村庄有总的家谱。另外下面的叙述中可能不自觉的夹杂着家乡话的语音习惯，敬请原谅！&lt;/p&gt;
 
@@ -348,8 +358,7 @@
 
 &lt;h3 id=&#34;总结&#34;&gt;总结&lt;/h3&gt;
 
-&lt;p&gt;在这里主要记录一下我们家这边过年的习俗，可能有遗漏的地方，另外由于在家待着的原因，文字里有些家乡话的语言习惯，见谅！&lt;/p&gt;
-</description>
+&lt;p&gt;在这里主要记录一下我们家这边过年的习俗，可能有遗漏的地方，另外由于在家待着的原因，文字里有些家乡话的语言习惯，见谅！&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -360,7 +369,8 @@
       <guid>http://painterliu.com/post/2015-06-14-lifegoal/</guid>
       <description>&lt;p&gt;前段时间身体不太好，导致心情比较低落，人也颓废，啥事都不想干。找暑假实习也无心情准备，各种被拒，暑假就只能呆在实验室了。&lt;/p&gt;
 
-&lt;p&gt;心情不好就喜欢想杂七杂八的东西(好的时候也想)，那段时间陷入了强烈的自我否定当中，感觉自己一无是处，各种缺点，而我又不是一个喜欢表达开放自己内心的人，也不习惯找人聊天排解。没事的时候(如果你心情不好任何时候都是没事的时候)就会想，自己想过什么样的生活，想有个什么样的未来。我知道自己从高考结束后一直以来都活的迷迷糊糊，没有明确的人生目标，也没想好这辈子活着是为了什么，迷茫着前进，却不知道远方到底有什么，或者说哪里才是远方。&lt;/p&gt;
+&lt;p&gt;心情不好就喜欢想杂七杂八的东西(好的时候也想)，那段时间陷入了强烈的自我否定当中，感觉自己一无是处，各种缺点，而我又不是一个喜欢表达开放自己内心的人，也不习惯找人聊天排解。没事的时候(如果你心情不好任何时候都是没事的时候)就会想，自己想过什么样的生活，想有个什么样的未来。我知道自己从高考结束后一直以来都活的迷迷糊糊，没有明确的人生目标，也没想好这辈子活着是为了什么，迷茫着前进，却不知道远方到底有什么，或者说哪里才是远方。
+&lt;/p&gt;
 
 &lt;p&gt;感觉不能这样颓废下去，要给自己个奋斗的理由，于是试了试奶牛文章&lt;a href=&#34;http://blog.sina.com.cn/s/blog_6e8e05ac0100wu4h.html&#34;&gt;《给明年依然年轻的我们&amp;hellip;》&lt;/a&gt;中的方法，找找人生理想，PS.亲测不怎么有效!
 用文章里面的方法，列了一大堆内容，由于人生经历有限，也没找到啥感动的自己都要哭的人生目标，不过还是有收获的，最后确定的奋斗目标是：&lt;code&gt;可以不受限制的去做自己想做、喜欢做的事，快乐自由的去体验生活，感受更大世界！&lt;/code&gt;。这个人生目标受我过去的人生经历和现阶段对自我的认识所影响，也许以后会变，但确实是我现阶段的想法。我确实不是一个很有野心的人啊！&lt;/p&gt;
@@ -379,8 +389,7 @@
 
 &lt;p&gt;少年，就是要在阳光下挥洒汗水！&lt;/p&gt;
 
-&lt;p&gt;一切随性而为!&lt;/p&gt;
-</description>
+&lt;p&gt;一切随性而为!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -389,15 +398,14 @@
       <pubDate>Sun, 07 Dec 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-12-07-scrapy/</guid>
-      <description>
-
-&lt;p&gt;最近懒，没怎么更新博客，赶紧在周末抽出时间写写。&lt;/p&gt;
+      <description>&lt;p&gt;最近懒，没怎么更新博客，赶紧在周末抽出时间写写。&lt;/p&gt;
 
 &lt;p&gt;前一段时间想翻翻&lt;a href=&#34;http://www.freebuf.com/&#34;&gt;freebuf网站&lt;/a&gt;的内容（黑客与画家^_^），一页一页翻太麻烦，本着黑客精神，就想着写个爬虫把网站内容题目爬下来，对感兴趣的题目可以点进去看。&lt;/p&gt;
 
 &lt;p&gt;先声明，原来从来没写过爬虫，于是为了偷懒，找到了Python的爬虫框架&lt;a href=&#34;http://scrapy.org/&#34;&gt;Scrapy&lt;/a&gt;,官方文档看&lt;a href=&#34;https://scrapy-chs.readthedocs.org/zh_CN/latest/&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
 
-&lt;p&gt;有框架就是快，突击学习了两天就把爬虫写出来了。&lt;/p&gt;
+&lt;p&gt;有框架就是快，突击学习了两天就把爬虫写出来了。
+&lt;/p&gt;
 
 &lt;h3 id=&#34;scrapy安装&#34;&gt;Scrapy安装&lt;/h3&gt;
 
@@ -528,8 +536,7 @@ class FreeBufToolsSpider(scrapy.Spider):
 
 &lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/json.PNG&#34; alt=&#34;json输出形式&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看&lt;a href=&#34;http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086&#34;&gt;这里&lt;/a&gt;，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要&lt;code&gt;pipelines.py&lt;/code&gt;文件和&lt;code&gt;settings.py&lt;/code&gt;文件&lt;/p&gt;
-</description>
+&lt;p&gt;最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看&lt;a href=&#34;http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086&#34;&gt;这里&lt;/a&gt;，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要&lt;code&gt;pipelines.py&lt;/code&gt;文件和&lt;code&gt;settings.py&lt;/code&gt;文件&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -538,11 +545,12 @@ class FreeBufToolsSpider(scrapy.Spider):
       <pubDate>Sat, 01 Nov 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/about/2014-11-01-book-js/</guid>
-      <description>&lt;p&gt;为了偷懒，看了两天Javascript，网上又搜索了一下jquery，想着改写下博客模板，使得罗列读的图书时可以少写些内容，能根据ID自动添加豆瓣上的其他的相关内容。&lt;/p&gt;
+      <description>&lt;p&gt;为了偷懒，看了两天Javascript，网上又搜索了一下jquery，想着改写下博客模板，使得罗列读的图书时可以少写些内容，能根据ID自动添加豆瓣上的其他的相关内容。PS.这是改版前的内容，用于老博客的前端页面&lt;/p&gt;
 
 &lt;p&gt;下面总结一下:&lt;/p&gt;
 
-&lt;p&gt;首先用到了&lt;a href=&#34;http://developers.douban.com/wiki/?title=guide&#34;&gt;豆瓣API&lt;/a&gt;，另外推荐百度的&lt;a href=&#34;http://apistore.baidu.com/&#34;&gt;API Store&lt;/a&gt;，上面可以查找各个公司的提供的API接口。&lt;/p&gt;
+&lt;p&gt;首先用到了&lt;a href=&#34;http://developers.douban.com/wiki/?title=guide&#34;&gt;豆瓣API&lt;/a&gt;，另外推荐百度的&lt;a href=&#34;http://apistore.baidu.com/&#34;&gt;API Store&lt;/a&gt;，上面可以查找各个公司的提供的API接口。
+&lt;/p&gt;
 
 &lt;p&gt;其次在&lt;code&gt;book.html&lt;/code&gt;模板里面对要添加的地方&lt;code&gt;div&lt;/code&gt;标签增加类&lt;code&gt;book&lt;/code&gt;属性，并取markdown中&lt;code&gt;subject、image、description、status&lt;/code&gt;的值来设为属性。
 如下：&lt;/p&gt;
@@ -623,8 +631,7 @@ class FreeBufToolsSpider(scrapy.Spider):
 
 &lt;p&gt;因为是初学，中间遇到各种奇葩问题，不一一列举。&lt;/p&gt;
 
-&lt;p&gt;发现写着好简单，做着好难、、、&lt;/p&gt;
-</description>
+&lt;p&gt;发现写着好简单，做着好难、、、&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -635,12 +642,12 @@ class FreeBufToolsSpider(scrapy.Spider):
       <guid>http://painterliu.com/post/2014-10-27-give-me-a-girl/</guid>
       <description>&lt;p&gt;小说还是一口气看完比较好，虽然这本书我不是一口气看完的，但是是集中时间看的。&lt;/p&gt;
 
-&lt;p&gt;小说开篇就提朱裳，但从不正面描写朱裳，所有对朱裳的描写都是从“我”的印象中来的，是“我”对朱裳的感觉。所以中心还是“我”，&lt;code&gt;生动细致地刻画出一个处于青春期的男孩内心里那种熊熊燃烧的感觉。&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;小说开篇就提朱裳，但从不正面描写朱裳，所有对朱裳的描写都是从“我”的印象中来的，是“我”对朱裳的感觉。所以中心还是“我”，&lt;code&gt;生动细致地刻画出一个处于青春期的男孩内心里那种熊熊燃烧的感觉。&lt;/code&gt;
+&lt;/p&gt;
 
 &lt;p&gt;小说读下来有种感觉，就是把一个大人的灵魂放到一个高中生的身体里，去过高中生的生活，但思想又混杂着高中生的思想。&lt;/p&gt;
 
-&lt;p&gt;不多说，以后就不写读后感了，只列清单，最多一句话评价一下。&lt;/p&gt;
-</description>
+&lt;p&gt;不多说，以后就不写读后感了，只列清单，最多一句话评价一下。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -669,9 +676,7 @@ class FreeBufToolsSpider(scrapy.Spider):
       <pubDate>Sat, 18 Oct 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-10-18-js-dom/</guid>
-      <description>
-
-&lt;p&gt;看了两天《javascript DOM编程艺术(第二版)》，这里记录一下基本的内容，备忘。&lt;/p&gt;
+      <description>&lt;p&gt;看了两天《javascript DOM编程艺术(第二版)》，这里记录一下基本的内容，备忘。&lt;/p&gt;
 
 &lt;h4 id=&#34;语法&#34;&gt;语法&lt;/h4&gt;
 
@@ -686,7 +691,8 @@ age=33;
 &lt;pre&gt;&lt;code&gt;var mood=&amp;quot;about 5&#39;10\&amp;quot; tall&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;数组用&lt;code&gt;Array()&lt;/code&gt;声明，可以&lt;code&gt;Array(4)&lt;/code&gt;设置数组长度，或者&lt;code&gt;Array(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;);&lt;/code&gt;直接初始化数组或者
+&lt;p&gt;
+数组用&lt;code&gt;Array()&lt;/code&gt;声明，可以&lt;code&gt;Array(4)&lt;/code&gt;设置数组长度，或者&lt;code&gt;Array(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;);&lt;/code&gt;直接初始化数组或者
 &lt;code&gt;var year =[1990,1991,1992]&lt;/code&gt;
 字符串、数字、变量、数组、等可以混合存入数组，也可以是变量。&lt;/p&gt;
 
@@ -726,8 +732,7 @@ lennon.living=false;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;函数内部局部变量不影响全局变量要用var声明才行，不声明则影响同名全局变量&lt;/p&gt;
-</description>
+&lt;p&gt;函数内部局部变量不影响全局变量要用var声明才行，不声明则影响同名全局变量&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -740,7 +745,8 @@ lennon.living=false;
 
 &lt;p&gt;真的不喜欢用零碎的时间看书，感觉没体系，没连贯性。&lt;/p&gt;
 
-&lt;p&gt;实际上还是挺享受阅读的。在周末的上午，拿本书，带上杯子，慢慢走到图书馆，接杯白开水，找一个靠窗的位置坐下，打开书本，悠悠然的看一上午，不时的喝两口水或者往窗外看看。水一定要是白开水，书一定是纸质书。&lt;/p&gt;
+&lt;p&gt;实际上还是挺享受阅读的。在周末的上午，拿本书，带上杯子，慢慢走到图书馆，接杯白开水，找一个靠窗的位置坐下，打开书本，悠悠然的看一上午，不时的喝两口水或者往窗外看看。水一定要是白开水，书一定是纸质书。
+&lt;/p&gt;
 
 &lt;p&gt;不扯这么多，本着不评价只写感受的原则，说说自己看《三十六大的感觉》。前半部分看时，感觉冯唐有些矫情，不知道为什么，反正就是这感觉。后半部分没啥感觉。大概就这样。
 下面是摘抄:&lt;/p&gt;
@@ -763,8 +769,7 @@ lennon.living=false;
 &lt;li&gt;&lt;p&gt;&lt;code&gt;独立思考，时常忘记标准答案，读读历史，多走些地方。&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;另，最后路金波的《我读冯唐》写的不错。&lt;/p&gt;
-</description>
+&lt;p&gt;另，最后路金波的《我读冯唐》写的不错。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -775,14 +780,14 @@ lennon.living=false;
       <guid>http://painterliu.com/post/2014-10-07-study/</guid>
       <description>&lt;p&gt;宋濂&lt;/p&gt;
 
-&lt;p&gt;　　余幼时即嗜学。家贫，无致书以观，每假借于藏书之家，手自笔录，计日以还。天大寒，观冰坚，手指不可屈伸，弗之怠。录毕，走送了，不敢销逾约。以是人多以书假余，余因得遍观群书。既加冠，益慕圣贤之道。又患无硕师名人与游，尝趋百里外从乡之先达执经叩问。先达德隆望尊，门人弟子填其室，未尝稍降辞色。余立侍左右，援疑质理，俯身倾耳以请；或遇其叱咄，色愈恭，礼愈至，不敢出一言以复；俟其欣悦，则又请焉。故余虽愚，卒获有所闻。&lt;/p&gt;
+&lt;p&gt;　　余幼时即嗜学。家贫，无致书以观，每假借于藏书之家，手自笔录，计日以还。天大寒，观冰坚，手指不可屈伸，弗之怠。录毕，走送了，不敢销逾约。以是人多以书假余，余因得遍观群书。既加冠，益慕圣贤之道。又患无硕师名人与游，尝趋百里外从乡之先达执经叩问。先达德隆望尊，门人弟子填其室，未尝稍降辞色。余立侍左右，援疑质理，俯身倾耳以请；或遇其叱咄，色愈恭，礼愈至，不敢出一言以复；俟其欣悦，则又请焉。故余虽愚，卒获有所闻。
+&lt;/p&gt;
 
 &lt;p&gt;　　当余之从师也，负箧曳屣，行深山巨谷中，穷冬烈风，大雪深数尺，足肤皲裂而不知。至舍，四支僵劲不能动，媵人持汤沃灌，以衾拥覆，久而乃和。寓逆旅主人，日再食，无鲜肥滋味之享。同舍生皆被绮绣，戴朱缨宝饰之帽，腰白玉之环，左佩刀，右备容臭，烨然若神人；余则緼袍敝衣处其间，略无慕艳意，以中有足乐者，不知口体之奉不若人也。盖余之勤且艰苦此。&lt;/p&gt;
 
 &lt;p&gt;　　今诸生学于太学，县官日有禀销之供，父母岁有裘葛之遗，无冻馁之患矣；坐大厦之下而诵《诗》《书》，无奔走之劳矣；有司业、博士为之师，未有问而不告，求而不得者也；凡所宜有之书皆集于此，不必若余之手录，假诸人而后见也。其业有不精，德有不成者，非天质之卑，则心不若余之专耳，岂他人之过哉？&lt;/p&gt;
 
-&lt;p&gt;　　东阳马生君则，在太学已二年，流辈甚称其贤。余朝京师，生以乡人子谒余。撰长书以为贽，辞甚畅达。与之论辨，言和而色夷。自谓少时用心于学甚劳。是可谓善学者矣。其将归见其亲也，余故道为学之难以告之。&lt;/p&gt;
-</description>
+&lt;p&gt;　　东阳马生君则，在太学已二年，流辈甚称其贤。余朝京师，生以乡人子谒余。撰长书以为贽，辞甚畅达。与之论辨，言和而色夷。自谓少时用心于学甚劳。是可谓善学者矣。其将归见其亲也，余故道为学之难以告之。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -795,7 +800,8 @@ lennon.living=false;
 
 &lt;p&gt;图有点大哈!&lt;/p&gt;
 
-&lt;p&gt;总算把《沉默的大多数》陆陆续续看完了，大概花了一个月吧，实际上集中时间看，一个白天就能开完了。标点都不知道怎么加了，《沉默的大多数》是一本文集，里面有一篇《沉默的大多数》，不知道该怎么用书名号了，要不要用引号？&lt;/p&gt;
+&lt;p&gt;总算把《沉默的大多数》陆陆续续看完了，大概花了一个月吧，实际上集中时间看，一个白天就能开完了。标点都不知道怎么加了，《沉默的大多数》是一本文集，里面有一篇《沉默的大多数》，不知道该怎么用书名号了，要不要用引号？
+&lt;/p&gt;
 
 &lt;p&gt;前面自己写的《沉默的大多数》读后感，写的很垃圾，但一想就我的文学素养来说，写出来就很不容易了，就在那里放着吧！&lt;/p&gt;
 
@@ -820,8 +826,7 @@ lennon.living=false;
 &lt;li&gt;我们民族最重大的文化传统，不是孔孟程朱，而是这种钻研精神。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;就摘抄这么多吧，最后对王小波也是一位程序员感到惊喜！&lt;/p&gt;
-</description>
+&lt;p&gt;就摘抄这么多吧，最后对王小波也是一位程序员感到惊喜！&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -830,15 +835,15 @@ lennon.living=false;
       <pubDate>Thu, 04 Sep 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-09-04-emmy/</guid>
-      <description>&lt;p&gt;不知道是什么时候喜欢上看美国的颁奖典礼的，像奥斯卡、格莱美、艾美奖、公告牌音乐大奖等等涉及电影、电视剧、音乐一类的颁奖典礼，一般看到资源都会下载下来看一下，虽然我基本不看美剧(国产剧也不怎么看)也不怎么听歌，虽然不是每一个颁奖典礼都必看，也不太执着于是否看，但大部分颁奖礼还是都看了的。&lt;/p&gt;
+      <description>&lt;p&gt;不知道是什么时候喜欢上看美国的颁奖典礼的，像奥斯卡、格莱美、艾美奖、公告牌音乐大奖等等涉及电影、电视剧、音乐一类的颁奖典礼，一般看到资源都会下载下来看一下，虽然我基本不看美剧(国产剧也不怎么看)也不怎么听歌，虽然不是每一个颁奖典礼都必看，也不太执着于是否看，但大部分颁奖礼还是都看了的。
+&lt;/p&gt;
 
 &lt;p&gt;最近断断续续的把第66届艾美奖看完了，这里写些感想，主要有两点。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;国外像艾美奖这样中间没什么表演节目的会在主持人嘉宾等台词上下功夫，使得语言很幽默风趣，偶尔找嘉宾开下玩笑，不让人感觉枯燥，而且邻居致辞也很有趣。而音乐类奖项等中间穿插各种表演的现场表演又是精彩纷呈，比如13年41届全美音乐奖的&lt;a href=&#34;http://v.youku.com/v_show/id_XNjM5Mzk1NDAw.html&#34;&gt;say somthing&lt;/a&gt;，确实精彩。国外一般是开发性的舞台，设计的很好，科技程度高，有些舞台深入到观众内部的，互动性强。&lt;/li&gt;
 &lt;li&gt;看艾美奖最感动的就是其中的缅怀环节，美国的大部分颁奖都有这个环节，我不清楚里面出现的人是不是都已逝去或者在这距离上届艾美奖一年的时间里逝去，但这个环节让人们记住、想起那些曾经在这一领域做出贡献的人，不忘老一辈电视人的贡献。虽然里面缅怀的人我基本都不认识，对简介上说的美剧也没印象，但就是很感动，这些人曾对这一领域做出贡献，这些人还不曾被遗忘，我想对一个人工作最好的肯定就是这了吧，当你老去或者死后，你的工作、贡献还能被人提起、回忆，还能留住人们心中。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -847,9 +852,8 @@ lennon.living=false;
       <pubDate>Fri, 08 Aug 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-08-08-linux-java-matlab/</guid>
-      <description>
-
-&lt;p&gt;项目需要迁移到linux环境，准确的说是redhat系统，所以最近研究在redhat下java调用matlab的解决方法，期间遇到了各种问题，卡了好长时间，现在终于解决了。&lt;/p&gt;
+      <description>&lt;p&gt;项目需要迁移到linux环境，准确的说是redhat系统，所以最近研究在redhat下java调用matlab的解决方法，期间遇到了各种问题，卡了好长时间，现在终于解决了。
+&lt;/p&gt;
 
 &lt;h3 id=&#34;redhat下matlab安装&#34;&gt;Redhat下matlab安装&lt;/h3&gt;
 
@@ -900,28 +904,7 @@ rpm -qa libXp  (查看是否安装成功）
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后就可以java调用matlab了。
-&lt;code&gt;友情提示：&lt;/code&gt;上面对rhel-debuginfo.repo文件操作有什么影响不清楚，可以先备份一下供以后还原&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>《沉默的大多数》读后感</title>
-      <link>http://painterliu.com/tag/2014-08-05-silence/</link>
-      <pubDate>Tue, 05 Aug 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://painterliu.com/tag/2014-08-05-silence/</guid>
-      <description>&lt;p&gt;今天看了《沉默的大多数》里面的《沉默的大多数》，对于文学素养不够高的我来说，杂文确实不好理解，王小波也不好理解。下面主要说一下我自己的感受。怎么想起原来被逼着写读后感的日子？&lt;/p&gt;
-
-&lt;p&gt;首先，看了沉默的大多数，发现自己也一直属于沉默的大多数，还好，是大多数，不过虽然是大多数，但彼此是孤立的，因为沉默，所以还是少数。&lt;/p&gt;
-
-&lt;p&gt;其次，文章中的问题依然存在。比如文章中说福柯先生的&lt;code&gt;话语即权利&lt;/code&gt;应该倒过来说即&lt;code&gt;权利即话语&lt;/code&gt;,感觉这句话说的很对，现在的中国依然是权利决定话语，只不过网络的发达使得这种现象逐渐改变，当然也使得大多数人不再沉默，开始&lt;code&gt;捐税&lt;/code&gt;了。&lt;/p&gt;
-
-&lt;p&gt;最后，王小波在文中多次说&lt;code&gt;世界不光有阳的一门，还有阴的一面&lt;/code&gt;,感觉这里不只代表好坏善恶，还代表了现实世界和个人内心想法，话语连接了内心与现实，但因为不自由的世界，人们又不想让它连接，所有沉默或者&lt;code&gt;捐税&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;为什么沉默？因为不自由，因为不沉默改变不了什么？因为&lt;code&gt;沉默是一种生活方式&lt;/code&gt;，国内的人大多数选择了沉默而已。&lt;/p&gt;
-
-&lt;p&gt;为了继续保持沉默，这里不多写了，另外，杂文是不是不应该这样，不应该这样写读后感？杂文，还是要联系实际问题来评价吧！我是评价不了，还是多看、多读。&lt;/p&gt;
-</description>
+&lt;code&gt;友情提示：&lt;/code&gt;上面对rhel-debuginfo.repo文件操作有什么影响不清楚，可以先备份一下供以后还原&lt;/p&gt;</description>
     </item>
     
   </channel>

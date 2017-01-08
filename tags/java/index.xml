@@ -13,9 +13,8 @@
       <pubDate>Fri, 08 Aug 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-08-08-linux-java-matlab/</guid>
-      <description>
-
-&lt;p&gt;项目需要迁移到linux环境，准确的说是redhat系统，所以最近研究在redhat下java调用matlab的解决方法，期间遇到了各种问题，卡了好长时间，现在终于解决了。&lt;/p&gt;
+      <description>&lt;p&gt;项目需要迁移到linux环境，准确的说是redhat系统，所以最近研究在redhat下java调用matlab的解决方法，期间遇到了各种问题，卡了好长时间，现在终于解决了。
+&lt;/p&gt;
 
 &lt;h3 id=&#34;redhat下matlab安装&#34;&gt;Redhat下matlab安装&lt;/h3&gt;
 
@@ -66,8 +65,7 @@ rpm -qa libXp  (查看是否安装成功）
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后就可以java调用matlab了。
-&lt;code&gt;友情提示：&lt;/code&gt;上面对rhel-debuginfo.repo文件操作有什么影响不清楚，可以先备份一下供以后还原&lt;/p&gt;
-</description>
+&lt;code&gt;友情提示：&lt;/code&gt;上面对rhel-debuginfo.repo文件操作有什么影响不清楚，可以先备份一下供以后还原&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -76,10 +74,14 @@ rpm -qa libXp  (查看是否安装成功）
       <pubDate>Tue, 08 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-07-28-javamatlab/</guid>
-      <description>&lt;p&gt;因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。
-具体java调用matlab函数的过程这里不多说，具体可以看这里:&lt;a href=&#34;http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/&#34;&gt;Java和matlab混合编程&lt;/a&gt;，&lt;a href=&#34;http://xiaolongfeixiang.iteye.com/blog/1893621&#34;&gt;Java调用Matlab方法的三种方式&lt;/a&gt;，&lt;a href=&#34;http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html&#34;&gt;java中调用Matlab的函数+注意事项&lt;/a&gt;，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
-这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。
-我这里函数返回的结构体直接java输出如下：&lt;/p&gt;
+      <description>&lt;p&gt;因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。&lt;/p&gt;
+
+&lt;p&gt;具体java调用matlab函数的过程这里不多说，具体可以看这里:&lt;a href=&#34;http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/&#34;&gt;Java和matlab混合编程&lt;/a&gt;，&lt;a href=&#34;http://xiaolongfeixiang.iteye.com/blog/1893621&#34;&gt;Java调用Matlab方法的三种方式&lt;/a&gt;，&lt;a href=&#34;http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html&#34;&gt;java中调用Matlab的函数+注意事项&lt;/a&gt;，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
+&lt;/p&gt;
+
+&lt;p&gt;这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。&lt;/p&gt;
+
+&lt;p&gt;我这里函数返回的结构体直接java输出如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;      Comment: &#39;Mean: ARMAX(0,0,0); Variance: GARCH(1,1) &#39;
  Distribution: &#39;Gaussian&#39;
@@ -93,8 +95,9 @@ VarianceModel: &#39;GARCH&#39;
       Display: &#39;off&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：&lt;code&gt;作为字符串处理&lt;/code&gt;。
-代码如下：&lt;/p&gt;
+&lt;p&gt;一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：&lt;code&gt;作为字符串处理&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;代码如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;MWStructArray result=(MWStructArray)resultObjects[0];//取matlab导出函数的第一个返回值
 String string=result.toString();//转化为字符串
@@ -105,8 +108,7 @@ garch=Double.parseDouble(list[7].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#3
 arch=Double.parseDouble(list[8].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第9行取ARCH值
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;方法很简单，提供个处理思路，大家可按照自己返回的内容处理。&lt;/p&gt;
-</description>
+&lt;p&gt;方法很简单，提供个处理思路，大家可按照自己返回的内容处理。&lt;/p&gt;</description>
     </item>
     
   </channel>

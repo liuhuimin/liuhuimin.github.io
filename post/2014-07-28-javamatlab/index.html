@@ -24,6 +24,9 @@
     </div>
     <ul class="sidebar-nav">
         
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/--more--">--More--</a></li>
+
+        
         <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af">技术</a></li>
 
         
@@ -50,10 +53,14 @@
       2014年07月08日
       &nbsp;<a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b"> 编程</a>
       </div>
-           <p>因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。
-具体java调用matlab函数的过程这里不多说，具体可以看这里:<a href="http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/">Java和matlab混合编程</a>，<a href="http://xiaolongfeixiang.iteye.com/blog/1893621">Java调用Matlab方法的三种方式</a>，<a href="http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html">java中调用Matlab的函数+注意事项</a>，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
-这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。
-我这里函数返回的结构体直接java输出如下：</p>
+           <p>因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。</p>
+
+<p>具体java调用matlab函数的过程这里不多说，具体可以看这里:<a href="http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/">Java和matlab混合编程</a>，<a href="http://xiaolongfeixiang.iteye.com/blog/1893621">Java调用Matlab方法的三种方式</a>，<a href="http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html">java中调用Matlab的函数+注意事项</a>，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
+</p>
+
+<p>这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。</p>
+
+<p>我这里函数返回的结构体直接java输出如下：</p>
 
 <pre><code>      Comment: 'Mean: ARMAX(0,0,0); Variance: GARCH(1,1) '
  Distribution: 'Gaussian'
@@ -67,8 +74,9 @@ VarianceModel: 'GARCH'
       Display: 'off'
 </code></pre>
 
-<p>一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：<code>作为字符串处理</code>。
-代码如下：</p>
+<p>一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：<code>作为字符串处理</code>。</p>
+
+<p>代码如下：</p>
 
 <pre><code>MWStructArray result=(MWStructArray)resultObjects[0];//取matlab导出函数的第一个返回值
 String string=result.toString();//转化为字符串
@@ -80,7 +88,6 @@ arch=Double.parseDouble(list[8].split(&quot;:&quot;)[1]);//以':'分割第9行�
 </code></pre>
 
 <p>方法很简单，提供个处理思路，大家可按照自己返回的内容处理。</p>
-
     </div>
     <ul class="pager">
     

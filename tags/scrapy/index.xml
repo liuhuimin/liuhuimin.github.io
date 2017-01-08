@@ -13,15 +13,14 @@
       <pubDate>Sun, 07 Dec 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-12-07-scrapy/</guid>
-      <description>
-
-&lt;p&gt;最近懒，没怎么更新博客，赶紧在周末抽出时间写写。&lt;/p&gt;
+      <description>&lt;p&gt;最近懒，没怎么更新博客，赶紧在周末抽出时间写写。&lt;/p&gt;
 
 &lt;p&gt;前一段时间想翻翻&lt;a href=&#34;http://www.freebuf.com/&#34;&gt;freebuf网站&lt;/a&gt;的内容（黑客与画家^_^），一页一页翻太麻烦，本着黑客精神，就想着写个爬虫把网站内容题目爬下来，对感兴趣的题目可以点进去看。&lt;/p&gt;
 
 &lt;p&gt;先声明，原来从来没写过爬虫，于是为了偷懒，找到了Python的爬虫框架&lt;a href=&#34;http://scrapy.org/&#34;&gt;Scrapy&lt;/a&gt;,官方文档看&lt;a href=&#34;https://scrapy-chs.readthedocs.org/zh_CN/latest/&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
 
-&lt;p&gt;有框架就是快，突击学习了两天就把爬虫写出来了。&lt;/p&gt;
+&lt;p&gt;有框架就是快，突击学习了两天就把爬虫写出来了。
+&lt;/p&gt;
 
 &lt;h3 id=&#34;scrapy安装&#34;&gt;Scrapy安装&lt;/h3&gt;
 
@@ -152,8 +151,7 @@ class FreeBufToolsSpider(scrapy.Spider):
 
 &lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/json.PNG&#34; alt=&#34;json输出形式&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看&lt;a href=&#34;http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086&#34;&gt;这里&lt;/a&gt;，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要&lt;code&gt;pipelines.py&lt;/code&gt;文件和&lt;code&gt;settings.py&lt;/code&gt;文件&lt;/p&gt;
-</description>
+&lt;p&gt;最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看&lt;a href=&#34;http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086&#34;&gt;这里&lt;/a&gt;，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要&lt;code&gt;pipelines.py&lt;/code&gt;文件和&lt;code&gt;settings.py&lt;/code&gt;文件&lt;/p&gt;</description>
     </item>
     
   </channel>
