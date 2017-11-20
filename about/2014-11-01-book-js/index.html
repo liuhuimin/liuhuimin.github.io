@@ -148,22 +148,20 @@
       
       
     </ul>
-    
-    <div class="ds-thread" data-thread-key="/about/2014-11-01-book-js/" data-title="JS自动加载豆瓣相关图书内容" data-url="http://painterliu.com/about/2014-11-01-book-js/"></div>
-
-
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"painterliu"};
-    (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] 
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-    </script>
-
+    <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'liuhuimin',
+  repo: 'comment',
+  oauth: {
+    client_id: 'e25c4f4c43c6ef1f403b',
+    client_secret: '503da73a705d49acd7c3f530436c4fd9af2c1e5d',
+  },
+})
+gitment.render('container')
+</script>
 
  </div>
 

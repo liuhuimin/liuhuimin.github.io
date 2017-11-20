@@ -2,10 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>编程 on painterliu的博客</title>
-    <link>http://painterliu.com/categories/%E7%BC%96%E7%A8%8B/index.xml</link>
+    <link>http://painterliu.com/categories/%E7%BC%96%E7%A8%8B/</link>
     <description>Recent content in 编程 on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <atom:link href="http://painterliu.com/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Dec 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://painterliu.com/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>用Scrapy写爬虫</title>
@@ -20,138 +23,7 @@
 &lt;p&gt;先声明，原来从来没写过爬虫，于是为了偷懒，找到了Python的爬虫框架&lt;a href=&#34;http://scrapy.org/&#34;&gt;Scrapy&lt;/a&gt;,官方文档看&lt;a href=&#34;https://scrapy-chs.readthedocs.org/zh_CN/latest/&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;有框架就是快，突击学习了两天就把爬虫写出来了。
-&lt;/p&gt;
-
-&lt;h3 id=&#34;scrapy安装&#34;&gt;Scrapy安装&lt;/h3&gt;
-
-&lt;p&gt;自己搜索吧，这里不提。
-我用的是Ubuntu系统，刚学会了一个小技巧。安装过程中报错缺少头文件，可试着用一下命令:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo apt-get install apt-file 
-apt-file update 
-apt-file search /***  #这里代表提示缺少的文件及路径
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通过上面的命令找到相关的包、软件后安装即可，注意会搜索出来很多，一般为后几个字母为lib的包。
-###创建项目
-选择合适的目录，创建freebuf项目:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;scrapy startproject freebuftools
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;该命令将创建如下目录文件:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;freebuftools/
-    scrapy.cfg
-    freebuftools/
-        __init__.py
-        items.py
-        pipelines.py
-        settings.py
-        spiders/
-            __init__.py
-            ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这些文件分别是:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;scrapy.cfg: 项目的配置文件&lt;/li&gt;
-&lt;li&gt;freebuftools/: 该项目的python模块。之后您将在此加入代码。&lt;/li&gt;
-&lt;li&gt;freebuftools/items.py: 项目中的item文件.&lt;/li&gt;
-&lt;li&gt;freebuftools/pipelines.py: 项目中的pipelines文件.&lt;/li&gt;
-&lt;li&gt;freebuftools/settings.py: 项目的设置文件.&lt;/li&gt;
-&lt;li&gt;freebuftools/spiders/: 放置spider代码的目录.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;定义item&#34;&gt;定义Item&lt;/h3&gt;
-
-&lt;p&gt;Item 是保存爬取到的数据的容器；其使用方法和python字典类似， 并且提供了额外保护机制来避免拼写错误导致的未定义字段错误。&lt;/p&gt;
-
-&lt;p&gt;由于我只想获得freebuf里文章的题目和链接，于是只定义了两个相应字段:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;import scrapy
-class FreebuftoolsItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    title=scrapy.Field()#用于保存题目
-    link =scrapy.Field()#用于保存链接
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;分析网站结构&#34;&gt;分析网站结构&lt;/h3&gt;
-
-&lt;p&gt;使用浏览器的审查元素功能查看freebuf网站分类浏览下的html代码，可以发现文章目录一条一条的都被包含在&lt;code&gt;&amp;lt;div class=&amp;quot;news_inner news-list&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;标签里面&lt;/p&gt;
-
-&lt;p&gt;具体结构如下图:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/html.jpg&#34; alt=&#34;文章题目结构&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;通过目录结构可以提取出文章题目的xpath:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//div[@class=&#39;news_inner news-list&#39;]/div[@class=&#39;news-info&#39;]/dl/dt/a/text()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;文章链接的xpath：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//div[@class=&#39;news_inner news-list&#39;]/div[@class=&#39;news-info&#39;]/dl/dt/a/@href
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;光有文章题目和内容还不够，还要知道怎样进入下一页，查看html代码可知下一页的链接格式为&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;news-more&amp;quot; id=&amp;quot;pagination&amp;quot;&amp;gt;
-    &amp;lt;a href=&amp;quot;http://www.freebuf.com/xxx/page/xxx&amp;quot;&amp;gt;查看更多&amp;lt;/a&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;提取出下一页链接xpath:&lt;code&gt;//div[@id=&#39;pagination&#39;]/a/@href&lt;/code&gt;
-具体xpath的教程可以查看&lt;a href=&#34;https://scrapy-chs.readthedocs.org/zh_CN/latest/&#34;&gt;scrapy文档&lt;/a&gt;，或者看这里&lt;a href=&#34;http://www.w3school.com.cn/xpath/&#34;&gt;xpath教程&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;有一个小技巧，浏览器中看html代码时可以右键选择&lt;code&gt;复制xpath&lt;/code&gt;，不过复制的路径比较死板。&lt;/p&gt;
-
-&lt;h3 id=&#34;编写spider&#34;&gt;编写spider&lt;/h3&gt;
-
-&lt;p&gt;首先在目录&lt;code&gt;freebuftools\freebuftools\spiders\&lt;/code&gt;下新建文件&lt;code&gt;freebuftools_Spider.py&lt;/code&gt;。
-代码如下:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#encoding=utf-8
-import scrapy
-from freebuftools.items import FreebuftoolsItem
-class FreeBufToolsSpider(scrapy.Spider):
-    name = &amp;quot;freeBufTools&amp;quot;
-    allowed_domains =[&amp;quot;freebuf.com&amp;quot;]#域名
-    start_urls =[&amp;quot;http://www.freebuf.com/geek&amp;quot;]#初始页面，可更改为相应分类首页
-    def parse(self,response):
-        file=open(&amp;quot;freebufgeek.html&amp;quot;,&#39;a&#39;)#写入爬取内容的文件，注意文件为追加模式
-
-        for sel in response.xpath(&amp;quot;//div[@class=&#39;news_inner news-list&#39;]/div[@class=&#39;news-info&#39;]/dl/dt/a&amp;quot;):#xpath路径父节点
-            tools=FreebuftoolsItem()#新建保存item
-            tools[&#39;title&#39;]=sel.xpath(&amp;quot;text()&amp;quot;).extract()[0].encode(&#39;utf-8&#39;)#提取文章题目并转换格式保存
-            tools[&#39;link&#39;]=sel.xpath(&amp;quot;@href&amp;quot;).extract()[0].encode(&#39;utf-8&#39;)#提取文章链接并转换格式保存
-            html=&#39;&#39;&#39;&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;&#39;&#39;&#39;+tools[&#39;link&#39;]+&#39;&#39;&#39;&amp;quot; target=&amp;quot;_black&amp;quot;&amp;gt;&#39;&#39;&#39;+tools[&#39;title&#39;]+&amp;quot;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;quot;#拼接写入文件的html代码
-            file.writelines(html)#将爬取内容写入文件
-            yield tools#返回爬取内容
-        url=response.xpath(&amp;quot;//div[@id=&#39;pagination&#39;]/a/@href&amp;quot;).extract()[0]#获取下一页的链接
-        yield scrapy.Request(url,callback=self.parse)#回调本函数继续爬取下一页
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面代码写的比较清楚，内容也很简单，不懂的可以查看官方文档，另外有点需要注意，保存爬取内容的文件打开方式为&lt;strong&gt;追加&lt;/strong&gt;，如果不这样只能保存一条爬取的数据。&lt;/p&gt;
-
-&lt;p&gt;改变初始页面可以爬取不同分类下的文章题目。&lt;/p&gt;
-
-&lt;p&gt;还有Python中yield的用法，简单来说就是yield可在函数中返回内容而仍使函数能继续执行。具体Google百度。&lt;/p&gt;
-
-&lt;h3 id=&#34;执行爬虫&#34;&gt;执行爬虫&lt;/h3&gt;
-
-&lt;p&gt;打开最外层freebuftools文件夹，运行命令&lt;code&gt;scrapy crawl freeBufTools&lt;/code&gt;即可。运行完后可找到自己定义的爬取内容的文件。&lt;/p&gt;
-
-&lt;p&gt;我这里有个问题就是记得创建项目时字母用的小写，但执行时发现小写不对，大家可以在执行前先运行一下&lt;code&gt;scrapy list&lt;/code&gt;查看项目名称。
-###遇到的问题
-主要是文件的问题，一开始我是想直接通过管道导出json格式文件的，但是发现输出的文件内容是汉字对应的utf-8编码，如图:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/json.PNG&#34; alt=&#34;json输出形式&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看&lt;a href=&#34;http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086&#34;&gt;这里&lt;/a&gt;，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要&lt;code&gt;pipelines.py&lt;/code&gt;文件和&lt;code&gt;settings.py&lt;/code&gt;文件&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -165,88 +37,7 @@ class FreeBufToolsSpider(scrapy.Spider):
 &lt;p&gt;下面总结一下:&lt;/p&gt;
 
 &lt;p&gt;首先用到了&lt;a href=&#34;http://developers.douban.com/wiki/?title=guide&#34;&gt;豆瓣API&lt;/a&gt;，另外推荐百度的&lt;a href=&#34;http://apistore.baidu.com/&#34;&gt;API Store&lt;/a&gt;，上面可以查找各个公司的提供的API接口。
-&lt;/p&gt;
-
-&lt;p&gt;其次在&lt;code&gt;book.html&lt;/code&gt;模板里面对要添加的地方&lt;code&gt;div&lt;/code&gt;标签增加类&lt;code&gt;book&lt;/code&gt;属性，并取markdown中&lt;code&gt;subject、image、description、status&lt;/code&gt;的值来设为属性。
-如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;col-md-12 book&amp;quot; subject=&amp;quot;25902102&amp;quot; image=&amp;quot;/public/img/s27299192.jpg&amp;quot; description=&amp;quot;&amp;quot; status=&amp;quot;在读&amp;quot;&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下面把book.js代码贴上&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$(document).ready(function(){
-    var url = &#39;https://api.douban.com/v2/book/&#39;//API地址
-    $(&amp;quot;.book&amp;quot;).each(//对html页面中class是book的每个标签执行以下操作
-        function(){
-       var subject=$(this).attr(&amp;quot;subject&amp;quot;);//取得subjec属性
-       var image=$(this).attr(&amp;quot;image&amp;quot;);
-       var description=$(this).attr(&amp;quot;description&amp;quot;);
-       var status=$(this).attr(&amp;quot;status&amp;quot;);
-       var ob=$(this);//获取这个对象
-       //alert(subject);
-        var hml1=&#39;&amp;lt;div class=&amp;quot;panel panel-primary&amp;quot;&amp;gt;&#39;
-            +&#39;&amp;lt;div class=&amp;quot;panel-heading&amp;quot;&amp;gt;&#39;;
-        var hml2=&#39;&amp;lt;/div&amp;gt;&#39;
-            +&#39;&amp;lt;div class=&amp;quot;panel-body&amp;quot;&amp;gt;&#39;
-              +&#39;&amp;lt;div class=&amp;quot;row&amp;quot;&amp;gt;&#39;
-               +&#39;&amp;lt;div class=&amp;quot;col-md-4 col-xs-12 center&amp;quot;&amp;gt;&#39;
-                 +&#39;&amp;lt;img src=&amp;quot;&#39;;
-        var hml3=&#39;&amp;quot; alt=&amp;quot;cover&amp;quot; class=&amp;quot;img-thumbnail&amp;quot;&amp;gt;&#39;
-                +&#39;&amp;lt;/div&amp;gt;&#39;
-                +&#39;&amp;lt;div class=&amp;quot;col-md-8 col-xs-12&amp;quot;&amp;gt;&#39;
-                  +&#39;&amp;lt;table class=&amp;quot;table table-bordered&amp;quot;&amp;gt;&#39;
-                    +&#39;&amp;lt;tbody&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td style=&amp;quot;width:80px;&amp;quot;&amp;gt;作者&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml4=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;出版社&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-
-        var hml5=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                     +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;出版年&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml6=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;ISBN&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml7=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;链接&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;a href=&amp;quot;&#39;;
-        var hml8=&#39;&amp;quot; title=&amp;quot;&#39;;
-        var hml9=&#39;&amp;quot;&amp;gt;图书链接&amp;lt;/a&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-        
-        if(status==&amp;quot;已读&amp;quot;)//判断状态
-          hml9=hml9+&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;状态&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;
-                    +&#39;&amp;lt;span class=&amp;quot;label label-success&amp;quot;&amp;gt;已读&#39;;
-        else if(status==&amp;quot;在读&amp;quot;)
-          hml9=hml9+&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;状态&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;
-                      +&#39;&amp;lt;span class=&amp;quot;label label-info&amp;quot;&amp;gt;在读&#39;;
-        else if(status==&#39;未读&#39;)
-          hml9=hml9+&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;状态&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;
-                      +&#39;&amp;lt;span class=&amp;quot;label label-default&amp;quot;&amp;gt;未读&#39;;
-        hml9 =hml9+&#39;&amp;lt;/span&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;豆瓣评分&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-
-        var hml10=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;评论&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml11=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-        +&#39;&amp;lt;/tbody&amp;gt;&#39;
-                  +&#39;&amp;lt;/table&amp;gt;&#39;
-                +&#39;&amp;lt;/div&amp;gt;&#39;
-              +&#39;&amp;lt;/div&amp;gt;&#39;
-           +&#39;&amp;lt;/div&amp;gt;&#39;
-          +&#39;&amp;lt;/div&amp;gt; &#39;;
-        $.getJSON(url+subject+&amp;quot;?callback=?&amp;quot;, function(data) {//获取豆瓣数据并拼接html代码
-          ob.append(hml1+data.title+hml2+image+hml3+data.author+hml4+data.publisher+hml5+data.pubdate+hml6+data.isbn13+hml7+data.alt+hml8+data.alt+hml9+data.rating.average+hml10+description+hml11);
-        });
-    } );
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通过上面代码列读书清单markdown时，只需要添加豆瓣subject、本地图书封面地址和自己的评价与读书状态就可以了，比原来方便些。&lt;/p&gt;
-
-&lt;p&gt;下面就是处理js代码的引用。
-一开始使用&lt;code&gt;&amp;lt;script src=&amp;quot;/public/js/book.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;放在了&lt;code&gt;footer.html&lt;/code&gt;里面发现不行，只有首次打开能够加载，再点击按钮时，由于ajax的作用，js代码不重新加载执行。后来放到&lt;code&gt;book.html&lt;/code&gt;里，仍然是这个问题。最后没办法，直接把代码加到&lt;code&gt;book.html&lt;/code&gt;的后面，不引用&lt;code&gt;src&lt;/code&gt;了，结果居然好了。
-目前还有一个问题没解决，就是豆瓣限制api的访问次数，调试过程中访问多了都是&lt;code&gt;403禁止访问&lt;/code&gt;，这个真不知道怎么改了，哎！&lt;/p&gt;
-
-&lt;p&gt;因为是初学，中间遇到各种奇葩问题，不一一列举。&lt;/p&gt;
-
-&lt;p&gt;发现写着好简单，做着好难、、、&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -268,50 +59,7 @@ age=33;
 &lt;p&gt;字符串中可以用双引号里面含单引号，单引号里面含双引号，不需要转义，如果单引号里面有单引号，需要转义，如下&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;var mood=&amp;quot;about 5&#39;10\&amp;quot; tall&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
-数组用&lt;code&gt;Array()&lt;/code&gt;声明，可以&lt;code&gt;Array(4)&lt;/code&gt;设置数组长度，或者&lt;code&gt;Array(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;);&lt;/code&gt;直接初始化数组或者
-&lt;code&gt;var year =[1990,1991,1992]&lt;/code&gt;
-字符串、数字、变量、数组、等可以混合存入数组，也可以是变量。&lt;/p&gt;
-
-&lt;p&gt;关联数组(不推荐使用)：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var lennon=Array();
-lennon[&#39;name&#39;]=&amp;quot;John&amp;quot;;
-lennon[&#39;year&#39;]=1940;
-lennon[&#39;living&#39;]=false;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;对象Object&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var lennon=Object();//var lennon={}
-lennon.name=&amp;quot;John&amp;quot;;
-lennon.year=1940
-lennon.living=false;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或者&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var lennon={name:&amp;quot;John&amp;quot;,year:1940,living:false};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;操作&#34;&gt;操作&lt;/h4&gt;
-
-&lt;p&gt;&amp;rdquo;+&amp;ldquo;连接字符串和数字时转为字符串&lt;/p&gt;
-
-&lt;h4 id=&#34;条件语句&#34;&gt;条件语句&lt;/h4&gt;
-
-&lt;p&gt;&amp;rdquo;==&amp;ldquo;不进行严格比较，严格比较用&amp;rdquo;===&amp;ldquo;，同样，“!==”对应于&amp;rdquo;!=&amp;rdquo;&lt;/p&gt;
-
-&lt;h4 id=&#34;函数&#34;&gt;函数&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;function name(arguments){
-     statements;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;函数内部局部变量不影响全局变量要用var声明才行，不声明则影响同名全局变量&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -321,58 +69,7 @@ lennon.living=false;
       
       <guid>http://painterliu.com/post/2014-08-08-linux-java-matlab/</guid>
       <description>&lt;p&gt;项目需要迁移到linux环境，准确的说是redhat系统，所以最近研究在redhat下java调用matlab的解决方法，期间遇到了各种问题，卡了好长时间，现在终于解决了。
-&lt;/p&gt;
-
-&lt;h3 id=&#34;redhat下matlab安装&#34;&gt;Redhat下matlab安装&lt;/h3&gt;
-
-&lt;p&gt;首先需要在redhat下安装matlab，我redhat是搭在虚拟机里的，大家也可以在虚拟机里搭建练手，可以保存快照，很方便回退。&lt;/p&gt;
-
-&lt;p&gt;这里不详细介绍安装过程，只提一些重点内容。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;安装时提示是否在线安装选否(询问是英文的)&lt;/li&gt;
-&lt;li&gt;报错：error while loading shared libraries: &lt;code&gt;libXp.so.6&lt;/code&gt;: cannot open shared object file: No such file or directory时，将安装文件中/update/bin/glnx86目录下的libmwins.so文件复制到/usr/lib/下，命名为libXp.so.6&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;安装就这两个需要注意的地方，下面是调用&lt;/p&gt;
-
-&lt;h3 id=&#34;java调用matlab&#34;&gt;java调用matlab&lt;/h3&gt;
-
-&lt;p&gt;matlab导出jar包这里就不提了，大家可以自己搜索。这里主要讲述过程中遇到的困难及解决办法&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;提示&lt;code&gt;MCR版本不对&lt;/code&gt;，这个报错很奇怪，明明一个matlab导出的，用的就是它的MCR，居然提示不对，解决方法就是配置环境变量LD_LIBRARY_PATH,XAPPLRESDIR&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;LD_LIBRARY_PATH=/usr/local/MATLAB/bin/glnxa64
-XAPPLRESDIR=/usr/local/MATLAB/X11/app-defaults
-LD_PATH=/usr/local/MATLAB/runtime/glnxa64
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将&lt;code&gt;&#39;/usr/local/MATLAB/&#39;&lt;/code&gt;换成自己的安装目录,如果还有问题，在eclipse里面配置运行的环境变量，方法是右键项目,选择&lt;code&gt;Run As&lt;/code&gt;下&lt;code&gt;Run Configurations&lt;/code&gt;,点击&lt;code&gt;Environment&lt;/code&gt;选项卡，新建上面两个环境变量。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;报错&lt;code&gt;Exception in thread &amp;quot;main&amp;quot; java.lang.LinkageError:/usr/lib/libXp.so.6:undefined symbol
-:SSL_connect&lt;/code&gt;，这里是缺少文件，解决方法是：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;mounts /dev/cdrom /media   （挂载盘）
-cd /media &amp;amp;&amp;amp; ls    （查看是否挂载成功）
-vim /etc/yum.repos.d/rhel-debuginfo.repo 打开该文件
-
-*****该文件中前两行不需要改，从baseurl开始修改成下文所示的值
-[xxxx]
-name=xxxx
-baseurl=file:///media/Server
-enable=1  （这里一定是1，启动服务）
-gpgchek=0  （这里一定是0，否则下面不能安装）
-保存该文件，执行下面操作就ok
-yum -y install *linbXp*  （安装需要的包）
-rpm -qa libXp  (查看是否安装成功）
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后就可以java调用matlab了。
-&lt;code&gt;友情提示：&lt;/code&gt;上面对rhel-debuginfo.repo文件操作有什么影响不清楚，可以先备份一下供以后还原&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -384,38 +81,7 @@ rpm -qa libXp  (查看是否安装成功）
       <description>&lt;p&gt;因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。&lt;/p&gt;
 
 &lt;p&gt;具体java调用matlab函数的过程这里不多说，具体可以看这里:&lt;a href=&#34;http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/&#34;&gt;Java和matlab混合编程&lt;/a&gt;，&lt;a href=&#34;http://xiaolongfeixiang.iteye.com/blog/1893621&#34;&gt;Java调用Matlab方法的三种方式&lt;/a&gt;，&lt;a href=&#34;http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html&#34;&gt;java中调用Matlab的函数+注意事项&lt;/a&gt;，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
-&lt;/p&gt;
-
-&lt;p&gt;这里主要讲述matlab返回内容是struct类型(java中为MWStructArray类型)时的一点处理技巧。&lt;/p&gt;
-
-&lt;p&gt;我这里函数返回的结构体直接java输出如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;      Comment: &#39;Mean: ARMAX(0,0,0); Variance: GARCH(1,1) &#39;
- Distribution: &#39;Gaussian&#39;
-            C: 0.0195
-VarianceModel: &#39;GARCH&#39;
-            P: 1
-            Q: 1
-            K: 0.0055
-        GARCH: 0.8004
-         ARCH: 0
-      Display: &#39;off&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;一开始我也试着通过MWStructArray的get()方法去每一个的值，但由于值的类型是Object，不好转化，最后想出一个偷巧的方法：&lt;code&gt;作为字符串处理&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;代码如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;MWStructArray result=(MWStructArray)resultObjects[0];//取matlab导出函数的第一个返回值
-String string=result.toString();//转化为字符串
-String[] list=string.split(&amp;quot;\n&amp;quot;);//以换行符分割
-c=Double.parseDouble(list[2].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第3行取C值
-k=Double.parseDouble(list[6].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第7行取k值
-garch=Double.parseDouble(list[7].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第8行取GARCH值
-arch=Double.parseDouble(list[8].split(&amp;quot;:&amp;quot;)[1]);//以&#39;:&#39;分割第9行取ARCH值
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;方法很简单，提供个处理思路，大家可按照自己返回的内容处理。&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
   </channel>

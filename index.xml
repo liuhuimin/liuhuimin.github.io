@@ -2,11 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>painterliu的博客</title>
-    <link>http://painterliu.com/index.xml</link>
+    <link>http://painterliu.com/</link>
     <description>Recent content on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 08 Jan 2017 10:03:09 +0800</lastBuildDate>
-    <atom:link href="http://painterliu.com/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://painterliu.com/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>2017年年度计划</title>
@@ -31,55 +33,7 @@
 &lt;li&gt;其他&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;学习&#34;&gt;学习&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;6.824&lt;/li&gt;
-&lt;li&gt;leetcode&lt;/li&gt;
-&lt;li&gt;刘一男5000单词&lt;/li&gt;
-&lt;li&gt;漂移板&lt;/li&gt;
-&lt;li&gt;素描&lt;/li&gt;
-&lt;li&gt;软考&lt;/li&gt;
-&lt;li&gt;微信小程序&lt;/li&gt;
-&lt;li&gt;go语言&lt;/li&gt;
-&lt;li&gt;每周一篇博客&lt;/li&gt;
-&lt;li&gt;其他&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;锻炼&#34;&gt;锻炼&lt;/h3&gt;
-
-&lt;p&gt;工作日：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;乒乓球两小时&lt;/li&gt;
-&lt;li&gt;或跑步一小时&lt;/li&gt;
-&lt;li&gt;或漂移板一小时&lt;/li&gt;
-&lt;li&gt;减重到136&lt;/li&gt;
-&lt;li&gt;其他&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;周末:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;发展其他运动爱好&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;娱乐&#34;&gt;娱乐&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;每两周一个博物馆&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;其他&#34;&gt;其他&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;调整到每天11点睡觉&lt;/li&gt;
-&lt;li&gt;条件允许每天冥想10分钟&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;做更好的自己！&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -98,31 +52,7 @@
 &lt;li&gt;外公外婆相继过世&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;研究生毕业-入职农行软开&#34;&gt;研究生毕业，入职农行软开&lt;/h3&gt;
-
-&lt;p&gt;学生生涯终于结束了，即使以后累了，想回校园读个博，心情也不会和这一样了！毕业没什么可说的，就是写毕业论文、答辩、办一大堆手续，然后和小伙伴们一一告别，大家以后不知何时才能相见。虽然网络比较发达，但自己本身就不是特别会聊天的人，尤其和在其他的地方的小伙伴，因为生活没有交集，更是找不到话题，以后难免会一一疏远。&lt;/p&gt;
-
-&lt;p&gt;7月末入职了农行软开，本来有其他offer，但违约选择了农行。因为当时其他的公司也在北京，农行有可能解决户口，而且前几年不考虑加薪的话工资都差不多，当然后期发展农行肯定没有其他互联网行业好，但公司以后还能有其他选择，户口就只有这一次机会了，综合考虑了下，还是选择了农行！&lt;/p&gt;
-
-&lt;p&gt;目前在应用开发六部分析应用三组，开发六部主要负责农行的大数据相关工作，三组负责监管报送，组内有反洗钱、反欺诈、征信和审计、监管标准化等和上级监管部门相关的项目，感觉这些项目都不错，值得长期深入学习。因为监管要求，目前组内有大部分行内的数据，但由于报送项目多，需求更改多，数据还没有有效的利用起来，大有可为。&lt;/p&gt;
-
-&lt;h3 id=&#34;没能解决北京户口&#34;&gt;没能解决北京户口&lt;/h3&gt;
-
-&lt;p&gt;户口最后没有能够解决，今年人社部开始限制央企北京户口数量，没办法，更可悲的是央企不属于北京市属企业，不能办理北京市工作居住证。HR办事不地道，各种忽悠，一直在强调往年户口全部解决，虽然是实话，但。。，而且今年的户口情况拖到最后都不给个人说。17年校招北邮官方明确拒绝农行校园招聘，而软开本身也将招聘条件放开到大学本科、应用四级。。。&lt;/p&gt;
-
-&lt;h3 id=&#34;外公外婆相继过世&#34;&gt;外公外婆相继过世&lt;/h3&gt;
-
-&lt;p&gt;外公外婆的去世是完全没有想到的，外婆今年80，外公才70多岁。外婆在我快毕业离校的时候查出肺癌。当时身体还好，肺癌也不能确诊，入院前洗衣做饭都没事，入院后抽了一次肺部积水，身体立马不行了，只能一直在医院躺着。之前外婆也做过一些检查，但没有做过全面体检，虽然有些咳嗽，但不严重，没往肺癌方面想，没想到居然这样。因为外婆年龄大了，很多癌症治疗手段不能用，甚至癌症确诊的取样手术都不敢做，只能在医院耗着，做些药物治疗。外婆前后住院大概有6个月，主要是我妈和两位姨照顾，我舅因为是男性不太方便。因为外婆住院持续时间长，病情变化不明显，而我也刚入职，没有能够在医院多陪陪外婆，就入职前在医院呆的时间长些。我来北京后，每周会往家里打电话询问下家里的情况，都是打两个，一个打个我妈，她一直在医院照顾外婆，一个打给我爸，说说近况，问问家里情况。&lt;/p&gt;
-
-&lt;p&gt;外公的去世是完全始料未及的，用的棺材等东西都是我舅为外婆准备的。当时中秋节后上班第一天，接到家里的电话，我本来以为是我外婆不行了，没想到是外公出事了。中秋本来是想回家的看看外婆的，遇到铁路路线图调整，没注意到何时放票，没能买到好时段的票，回家的话3天只能带1天，就没回。现在特别后悔，也许回家了外公就不会出事了。外公身体一直不好，但整体状况可以，完全没想到会出事，虽然外婆一直在住院，但由于外公眼睛看不见，也一直有人照顾外公。外公的去世是因为心脏突然出问题没来得及抢救，当时是凌晨，只有我舅在家，到医院后外公已经不行了。我妈和三姨因为要照顾外婆，防止外婆起疑，没能见外公最后一面，而外公出葬时，二姨也是因为这个原因最后一刻才赶回来。外公去世当天我就和我弟一起回了，当时自己去的外公家，守灵了一夜，没回自己家，因为事出突然，而且外公在旁边棺材里躺着，没感觉多么悲伤，直到第二天外公火化时，看到外公被推进去，最后出来一剖骨灰，才突然意识到，外公从此真的彻底不在了！&lt;/p&gt;
-
-&lt;p&gt;外婆在外公去世后不到两个月就去世了。外婆因为治疗需要吃各种药物，反应比较大，一直不能好好吃饭，去世时真的是皮包骨头。外婆一生也没享过什么福，之前一直照顾儿女，儿女结婚出嫁后，又照顾我外公。我外公虽然是人民教师，退休后有退休工资可用，但眼睛不好，外婆需要一直照顾，而且我外公又是一个特别挑剔的人，不好伺候。外婆去世时仍不知道外公已经先她而去了，因为外公眼睛看不见，外婆之前住院时外公就没有去看过，外婆也没有怀疑。有一次我在医院时，领着外公做检查，到了病房下面想推外公上去看看外婆，外公最后也给拒绝了。&lt;/p&gt;
-
-&lt;p&gt;我爷爷去世时我上小学5年级，当时年龄小，印象不深，没有剩下多少感觉，这次是这些年第一次经历亲人的去世，有些该面对的总是要面对的！我奶奶已经90多岁了，目前除了耳背身体很好，希望能一直健康长寿！&lt;/p&gt;
-
-&lt;p&gt;阖家平安健康！&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -135,19 +65,7 @@
 
 &lt;p&gt;博客原来的内容基本没删除（只所以说基本，是因为我忘了事前备份，而且直接使用的&lt;code&gt;push -f&lt;/code&gt;把之前github上的内容全覆盖了），不管之前写的内容多糟糕，想法看法对不对，还是留着当个纪念吧！&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;之所以好久没更新，除了这半年多家里出了些事情外，还有就是因为找不到更新的意义。我对这个博客的定位是一个技术博客，但大部分技术文章只是记录，缺少自己的看法和想法，另外目前我所可能遇到的技术问题基本都能在网上找到解决方法，或者我就是通过网上的方法解决的，缺乏原创性内容。我认为博客不应该是一些记录性的内容，博客主要还是给其他人看的，要不自己做笔记就可以了，个人也不应该通过看博客的记录性内容学习新的知识，缺乏系统性。&lt;/p&gt;
-
-&lt;p&gt;现在想法有点变化，对记录性的内容没有这么排斥了，有些记录性的内容可以为自己服务，容易找到，有些问题解决方案虽然网上有，但再次遇到重新搜索总是麻烦的。针对缺少原创性内容的问题，可以通过将记录性内容转化为总结来解决，不一味的记录详细内容，而是偏向总结供人参考。还有重要的一点，博客不仅仅是给其他人看的，还记录了自己的成长！&lt;/p&gt;
-
-&lt;p&gt;这次对博客进行改版，不仅仅是换了主题，而且换了静态博客生成工具，将博客从jekyll迁移到了Hugo。 &lt;a href=&#34;http://www.gohugo.io/&#34;&gt;Hugo&lt;/a&gt;是使用go语言编写的静态网站生成工具，得益于go语言的特性，hugo可以在大部分平台上运行，而且不需要安装依赖。我放弃jekyll的一个很大原因是我平时不用ruby，为了博客却要安装一大堆相关的ruby环境软件，而hugo只需要一个程序就可（好吧，我早就把jekyll环境给卸了，重新安装比较麻烦，但最后发现建新主题更麻烦，::&amp;gt;_&amp;lt;:: ）。&lt;/p&gt;
-
-&lt;p&gt;另外博客主题是使用&lt;a href=&#34;http://www.chingli.com/&#34;&gt;青砾&lt;/a&gt;的博客改造而来，未征得博主的同意，但毕竟是自己将其前端页面改造成了主题，有一些新增的内容，中间有自己的劳动，就擅自使用了，非常抱歉。另基于以上原因，主题暂时不放到github上了！&lt;/p&gt;
-
-&lt;p&gt;下一步计划将rss订阅功能和书籍列表功能添加到博客中，书籍列表暂定为时间轴的形式！&lt;/p&gt;
-
-&lt;p&gt;希望一年能更新50篇左右吧！&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -165,136 +83,7 @@
 &lt;p&gt;银河系属于室女座超星系团。&lt;/p&gt;
 
 &lt;p&gt;宇宙年龄137亿年
-&lt;/p&gt;
-
-&lt;h3 id=&#34;后院天文学&#34;&gt;后院天文学&lt;/h3&gt;
-
-&lt;p&gt;测量星空以度为距离单位，将胳膊伸直后可用手测量
-- 小指顶端1度
-- 中间三根手指宽5度
-- 拳头手指根处宽10度
-- 食指小指伸开两端15度
-- 拇指和小指伸开两端25度&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/u624B_u52BF.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;个体差异可通过北斗七星测量调整。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/u5317_u6597.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;星星亮度
-亮度用星等表示，数字越大越暗，差1星等亮度差别2.5倍，最暗30等。夜空最亮恒星为天狼星，-1等，木星-3等，金星-4等，火星2到-3等变化。&lt;/p&gt;
-
-&lt;p&gt;猎户座寻星&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/u730E_u6237.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;北斗七星寻星&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/u5317_u6597_u4E03_u661F.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;北半球星空&#34;&gt;北半球星空&lt;/h3&gt;
-
-&lt;p&gt;黄道为预览和行星在天空运动的轨迹，跨越黄道的星座为黄道星座。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;大角&lt;/code&gt;属于&lt;code&gt;牧夫座&lt;/code&gt;，0等，浅橙色，“沿着斗柄去大角，加速就到&lt;code&gt;角宿一&lt;/code&gt;”，继续延长15度到乌鸦座，四边形。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;轩辕十四&lt;/code&gt;属于&lt;code&gt;狮子座&lt;/code&gt;，1等，蓝色恒星，看上去是白色&lt;/p&gt;
-
-&lt;p&gt;轩辕十四和&lt;code&gt;北河三&lt;/code&gt;之间是&lt;code&gt;鬼星团（M44）&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;夏季三角形&lt;/code&gt;，三个顶点为&lt;code&gt;织女星&lt;/code&gt;、&lt;code&gt;天津四&lt;/code&gt;、和&lt;code&gt;牛郎星&lt;/code&gt;
-织女星0等，&lt;code&gt;天琴座&lt;/code&gt;。天津四1等，&lt;code&gt;天鹅座&lt;/code&gt;。牛郎星1等，&lt;code&gt;天鹰座&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;仙女星系&lt;/code&gt;在仙后座和靠近飞马座的半个W作为三角头向南15度&lt;/p&gt;
-
-&lt;p&gt;猎户座最亮的&lt;code&gt;参宿七&lt;/code&gt;是已知光度最大的恒星自已，&lt;code&gt;参宿四&lt;/code&gt;是已知最大的恒星之一，呈红色，为变星。猎户腰带约宽3度。&lt;/p&gt;
-
-&lt;p&gt;春季星空&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/1456493772449_u6625_u5B63_u661F_u7A7A.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;夏季星空&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/1456494178739_u6625_u5B63_u661F_u7A7A.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;秋季星空&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/u79CB_u5B63.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;冬季星空&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/u51AC_u5B63_u591C_u7A7A.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;观星器材&#34;&gt;观星器材&lt;/h3&gt;
-
-&lt;p&gt;双筒镜如7x50,7表示倍数，50表示口径，mm为单位。视场1度对应1000米17米。
-折射式望远镜中有色差，复消色差(APO)适合拍深空。
-牛顿反射镜最好抛物面的，有彗差，深空拍摄需要彗差修正镜。
-折反式望远镜 施密特-塞格林式（施卡）和马克苏托夫-塞格林式（马卡）望远镜小巧，长度短&lt;/p&gt;
-
-&lt;p&gt;目镜放大率为物镜焦距除以目镜焦距。
-&lt;code&gt;巴罗透镜&lt;/code&gt;会再放大目镜倍数。&lt;/p&gt;
-
-&lt;h3 id=&#34;探索星空&#34;&gt;探索星空&lt;/h3&gt;
-
-&lt;p&gt;双星，排列而成的双星称为光学双星，有引力维系的称为双星系统，简称双星。
-星云，&lt;code&gt;猎户星云&lt;/code&gt;最著名，&lt;code&gt;武仙座M13&lt;/code&gt;和&lt;code&gt;人马座M22&lt;/code&gt;球状星团。
-仙女星系最近，视场大，需要2度。
-&lt;code&gt;猎犬座涡状星系M51&lt;/code&gt;具有悬臂结构。&lt;/p&gt;
-
-&lt;p&gt;注意保存观测记录。&lt;/p&gt;
-
-&lt;p&gt;适合观看的深空天体，注意&lt;code&gt;辇道增七&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/u6DF1_u7A7A_u5929_u4F53.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;行星&#34;&gt;行星&lt;/h3&gt;
-
-&lt;p&gt;区别行星和其他恒星的方法：行星在黄道上，行星不闪，恒星闪。&lt;/p&gt;
-
-&lt;p&gt;太阳系从内到外依次是：太阳，水星，金星，地球，火星，小行星带，木星，土星，天王星，海王星，冥王星。&lt;/p&gt;
-
-&lt;p&gt;水星离太阳近，黄色0等，一般在日落后或日出前能看。16年4月中旬到4月底夜晚可见，9月底到10月初清晨可见。
-金星也是日落和日出看到，距离地球最近，－4等，除了月亮最亮。2016年9月中旬到17年3月中旬可见。
-火星亮度变化大，最亮－3等，铁锈色。
-木星在－2～－3等车型之间变化，奶油色，木星最大的行星，卫星从内到外分别是木卫一到四，木卫三最大。
-木星会在每个黄道星座停留约一年，今年是狮子座，绕太阳一周需12年。
-土星颜色不明显，在每个黄道星座中停留两年，今年在天蝎座。土星主要有土星环，厚度不足一千米。卫星较多，土卫六比水星还大。&lt;/p&gt;
-
-&lt;h3 id=&#34;月球和太阳&#34;&gt;月球和太阳&lt;/h3&gt;
-
-&lt;p&gt;望远镜看太阳一定要用全口径滤光片或巴德膜，窄带滤光片最好。日全食发生时可以不用滤光片，遮不完都要用。&lt;/p&gt;
-
-&lt;p&gt;月相：朔（最少），上弦（上半月，小于50），下弦（下半月，大于50），望（满月）&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;第谷环形山&lt;/code&gt;延伸辐射纹&lt;/p&gt;
-
-&lt;p&gt;日食是月亮挡住太阳，月食是地球挡着太阳看不到月亮。&lt;/p&gt;
-
-&lt;h3 id=&#34;彗星-流星和极光&#34;&gt;彗星、流星和极光&lt;/h3&gt;
-
-&lt;p&gt;彗星两条彗尾，都是有太阳风造成，和运动方向无关，和相对太阳的位置有关。一条白色的尘埃尾，一条蓝色的气体或等离子尾。彗尾十分稀薄，大部分空间都是良好的真空实验室，但又能实实在在的看到，感觉这才应该是现在大数据技术要呈现研究的东西。
-彗核包裹着彗发。&lt;/p&gt;
-
-&lt;p&gt;流星是流星体在地球大气层摩擦所致，流星体是太快碎片，可能产生流星，但不一定。&lt;/p&gt;
-
-&lt;p&gt;流星峰值期是一点左右到黎明前，和地区公转方向有关，这是所在位置迎着公转方向。&lt;/p&gt;
-
-&lt;p&gt;流星雨是地球经过彗星轨道所致，流星体是彗星释放的物质。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/u6D41_u661F_u96E8.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;极光产生于太阳高能粒子在地球磁场下的偏转，激发地球高层稀薄气体发光。&lt;/p&gt;
-
-&lt;h3 id=&#34;天文摄影&#34;&gt;天文摄影&lt;/h3&gt;
-
-&lt;p&gt;天文摄影必须相机有B门和手动挡，内容较多，书中讲的比较少。&lt;/p&gt;
-
-&lt;p&gt;最后附个从《诺顿星图手册》截的著名梅西耶天体的图。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/梅西耶1.JPG&#34; alt=&#34;&#34; /&gt;
-&lt;img src=&#34;http://painterliu.com/img/梅西耶2.JPG&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -304,168 +93,7 @@
       
       <guid>http://painterliu.com/post/2016-02-24-nian/</guid>
       <description>&lt;p&gt;我家住在鲁西南地区的一个小村庄里，可能是因为离孔子老家比较近，各种过年的风俗习惯和需要遵守的规矩比较多。最近几年年轻一辈由于偷懒都不太注意遵守各种风俗习惯了，这些风俗习惯或者说规矩是迷信也好、传统也罢，可能已经不太适应这个飞速发展的社会，也可能早已忘记这些风俗背后的意义内涵，但至少是祖祖辈辈传下来的，感觉有必要记录一下。需要说明的是，家乡这边各个村庄的年俗有细微差别，比如我姥爷家，骑自行车过去只需10多分钟，但他们那过年一些细节和我家就不太一样。
-&lt;/p&gt;
-
-&lt;p&gt;首先需要说明的是，我们庄两三百户左右人家都姓刘，追根溯源都是一个祖先，但时间长了以后血脉关系自然又分远近，于是分成了一个个大的家族（我们这叫“门”，俗称“一门子人”就是指一个家族的，血脉关系比较近），每个家族都有一份家谱，整个村庄有总的家谱。另外下面的叙述中可能不自觉的夹杂着家乡话的语音习惯，敬请原谅！&lt;/p&gt;
-
-&lt;p&gt;下面按时间(阴历)顺序叙述我们这的年俗，大年三十前的各种准备没有严格的顺序限制，可以按需安排，除夕和大年初一一些活动不能乱。ps：由于今年重感冒，有些内容没留下照片，用的上一年的图，另外也没有作为主力参与过年的准备活动，可惜！&lt;/p&gt;
-
-&lt;p&gt;年前主要是做各种食物为年后招待亲戚做准备，我们这年后初六前集市商店一般是不开门卖东西的，所以各种蔬菜肉食年前要买好准备好。由于地处北方，冬季严寒，各种食物能在自然环境下放比较长的时间。&lt;/p&gt;
-
-&lt;h3 id=&#34;腊月二十二&#34;&gt;腊月二十二&lt;/h3&gt;
-
-&lt;p&gt;腊月二十二今年是蒸的&lt;code&gt;菜馒头&lt;/code&gt;，也叫&lt;code&gt;菜馍&lt;/code&gt;，就是菜包子。旧时大家家里都穷，全是菜馅，现在虽然加肉，但菜馒头的称呼也延续下来了。蒸菜馒头时我正好发烧，没有拍照片，贴张上年的。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/IMG_20150209_160920.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;自己做的菜馒头和卖的包子差不多，主要差别是自己做的个头大，外形没有包子店的外形好。馅料传统的是红萝卜和白萝卜加粉条，今年自己院子里种的平菇正好那几天长势好，吃不完，就弄了些蘑菇馅。由于自己吃而且要一直吃到年后正月初十左右，所以做的量比较大，一般用家里的土灶每锅两篦能做3锅左右。之所以先做菜馒头是因为有陷大家喜欢吃，先做了吃着。&lt;/p&gt;
-
-&lt;h3 id=&#34;腊月二十四&#34;&gt;腊月二十四&lt;/h3&gt;
-
-&lt;p&gt;蒸&lt;code&gt;花糕&lt;/code&gt;（又叫&lt;code&gt;枣花&lt;/code&gt;）和&lt;code&gt;馒头&lt;/code&gt;，花糕和馒头如下图，不是馒头的都叫花糕。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/IMG_20160202_113212.jpg&#34; alt=&#34;花糕&#34; title=&#34;花糕&#34; /&gt;
-&lt;img src=&#34;http://painterliu.com/img/IMG_20160202_150809.jpg&#34; alt=&#34;&#34; /&gt;
-&lt;img src=&#34;http://painterliu.com/img/IMG_20160202_150755.jpg&#34; alt=&#34;&#34; /&gt;&lt;img src=&#34;http://painterliu.com/img/IMG_20160202_150802.jpg&#34; alt=&#34;&#34; /&gt;
-&lt;img src=&#34;http://painterliu.com/img/IMG_20150211_141400.jpg&#34; alt=&#34;&#34; /&gt;
-&lt;img src=&#34;http://painterliu.com/img/IMG_20150211_103148.jpg&#34; alt=&#34;&#34; /&gt;
-第三个图应该叫花杉(音是这个，具体哪个字不好说)。还有其他的花样没有拍全或者不会做。可惜由于发烧的原因没参与，我可是主力呜呜。。，上面最后一张图是我上年拍的，我自己做的。第四个图中是土灶用的大铁锅，刚换了一个，虽经过打磨处理，仍可以看出使用时还是会产生铁锈，补铁，吼吼！&lt;/p&gt;
-
-&lt;p&gt;馒头就是普通的馒头，有些时候会包些豆馅馒头，豆馅用红豆和枣加糖熬制。最近几年由于家人不爱吃，过年时只是象征性的做几个，外形和馒头一样。&lt;/p&gt;
-
-&lt;p&gt;蒸馒头和花糕由于量大比较费时费力，一般要花费一整天或者更多，酵母要提前一天发酵，由于要吃到年后正月初十左右(我们这过年后正月十五前不能蒸馒头，有风俗要留一块花糕到二月二龙抬头吃)，一般需要蒸4-5锅两篦的花糕和馒头，烧锅就要半天多。&lt;/p&gt;
-
-&lt;h3 id=&#34;腊月二十五&#34;&gt;腊月二十五&lt;/h3&gt;
-
-&lt;p&gt;炖肉&lt;/p&gt;
-
-&lt;p&gt;过年时家家都要买二三十斤猪肉，取其中带皮的切成大方块炖了，切成方块炖熟容易存放，吃时拿出一块切下几片肉片就可以了。另需留下些纯瘦肉冻起来年后招待客人，还要分出一部分炸酥肉和做肉丸子。&lt;/p&gt;
-
-&lt;p&gt;其他还需买些猪杂、猪头肉等做好的熟食留着年后用。&lt;/p&gt;
-
-&lt;p&gt;我们这没有做腊肉的习惯，可能有个别人家会做，但大部分人家不会。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/IMG_20160203_144402.jpg&#34; alt=&#34;猪肉&#34; title=&#34;猪肉&#34; /&gt;
-&lt;img src=&#34;http://painterliu.com/img/IMG_20160203_184023.jpg&#34; alt=&#34;炖熟的猪肉&#34; title=&#34;炖熟的猪肉&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;腊月二十七&#34;&gt;腊月二十七&lt;/h3&gt;
-
-&lt;p&gt;腊月二十七由于白天有其他的事情，在傍晚的时候做了些油炸的食物，炸的&lt;code&gt;酥肉&lt;/code&gt;、&lt;code&gt;丸子&lt;/code&gt;和鱼。由于我被同学喊出去玩了，没在家参与，回来拍的照。&lt;/p&gt;
-
-&lt;p&gt;酥肉是面里面加上瘦肉丝油炸而成的长条状食物。由于人多，需要的量大，我家做总是面多肉少，面里面裹些瘦肉，有些人家做是瘦肉上面挂一些面糊炸的，基本全是肉。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/1455348330686IMG_20160205_231315.jpg&#34; alt=&#34;酥肉&#34; title=&#34;酥肉&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;突然发现丸子忘了拍照了，应该是放在酥肉下面了，但是没拍到。&lt;/p&gt;
-
-&lt;p&gt;丸子是用白菜帮切粒混合葱姜加到面粉里挤成球形油炸而成的。上面图中依稀看到的圆形就是丸子，和酥肉差不多颜色。丸子炸完现吃比较好吃。&lt;/p&gt;
-
-&lt;p&gt;另外还炸了一些带鱼和鲤鱼，油炸的原因是容易存放，油炸后不容易腐败。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/IMG_20160205_231332.jpg&#34; alt=&#34;鲤鱼&#34; title=&#34;鲤鱼&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;其他事项&#34;&gt;其他事项&lt;/h3&gt;
-
-&lt;p&gt;前面准备食物的阶段各个食物准备的顺序不重要，可以打乱，一般不容易存放的东西比如煮肉晚一些，容易存放的食物比如蒸馒头做早一些。前面时间有间隔是因为其他一些事情如打算庭院，收拾东西等比较琐碎不方便细说。&lt;/p&gt;
-
-&lt;p&gt;另外我们这有一个风俗就是&lt;code&gt;yuan yu&lt;/code&gt;，家乡话，不清楚是哪两个字，意思是为过年做的食物刚做好时需要先敬神才能吃。取出一点食物样品，嘴里喊着各路神仙的名字，请他们先享用，然后往天上抛洒，弄完后就可以自己吃了，有个经典的话是&lt;code&gt;老灶爷就锅吃&lt;/code&gt;，一类食物只需一次就行，不用每个人吃前都&lt;code&gt;yuan yu&lt;/code&gt;一次。&lt;/p&gt;
-
-&lt;p&gt;除夕那天主要内容就不是准备食物了，就开始过年了，其中杂七杂八的风俗规矩比较多。&lt;/p&gt;
-
-&lt;h3 id=&#34;腊月二十九-除夕&#34;&gt;腊月二十九(除夕)&lt;/h3&gt;
-
-&lt;p&gt;今年由于没有大年三十，所以腊月二十九就是除夕。除夕开始规矩就比较多了，不像前面主要是准备食物。&lt;/p&gt;
-
-&lt;p&gt;首先早晨&lt;code&gt;不能喝粥&lt;/code&gt;（我们这边粥一般指的玉米粥，和南方不太一样，清汤米饭不叫粥），说法是喝粥糊涂一年。吃完早饭后煮浆糊&lt;code&gt;贴对联&lt;/code&gt;，一般我爸和我弟贴对联，我这做饭小能手和我妈及奶奶一起&lt;code&gt;包饺子&lt;/code&gt;，下面一篦的饺子全是我包的，很饱满吧，哈哈。这里说个小技巧，包饺子和面时加点盐和鸡蛋清面会比较劲道，饺子下锅后不容易烂，不要加鸡蛋黄。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/microMsg.1454813180688.jpg&#34; alt=&#34;我包的饺子&#34; title=&#34;我包的饺子&#34; /&gt;
-全是我包的&lt;/p&gt;
-
-&lt;p&gt;大年三十和初一的饺子不能乱包，要统一。正月十五包饺子可以各种花样玩。&lt;/p&gt;
-
-&lt;p&gt;下面是贴的对联，刚补拍的，第一张是堂屋，第二张是大门，大门已经20年左右了，也没翻修过，比较破。今年对联没找熟人写，全买的，都是卖给做生意人的对联，没仔细挑。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/IMG_20160213_160240.jpg&#34; alt=&#34;堂屋&#34; /&gt;
-&lt;img src=&#34;http://painterliu.com/img/IMG_20160213_160123.jpg&#34; alt=&#34;大门&#34; title=&#34;大门&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;包完饺子就快接近中午了，下面的活动一定要在&lt;code&gt;十二点之前做完&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;首先是一边下水饺一边给家里&lt;code&gt;敬的神和祖先烧香和烧元宝&lt;/code&gt;。家里有画像和瓷人的神一共五个，不包括贴的门神。每个神都要烧一炷香，另外需注意的是&lt;code&gt;先给老天爷烧香，然后是观音菩萨和灶王爷，接着是关爷财神和仙姑奶奶&lt;/code&gt;，这里强调一下是因为灶王爷在厨房，而其他神都在堂屋，不注意可能就先给堂屋所有神仙烧了。另外烧香时还要烧元宝，一般元宝烧6个、8个或者多少都行，六六大顺，8就是发。我妈过年一烧就烧十六个。元宝都是手工用薄黄纸叠的，如下图，忘记拍个特写了，算上大年初一早晨烧的要叠好多好多！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/1455352872837IMG_20160207_112651.jpg&#34; alt=&#34;&#34; /&gt;
-与此同时，还要在&lt;code&gt;每个门的门两旁各烧一根香和一个元宝&lt;/code&gt;，屋里的门不需要，邻院的门才烧。另外有个规矩是&lt;code&gt;折断的香一定不能用&lt;/code&gt;。
-烧完香和元宝就可以饺子出锅了，首先也要先&lt;code&gt;yuan yu&lt;/code&gt;，让各路神仙和祖先先品尝，这里&lt;code&gt;yuan yu&lt;/code&gt;需要用碗盛着饺子汤洒在神像和祖先牌位前。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;yuan yu&lt;/code&gt;以后就可以点鞭炮了，然后大家一起吃水饺。还有一个习俗是&lt;code&gt;饺子做好后给长辈送一碗&lt;/code&gt;，奶奶都是在我家这边过年，大伯一般会让堂哥送一碗过来，然后爸妈让堂哥带一碗我家的饺子回去。由于今年二堂哥孩子出生不满一岁，担心家里寒冷，就没回家过年，大伯亲自来的。今年大伯饺子送的早，我家饺子还没熟，等饺子熟了，我又端一碗跑了一趟大伯家。&lt;/p&gt;
-
-&lt;p&gt;还有一个事情是家里敬完神去&lt;code&gt;土地庙里和家谱&lt;/code&gt;(家谱一个家族一个，放在一个人家里)&lt;code&gt;上炷香和烧元宝&lt;/code&gt;（一般烧香和元宝都是配合的）。&lt;/p&gt;
-
-&lt;p&gt;下面放几张家里供的神的照片，除夕和大年初一烧香真的是烟熏火燎，睁不开眼。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/IMG_20160207_121737.jpg&#34; alt=&#34;老天爷&#34; title=&#34;老天爷&#34; /&gt;
-老天爷
-&lt;img src=&#34;http://painterliu.com/img/IMG_20160207_121746.jpg&#34; alt=&#34;观音菩萨&#34; title=&#34;观音菩萨&#34; /&gt;
-观音菩萨，开过光的，每年腊月二十六我妈都要摆贡(我们这边的说法，就是摆贡品)给其过生日，然后换衣服。
-&lt;img src=&#34;http://painterliu.com/img/IMG_20160207_121757.jpg&#34; alt=&#34;上关下财&#34; title=&#34;上关下财&#34; /&gt;
-关公和财神
-&lt;img src=&#34;http://painterliu.com/img/IMG_20160207_121807.jpg&#34; alt=&#34;仙姑奶奶&#34; title=&#34;仙姑奶奶&#34; /&gt;
-仙姑奶奶
-&lt;img src=&#34;http://painterliu.com/img/IMG_20160207_121833.jpg&#34; alt=&#34;&#34; /&gt;
-灶王爷，上面有二十四节气的阴历时间。
-还有门神是贴对联时贴在门上的。
-&lt;img src=&#34;http://painterliu.com/img/IMG_20160215_114217.jpg&#34; alt=&#34;&#34; /&gt;&lt;img src=&#34;http://painterliu.com/img/IMG_20160215_114229.jpg&#34; alt=&#34;&#34; /&gt;
-秦叔宝和尉迟恭，还有其他门神就不贴了。&lt;/p&gt;
-
-&lt;p&gt;上午活动一般在十二点前完成。&lt;/p&gt;
-
-&lt;p&gt;下午事情就不多了，主要是去家里&lt;code&gt;坟地烧香请祖先回家过年&lt;/code&gt;，然后包饺子及其他活动为初一早晨准备。傍晚时，还做了些&lt;code&gt;肉丸子&lt;/code&gt;，这个也是过年必备的。&lt;/p&gt;
-
-&lt;p&gt;晚上我家是没有年夜饭的（这里应该有个哭的表情），主要还是为大年初一做准备。大年初一规矩比较多，有些东西需要晚上睡前准备好。因为这些准备内容涉及大年初一的风俗，我把这部分放到大年初一来说。&lt;/p&gt;
-
-&lt;h3 id=&#34;大年初一&#34;&gt;大年初一&lt;/h3&gt;
-
-&lt;p&gt;先说下需要提前准备的内容。&lt;/p&gt;
-
-&lt;p&gt;首先，大年初一早晨需要为神仙和祖先&lt;code&gt;摆贡&lt;/code&gt;(摆放贡品敬神)，因为早晨比较忙，需要提前准备好，一般需要煮些白菜叶、洗些香菜放在贡品上，贡品就是前面介绍的含肉的食物，另外的贡品就是前面蒸的枣花。一般老天爷和观音菩萨贡品多些（六种），其他神少些。神那里要&lt;code&gt;放两根香作为筷子&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/IMG_20160208_065304.jpg&#34; alt=&#34;摆贡&#34; title=&#34;摆贡&#34; /&gt;
-&lt;img src=&#34;http://painterliu.com/img/IMG_20150219_064805.jpg&#34; alt=&#34;&#34; /&gt;
-&lt;img src=&#34;http://painterliu.com/img/IMG_20150219_063908.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;还有就是因为初一早晨需要点的蜡烛和香比较多，需要先准备好，尤其是门旁点蜡烛不方便，需要准备个容器。&lt;/p&gt;
-
-&lt;p&gt;其次，需要在&lt;code&gt;进出家里的大门和院门下放一截很粗的树干(俗称棍子)挡着&lt;/code&gt;，这个习俗啥意思不太懂。再就是在&lt;code&gt;院子里撒上芝麻杆&lt;/code&gt;(就是芝麻的植物茎晒干)，上面有芝麻的壳，踩着可啪可啪的响，据我妈说是因为姜子牙的老婆怕响，这样做就不敢进门了。&lt;/p&gt;
-
-&lt;p&gt;还有，需要提前&lt;code&gt;把剪刀、菜刀、锅铲、扫帚等一些尖锐的工具或者厨房卫生用具藏起来&lt;/code&gt;，初一早晨不能看见。大年初一早晨用的&lt;code&gt;碗筷子等要先洗刷好&lt;/code&gt;，早晨起来不能洗碗。土灶的&lt;code&gt;大锅中要放一个枣花&lt;/code&gt;，锅不能空着。&lt;code&gt;柴火需要事先折好&lt;/code&gt;，初一早晨烧柴火时不能折。
-还有一点是&lt;code&gt;睡前衣服兜里要放些钱&lt;/code&gt;，这样一年不穷。&lt;/p&gt;
-
-&lt;p&gt;因为要事先忙活这么多，我家是没有年夜饭的，不清楚庄里其他人家有没，我估计应该也没有。&lt;/p&gt;
-
-&lt;p&gt;大年初一早晨。&lt;/p&gt;
-
-&lt;p&gt;大年初一早晨要早起，&lt;code&gt;凌晨4、5点钟左右起床&lt;/code&gt;。拜年等活动在要天亮前结束。以下规矩一般在天亮前有效。&lt;/p&gt;
-
-&lt;p&gt;先提一下，起床后&lt;code&gt;不能出去上厕所&lt;/code&gt;，要尿在屋内的小便盆里(农村厕所都是单独的，冬天冷，都用尿壶或者小便盆），洗脸用的水也不能倒外面。&lt;/p&gt;
-
-&lt;p&gt;起床后&lt;code&gt;先烧香烧元宝&lt;/code&gt;，同时&lt;code&gt;下水饺&lt;/code&gt;。和除夕中午要求差不多，主要差别是贡品和蜡烛。&lt;code&gt;每个神那里要点两支蜡烛放在两边，大门和院门两旁也要点两支蜡烛，每间屋子也要有支蜡烛照明&lt;/code&gt;，其他烧香和元宝和除夕中午一致，但有一个要求，&lt;code&gt;天亮前如果神前的香和蜡烛烧完了要续上&lt;/code&gt;，就是再点香和蜡烛接着烧。水饺熟了&lt;code&gt;yuan yu&lt;/code&gt;后点完鞭炮就可以吃了，&lt;code&gt;吃水饺之前先咬一口昨晚盖锅里的枣花&lt;/code&gt;，一年不生病。&lt;/p&gt;
-
-&lt;p&gt;吃完水饺就开始拜年了，男女分开行动。首先给家里的奶奶&lt;code&gt;拜年&lt;/code&gt;，拜年的形式就是磕头，然后男人都按事先商量好的去家族家谱那里集合，然后一个家族的人一起行动，首先要跪拜家谱，磕4个头，然后去家族内年长辈分高的人家拜年，给人拜年一般磕一个头。大家一起给人磕头拜年时也要注意尊卑长幼的顺序，辈分高的在前面下跪，小辈在后面下跪。家族内拜过年后就去村庄上其他有家谱的人家和岁数大的老人家拜年。这个时候一个村庄的人都出动来回拜年，大街上人来人往，黑灯瞎火，好不热闹。集体拜完年后，就是单独行动了，各自去庄上关系好的人家单独拜年。女人拜年是另一波，具体情况我不了解。由于家里需要人续香和蜡烛，也要防止着火，我和我弟一般轮着跟着我爸去拜年，另一人看家。&lt;/p&gt;
-
-&lt;p&gt;一般拜完年后天也差不多亮了，天亮后蜡烛就可以吹灭了，贡品等也可以收拾了，上厕所什么的限制也都解除了。&lt;/p&gt;
-
-&lt;p&gt;天亮后上午一般有人来家里聊天，大年初一就没有其他事情了。我一般上午再补个觉。&lt;/p&gt;
-
-&lt;p&gt;由于早晨4、5点钟就吃饭了，大年初一中午一般做饭比较早，10点多就开始做，这顿饭和传说中的年夜饭有点像，比较丰盛，也要和长辈送。&lt;/p&gt;
-
-&lt;h3 id=&#34;其他&#34;&gt;其他&lt;/h3&gt;
-
-&lt;p&gt;大年初二开始走亲戚和招待亲戚，其他没什么事。初五我家没有破五的习俗，不过初七有活动。初七要送火神，傍晚时在家里点鞭炮、煮水饺吃，然后去土地庙旁边的大街上烧香。&lt;/p&gt;
-
-&lt;p&gt;到正月十五和十六就是元宵节的习俗了，这里就不写了。&lt;/p&gt;
-
-&lt;h3 id=&#34;总结&#34;&gt;总结&lt;/h3&gt;
-
-&lt;p&gt;在这里主要记录一下我们家这边过年的习俗，可能有遗漏的地方，另外由于在家待着的原因，文字里有些家乡话的语言习惯，见谅！&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -477,26 +105,7 @@
       <description>&lt;p&gt;前段时间身体不太好，导致心情比较低落，人也颓废，啥事都不想干。找暑假实习也无心情准备，各种被拒，暑假就只能呆在实验室了。&lt;/p&gt;
 
 &lt;p&gt;心情不好就喜欢想杂七杂八的东西(好的时候也想)，那段时间陷入了强烈的自我否定当中，感觉自己一无是处，各种缺点，而我又不是一个喜欢表达开放自己内心的人，也不习惯找人聊天排解。没事的时候(如果你心情不好任何时候都是没事的时候)就会想，自己想过什么样的生活，想有个什么样的未来。我知道自己从高考结束后一直以来都活的迷迷糊糊，没有明确的人生目标，也没想好这辈子活着是为了什么，迷茫着前进，却不知道远方到底有什么，或者说哪里才是远方。
-&lt;/p&gt;
-
-&lt;p&gt;感觉不能这样颓废下去，要给自己个奋斗的理由，于是试了试奶牛文章&lt;a href=&#34;http://blog.sina.com.cn/s/blog_6e8e05ac0100wu4h.html&#34;&gt;《给明年依然年轻的我们&amp;hellip;》&lt;/a&gt;中的方法，找找人生理想，PS.亲测不怎么有效!
-用文章里面的方法，列了一大堆内容，由于人生经历有限，也没找到啥感动的自己都要哭的人生目标，不过还是有收获的，最后确定的奋斗目标是：&lt;code&gt;可以不受限制的去做自己想做、喜欢做的事，快乐自由的去体验生活，感受更大世界！&lt;/code&gt;。这个人生目标受我过去的人生经历和现阶段对自我的认识所影响，也许以后会变，但确实是我现阶段的想法。我确实不是一个很有野心的人啊！&lt;/p&gt;
-
-&lt;p&gt;下面来具体说说我的人生目标。前面半句话是说要努力奋斗成长为高富帅(^o^)/，想去环游世界，就不能被工作压着，想去太空看看，就得有钱，想爬珠穆朗玛，身体要吃得消。后半句话意思是。。还是没找到啥确切的人生目标，到时候想到啥喜欢啥就做啥吧¯_(ツ)_/¯ (所以说不太有效)，活的自由快乐就好，最后的补充是想说&lt;code&gt;世界那么大，我想去看看！&lt;/code&gt;！&lt;/p&gt;
-
-&lt;p&gt;人怎样才算成功？一个人有能力去完成自己想做的事并付诸行动乐于其中就是成功！&lt;/p&gt;
-
-&lt;p&gt;有目标，就要努力实现，目标是结果，奋斗才是过程，目标虽然还不太具体，但过程可以具体些。所以，&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;实现人生目标第一步：&lt;code&gt;锻炼身体，实现财务自由&lt;/code&gt;！&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;赚钱赚钱赚大钱！具体计划就是好好准备秋招，找个好工作，认真工作个3-5年，努力扩展赚钱渠道，然后看情况决定下一步计划。工作学习的同时不能忽视身体锻炼，革命的本钱一定要保养好！(也真是够具体的)&lt;/p&gt;
-
-&lt;p&gt;少年，就是要在阳光下挥洒汗水！&lt;/p&gt;
-
-&lt;p&gt;一切随性而为!&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -512,138 +121,7 @@
 &lt;p&gt;先声明，原来从来没写过爬虫，于是为了偷懒，找到了Python的爬虫框架&lt;a href=&#34;http://scrapy.org/&#34;&gt;Scrapy&lt;/a&gt;,官方文档看&lt;a href=&#34;https://scrapy-chs.readthedocs.org/zh_CN/latest/&#34;&gt;这里&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;有框架就是快，突击学习了两天就把爬虫写出来了。
-&lt;/p&gt;
-
-&lt;h3 id=&#34;scrapy安装&#34;&gt;Scrapy安装&lt;/h3&gt;
-
-&lt;p&gt;自己搜索吧，这里不提。
-我用的是Ubuntu系统，刚学会了一个小技巧。安装过程中报错缺少头文件，可试着用一下命令:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo apt-get install apt-file 
-apt-file update 
-apt-file search /***  #这里代表提示缺少的文件及路径
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通过上面的命令找到相关的包、软件后安装即可，注意会搜索出来很多，一般为后几个字母为lib的包。
-###创建项目
-选择合适的目录，创建freebuf项目:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;scrapy startproject freebuftools
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;该命令将创建如下目录文件:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;freebuftools/
-    scrapy.cfg
-    freebuftools/
-        __init__.py
-        items.py
-        pipelines.py
-        settings.py
-        spiders/
-            __init__.py
-            ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这些文件分别是:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;scrapy.cfg: 项目的配置文件&lt;/li&gt;
-&lt;li&gt;freebuftools/: 该项目的python模块。之后您将在此加入代码。&lt;/li&gt;
-&lt;li&gt;freebuftools/items.py: 项目中的item文件.&lt;/li&gt;
-&lt;li&gt;freebuftools/pipelines.py: 项目中的pipelines文件.&lt;/li&gt;
-&lt;li&gt;freebuftools/settings.py: 项目的设置文件.&lt;/li&gt;
-&lt;li&gt;freebuftools/spiders/: 放置spider代码的目录.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;定义item&#34;&gt;定义Item&lt;/h3&gt;
-
-&lt;p&gt;Item 是保存爬取到的数据的容器；其使用方法和python字典类似， 并且提供了额外保护机制来避免拼写错误导致的未定义字段错误。&lt;/p&gt;
-
-&lt;p&gt;由于我只想获得freebuf里文章的题目和链接，于是只定义了两个相应字段:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;import scrapy
-class FreebuftoolsItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    title=scrapy.Field()#用于保存题目
-    link =scrapy.Field()#用于保存链接
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;分析网站结构&#34;&gt;分析网站结构&lt;/h3&gt;
-
-&lt;p&gt;使用浏览器的审查元素功能查看freebuf网站分类浏览下的html代码，可以发现文章目录一条一条的都被包含在&lt;code&gt;&amp;lt;div class=&amp;quot;news_inner news-list&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;标签里面&lt;/p&gt;
-
-&lt;p&gt;具体结构如下图:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/html.jpg&#34; alt=&#34;文章题目结构&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;通过目录结构可以提取出文章题目的xpath:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//div[@class=&#39;news_inner news-list&#39;]/div[@class=&#39;news-info&#39;]/dl/dt/a/text()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;文章链接的xpath：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//div[@class=&#39;news_inner news-list&#39;]/div[@class=&#39;news-info&#39;]/dl/dt/a/@href
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;光有文章题目和内容还不够，还要知道怎样进入下一页，查看html代码可知下一页的链接格式为&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;news-more&amp;quot; id=&amp;quot;pagination&amp;quot;&amp;gt;
-    &amp;lt;a href=&amp;quot;http://www.freebuf.com/xxx/page/xxx&amp;quot;&amp;gt;查看更多&amp;lt;/a&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;提取出下一页链接xpath:&lt;code&gt;//div[@id=&#39;pagination&#39;]/a/@href&lt;/code&gt;
-具体xpath的教程可以查看&lt;a href=&#34;https://scrapy-chs.readthedocs.org/zh_CN/latest/&#34;&gt;scrapy文档&lt;/a&gt;，或者看这里&lt;a href=&#34;http://www.w3school.com.cn/xpath/&#34;&gt;xpath教程&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;有一个小技巧，浏览器中看html代码时可以右键选择&lt;code&gt;复制xpath&lt;/code&gt;，不过复制的路径比较死板。&lt;/p&gt;
-
-&lt;h3 id=&#34;编写spider&#34;&gt;编写spider&lt;/h3&gt;
-
-&lt;p&gt;首先在目录&lt;code&gt;freebuftools\freebuftools\spiders\&lt;/code&gt;下新建文件&lt;code&gt;freebuftools_Spider.py&lt;/code&gt;。
-代码如下:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#encoding=utf-8
-import scrapy
-from freebuftools.items import FreebuftoolsItem
-class FreeBufToolsSpider(scrapy.Spider):
-    name = &amp;quot;freeBufTools&amp;quot;
-    allowed_domains =[&amp;quot;freebuf.com&amp;quot;]#域名
-    start_urls =[&amp;quot;http://www.freebuf.com/geek&amp;quot;]#初始页面，可更改为相应分类首页
-    def parse(self,response):
-        file=open(&amp;quot;freebufgeek.html&amp;quot;,&#39;a&#39;)#写入爬取内容的文件，注意文件为追加模式
-
-        for sel in response.xpath(&amp;quot;//div[@class=&#39;news_inner news-list&#39;]/div[@class=&#39;news-info&#39;]/dl/dt/a&amp;quot;):#xpath路径父节点
-            tools=FreebuftoolsItem()#新建保存item
-            tools[&#39;title&#39;]=sel.xpath(&amp;quot;text()&amp;quot;).extract()[0].encode(&#39;utf-8&#39;)#提取文章题目并转换格式保存
-            tools[&#39;link&#39;]=sel.xpath(&amp;quot;@href&amp;quot;).extract()[0].encode(&#39;utf-8&#39;)#提取文章链接并转换格式保存
-            html=&#39;&#39;&#39;&amp;lt;p&amp;gt;&amp;lt;a href=&amp;quot;&#39;&#39;&#39;+tools[&#39;link&#39;]+&#39;&#39;&#39;&amp;quot; target=&amp;quot;_black&amp;quot;&amp;gt;&#39;&#39;&#39;+tools[&#39;title&#39;]+&amp;quot;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;quot;#拼接写入文件的html代码
-            file.writelines(html)#将爬取内容写入文件
-            yield tools#返回爬取内容
-        url=response.xpath(&amp;quot;//div[@id=&#39;pagination&#39;]/a/@href&amp;quot;).extract()[0]#获取下一页的链接
-        yield scrapy.Request(url,callback=self.parse)#回调本函数继续爬取下一页
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面代码写的比较清楚，内容也很简单，不懂的可以查看官方文档，另外有点需要注意，保存爬取内容的文件打开方式为&lt;strong&gt;追加&lt;/strong&gt;，如果不这样只能保存一条爬取的数据。&lt;/p&gt;
-
-&lt;p&gt;改变初始页面可以爬取不同分类下的文章题目。&lt;/p&gt;
-
-&lt;p&gt;还有Python中yield的用法，简单来说就是yield可在函数中返回内容而仍使函数能继续执行。具体Google百度。&lt;/p&gt;
-
-&lt;h3 id=&#34;执行爬虫&#34;&gt;执行爬虫&lt;/h3&gt;
-
-&lt;p&gt;打开最外层freebuftools文件夹，运行命令&lt;code&gt;scrapy crawl freeBufTools&lt;/code&gt;即可。运行完后可找到自己定义的爬取内容的文件。&lt;/p&gt;
-
-&lt;p&gt;我这里有个问题就是记得创建项目时字母用的小写，但执行时发现小写不对，大家可以在执行前先运行一下&lt;code&gt;scrapy list&lt;/code&gt;查看项目名称。
-###遇到的问题
-主要是文件的问题，一开始我是想直接通过管道导出json格式文件的，但是发现输出的文件内容是汉字对应的utf-8编码，如图:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://painterliu.com/img/json.PNG&#34; alt=&#34;json输出形式&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;最后虽然解决了输出汉字的问题但想着json文件还要写个脚本读取，就直接在spider中往文件里写内容了，代码就是上面贴的代码。解决输出内容的方法可以看&lt;a href=&#34;http://git.oschina.net/ldshuang/imax-spider/commit/1d05d7bafdf7758f7b422cc1133abf493bf55086&#34;&gt;这里&lt;/a&gt;，声明:只是用的这里的方法，自己根据具体内容做相应改动。主要&lt;code&gt;pipelines.py&lt;/code&gt;文件和&lt;code&gt;settings.py&lt;/code&gt;文件&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -657,88 +135,7 @@ class FreeBufToolsSpider(scrapy.Spider):
 &lt;p&gt;下面总结一下:&lt;/p&gt;
 
 &lt;p&gt;首先用到了&lt;a href=&#34;http://developers.douban.com/wiki/?title=guide&#34;&gt;豆瓣API&lt;/a&gt;，另外推荐百度的&lt;a href=&#34;http://apistore.baidu.com/&#34;&gt;API Store&lt;/a&gt;，上面可以查找各个公司的提供的API接口。
-&lt;/p&gt;
-
-&lt;p&gt;其次在&lt;code&gt;book.html&lt;/code&gt;模板里面对要添加的地方&lt;code&gt;div&lt;/code&gt;标签增加类&lt;code&gt;book&lt;/code&gt;属性，并取markdown中&lt;code&gt;subject、image、description、status&lt;/code&gt;的值来设为属性。
-如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;col-md-12 book&amp;quot; subject=&amp;quot;25902102&amp;quot; image=&amp;quot;/public/img/s27299192.jpg&amp;quot; description=&amp;quot;&amp;quot; status=&amp;quot;在读&amp;quot;&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下面把book.js代码贴上&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$(document).ready(function(){
-    var url = &#39;https://api.douban.com/v2/book/&#39;//API地址
-    $(&amp;quot;.book&amp;quot;).each(//对html页面中class是book的每个标签执行以下操作
-        function(){
-       var subject=$(this).attr(&amp;quot;subject&amp;quot;);//取得subjec属性
-       var image=$(this).attr(&amp;quot;image&amp;quot;);
-       var description=$(this).attr(&amp;quot;description&amp;quot;);
-       var status=$(this).attr(&amp;quot;status&amp;quot;);
-       var ob=$(this);//获取这个对象
-       //alert(subject);
-        var hml1=&#39;&amp;lt;div class=&amp;quot;panel panel-primary&amp;quot;&amp;gt;&#39;
-            +&#39;&amp;lt;div class=&amp;quot;panel-heading&amp;quot;&amp;gt;&#39;;
-        var hml2=&#39;&amp;lt;/div&amp;gt;&#39;
-            +&#39;&amp;lt;div class=&amp;quot;panel-body&amp;quot;&amp;gt;&#39;
-              +&#39;&amp;lt;div class=&amp;quot;row&amp;quot;&amp;gt;&#39;
-               +&#39;&amp;lt;div class=&amp;quot;col-md-4 col-xs-12 center&amp;quot;&amp;gt;&#39;
-                 +&#39;&amp;lt;img src=&amp;quot;&#39;;
-        var hml3=&#39;&amp;quot; alt=&amp;quot;cover&amp;quot; class=&amp;quot;img-thumbnail&amp;quot;&amp;gt;&#39;
-                +&#39;&amp;lt;/div&amp;gt;&#39;
-                +&#39;&amp;lt;div class=&amp;quot;col-md-8 col-xs-12&amp;quot;&amp;gt;&#39;
-                  +&#39;&amp;lt;table class=&amp;quot;table table-bordered&amp;quot;&amp;gt;&#39;
-                    +&#39;&amp;lt;tbody&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td style=&amp;quot;width:80px;&amp;quot;&amp;gt;作者&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml4=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;出版社&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-
-        var hml5=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                     +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;出版年&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml6=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;ISBN&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml7=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;链接&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;a href=&amp;quot;&#39;;
-        var hml8=&#39;&amp;quot; title=&amp;quot;&#39;;
-        var hml9=&#39;&amp;quot;&amp;gt;图书链接&amp;lt;/a&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-        
-        if(status==&amp;quot;已读&amp;quot;)//判断状态
-          hml9=hml9+&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;状态&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;
-                    +&#39;&amp;lt;span class=&amp;quot;label label-success&amp;quot;&amp;gt;已读&#39;;
-        else if(status==&amp;quot;在读&amp;quot;)
-          hml9=hml9+&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;状态&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;
-                      +&#39;&amp;lt;span class=&amp;quot;label label-info&amp;quot;&amp;gt;在读&#39;;
-        else if(status==&#39;未读&#39;)
-          hml9=hml9+&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;状态&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;
-                      +&#39;&amp;lt;span class=&amp;quot;label label-default&amp;quot;&amp;gt;未读&#39;;
-        hml9 =hml9+&#39;&amp;lt;/span&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;豆瓣评分&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-
-        var hml10=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;评论&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml11=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-        +&#39;&amp;lt;/tbody&amp;gt;&#39;
-                  +&#39;&amp;lt;/table&amp;gt;&#39;
-                +&#39;&amp;lt;/div&amp;gt;&#39;
-              +&#39;&amp;lt;/div&amp;gt;&#39;
-           +&#39;&amp;lt;/div&amp;gt;&#39;
-          +&#39;&amp;lt;/div&amp;gt; &#39;;
-        $.getJSON(url+subject+&amp;quot;?callback=?&amp;quot;, function(data) {//获取豆瓣数据并拼接html代码
-          ob.append(hml1+data.title+hml2+image+hml3+data.author+hml4+data.publisher+hml5+data.pubdate+hml6+data.isbn13+hml7+data.alt+hml8+data.alt+hml9+data.rating.average+hml10+description+hml11);
-        });
-    } );
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通过上面代码列读书清单markdown时，只需要添加豆瓣subject、本地图书封面地址和自己的评价与读书状态就可以了，比原来方便些。&lt;/p&gt;
-
-&lt;p&gt;下面就是处理js代码的引用。
-一开始使用&lt;code&gt;&amp;lt;script src=&amp;quot;/public/js/book.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;放在了&lt;code&gt;footer.html&lt;/code&gt;里面发现不行，只有首次打开能够加载，再点击按钮时，由于ajax的作用，js代码不重新加载执行。后来放到&lt;code&gt;book.html&lt;/code&gt;里，仍然是这个问题。最后没办法，直接把代码加到&lt;code&gt;book.html&lt;/code&gt;的后面，不引用&lt;code&gt;src&lt;/code&gt;了，结果居然好了。
-目前还有一个问题没解决，就是豆瓣限制api的访问次数，调试过程中访问多了都是&lt;code&gt;403禁止访问&lt;/code&gt;，这个真不知道怎么改了，哎！&lt;/p&gt;
-
-&lt;p&gt;因为是初学，中间遇到各种奇葩问题，不一一列举。&lt;/p&gt;
-
-&lt;p&gt;发现写着好简单，做着好难、、、&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -750,11 +147,7 @@ class FreeBufToolsSpider(scrapy.Spider):
       <description>&lt;p&gt;小说还是一口气看完比较好，虽然这本书我不是一口气看完的，但是是集中时间看的。&lt;/p&gt;
 
 &lt;p&gt;小说开篇就提朱裳，但从不正面描写朱裳，所有对朱裳的描写都是从“我”的印象中来的，是“我”对朱裳的感觉。所以中心还是“我”，&lt;code&gt;生动细致地刻画出一个处于青春期的男孩内心里那种熊熊燃烧的感觉。&lt;/code&gt;
-&lt;/p&gt;
-
-&lt;p&gt;小说读下来有种感觉，就是把一个大人的灵魂放到一个高中生的身体里，去过高中生的生活，但思想又混杂着高中生的思想。&lt;/p&gt;
-
-&lt;p&gt;不多说，以后就不写读后感了，只列清单，最多一句话评价一下。&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -763,18 +156,8 @@ class FreeBufToolsSpider(scrapy.Spider):
       <pubDate>Sun, 19 Oct 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-10-19-onlinetools/</guid>
-      <description>&lt;p&gt;这里推荐一下协助学习工作的在线工具：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://stackedit.io&#34;&gt;StackEdit&lt;/a&gt;：markdown编辑器，可导入导出本地文件&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://naotu.baidu.com&#34;&gt;百度脑图&lt;/a&gt;：百度的思维导图编辑工具，可存到百度网盘，很好用&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.processon.com&#34;&gt;processon&lt;/a&gt;：在线画各种图的工具，和visio功能差不多，当然和office其他工具结合肯定没这么好，能导出为png、pdf、pos文件。&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.codecogs.com/latex/eqneditor.php&#34;&gt;在线LaTex公式编辑器&lt;/a&gt;：编辑公式生成LaTex、HTML等代码&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://webdemo.myscript.com/#/demo/equation&#34;&gt;公式手写识别&lt;/a&gt;：和上面的功能差不多，只不过这个是把公式画出来识别&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;再提一下在线Latex编辑器，没用过，有需要的可以看&lt;a href=&#34;http://www.zhihu.com/question/21375839&#34;&gt;这里&lt;/a&gt;,暂时列这么多，其他的一些在线工具和学习工作无关没有列。&lt;/p&gt;
-</description>
+      <description>这里推荐一下协助学习工作的在线工具：
+ StackEdit：markdown编辑器，可导入导出本地文件 百度脑图：百度的思维导图编辑工具，可存到百度网盘，很好用 processon：在线画各种图的工具，和visio功能差不多，当然和office其他工具结合肯定没这么好，能导出为png、pdf、pos文件。 在线LaTex公式编辑器：编辑公式生成LaTex、HTML等代码 公式手写识别：和上面的功能差不多，只不过这个是把公式画出来识别  再提一下在线Latex编辑器，没用过，有需要的可以看这里,暂时列这么多，其他的一些在线工具和学习工作无关没有列。</description>
     </item>
     
     <item>
@@ -796,50 +179,7 @@ age=33;
 &lt;p&gt;字符串中可以用双引号里面含单引号，单引号里面含双引号，不需要转义，如果单引号里面有单引号，需要转义，如下&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;var mood=&amp;quot;about 5&#39;10\&amp;quot; tall&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
-数组用&lt;code&gt;Array()&lt;/code&gt;声明，可以&lt;code&gt;Array(4)&lt;/code&gt;设置数组长度，或者&lt;code&gt;Array(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;);&lt;/code&gt;直接初始化数组或者
-&lt;code&gt;var year =[1990,1991,1992]&lt;/code&gt;
-字符串、数字、变量、数组、等可以混合存入数组，也可以是变量。&lt;/p&gt;
-
-&lt;p&gt;关联数组(不推荐使用)：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var lennon=Array();
-lennon[&#39;name&#39;]=&amp;quot;John&amp;quot;;
-lennon[&#39;year&#39;]=1940;
-lennon[&#39;living&#39;]=false;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;对象Object&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var lennon=Object();//var lennon={}
-lennon.name=&amp;quot;John&amp;quot;;
-lennon.year=1940
-lennon.living=false;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或者&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var lennon={name:&amp;quot;John&amp;quot;,year:1940,living:false};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;操作&#34;&gt;操作&lt;/h4&gt;
-
-&lt;p&gt;&amp;rdquo;+&amp;ldquo;连接字符串和数字时转为字符串&lt;/p&gt;
-
-&lt;h4 id=&#34;条件语句&#34;&gt;条件语句&lt;/h4&gt;
-
-&lt;p&gt;&amp;rdquo;==&amp;ldquo;不进行严格比较，严格比较用&amp;rdquo;===&amp;ldquo;，同样，“!==”对应于&amp;rdquo;!=&amp;rdquo;&lt;/p&gt;
-
-&lt;h4 id=&#34;函数&#34;&gt;函数&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;function name(arguments){
-     statements;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;函数内部局部变量不影响全局变量要用var声明才行，不声明则影响同名全局变量&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -853,30 +193,7 @@ lennon.living=false;
 &lt;p&gt;真的不喜欢用零碎的时间看书，感觉没体系，没连贯性。&lt;/p&gt;
 
 &lt;p&gt;实际上还是挺享受阅读的。在周末的上午，拿本书，带上杯子，慢慢走到图书馆，接杯白开水，找一个靠窗的位置坐下，打开书本，悠悠然的看一上午，不时的喝两口水或者往窗外看看。水一定要是白开水，书一定是纸质书。
-&lt;/p&gt;
-
-&lt;p&gt;不扯这么多，本着不评价只写感受的原则，说说自己看《三十六大的感觉》。前半部分看时，感觉冯唐有些矫情，不知道为什么，反正就是这感觉。后半部分没啥感觉。大概就这样。
-下面是摘抄:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;人之患在好为人师。&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;工作最好做你喜欢做的和擅长做的，哪怕你喜欢做的和擅长做的是码字、洗菜或者锄草。工作时最好周围有一小群你喜欢的也喜欢你的人，现世里，工作往往占据你大部分有效时间，如果周围的人无趣，生命容易无趣。又，不能小看工作，工作能让你的生活更平衡，即使你女人和朋友拐了你的金钱跑了，如果还有工作，你不怕。&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;偶像的标准：第一，因才。不能拧巴。是关公就耍大刀，是孔明就论天下。第二，尽力。哪怕一生要理解的是草履虫的纤毛前端的一个蛋白的基因，也要争取做到前无古人后无来者，当提刀而立，为之四顾，为之踌躇满志。第三，笃定。操南墙他妈，操棺材他妈，操命运他妈，不着急，不害怕，做到底。&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;终极神器是颗修炼得见了就做了做了就放下了的混横明强的心。&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;大通达，小拧巴，事儿逼过余生。&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;不着急，不害怕，不要的确，所有人都是井底之蛙，都是夜郎自大。所有人都受到个人认识的局限，天外有天，一个人力气再大，也无法自己拎着自己的头发把自己拎离地面。但是傻屄和有常识的人类的区别是，傻屄不知道这点，有常识的人类知道这一点。就是这点可贵的自知，严格区分了傻屄和有常识的人类。&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;因材，尽力，笃定&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;独立思考，时常忘记标准答案，读读历史，多走些地方。&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;另，最后路金波的《我读冯唐》写的不错。&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -888,13 +205,7 @@ lennon.living=false;
       <description>&lt;p&gt;宋濂&lt;/p&gt;
 
 &lt;p&gt;　　余幼时即嗜学。家贫，无致书以观，每假借于藏书之家，手自笔录，计日以还。天大寒，观冰坚，手指不可屈伸，弗之怠。录毕，走送了，不敢销逾约。以是人多以书假余，余因得遍观群书。既加冠，益慕圣贤之道。又患无硕师名人与游，尝趋百里外从乡之先达执经叩问。先达德隆望尊，门人弟子填其室，未尝稍降辞色。余立侍左右，援疑质理，俯身倾耳以请；或遇其叱咄，色愈恭，礼愈至，不敢出一言以复；俟其欣悦，则又请焉。故余虽愚，卒获有所闻。
-&lt;/p&gt;
-
-&lt;p&gt;　　当余之从师也，负箧曳屣，行深山巨谷中，穷冬烈风，大雪深数尺，足肤皲裂而不知。至舍，四支僵劲不能动，媵人持汤沃灌，以衾拥覆，久而乃和。寓逆旅主人，日再食，无鲜肥滋味之享。同舍生皆被绮绣，戴朱缨宝饰之帽，腰白玉之环，左佩刀，右备容臭，烨然若神人；余则緼袍敝衣处其间，略无慕艳意，以中有足乐者，不知口体之奉不若人也。盖余之勤且艰苦此。&lt;/p&gt;
-
-&lt;p&gt;　　今诸生学于太学，县官日有禀销之供，父母岁有裘葛之遗，无冻馁之患矣；坐大厦之下而诵《诗》《书》，无奔走之劳矣；有司业、博士为之师，未有问而不告，求而不得者也；凡所宜有之书皆集于此，不必若余之手录，假诸人而后见也。其业有不精，德有不成者，非天质之卑，则心不若余之专耳，岂他人之过哉？&lt;/p&gt;
-
-&lt;p&gt;　　东阳马生君则，在太学已二年，流辈甚称其贤。余朝京师，生以乡人子谒余。撰长书以为贽，辞甚畅达。与之论辨，言和而色夷。自谓少时用心于学甚劳。是可谓善学者矣。其将归见其亲也，余故道为学之难以告之。&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -908,32 +219,7 @@ lennon.living=false;
 &lt;p&gt;图有点大哈!&lt;/p&gt;
 
 &lt;p&gt;总算把《沉默的大多数》陆陆续续看完了，大概花了一个月吧，实际上集中时间看，一个白天就能开完了。标点都不知道怎么加了，《沉默的大多数》是一本文集，里面有一篇《沉默的大多数》，不知道该怎么用书名号了，要不要用引号？
-&lt;/p&gt;
-
-&lt;p&gt;前面自己写的《沉默的大多数》读后感，写的很垃圾，但一想就我的文学素养来说，写出来就很不容易了，就在那里放着吧！&lt;/p&gt;
-
-&lt;p&gt;看完主要有以下感觉，这里写一些，有些说的不一定对&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;文革对王小波影响很大&lt;/li&gt;
-&lt;li&gt;主要思想是己所不欲勿施于人，己所欲也勿施于人。&lt;/li&gt;
-&lt;li&gt;爱平等，爱自由，爱智慧！&lt;/li&gt;
-&lt;li&gt;思想家、文学家一类的别没事瞎叨叨!&lt;/li&gt;
-&lt;li&gt;书里讽刺批评的问题至今依然存在!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;大概就上面这些，下面摘抄些书里的文字。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;世界不光有阳的一面，还有阴的一面。&lt;/li&gt;
-&lt;li&gt;我最赞成罗素先生的一句话：“须知参差多态，乃是幸福的本源。”&lt;/li&gt;
-&lt;li&gt;认真地思索，真诚的明辨是非，有这种态度，大概就可算是善良吧。&lt;/li&gt;
-&lt;li&gt;科学家维纳认为，人在做两种不同性质的事，一类如棋手，成败由他的最坏状态决定，还有一类如发明家，只要有一天状态好，做成了发明，就成功了。&lt;/li&gt;
-&lt;li&gt;科学家和圣贤的区别在于，前者不但寻求知识，还寻求知识的证明。&lt;/li&gt;
-&lt;li&gt;我们民族最重大的文化传统，不是孔孟程朱，而是这种钻研精神。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;就摘抄这么多吧，最后对王小波也是一位程序员感到惊喜！&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -943,14 +229,71 @@ lennon.living=false;
       
       <guid>http://painterliu.com/post/2014-09-04-emmy/</guid>
       <description>&lt;p&gt;不知道是什么时候喜欢上看美国的颁奖典礼的，像奥斯卡、格莱美、艾美奖、公告牌音乐大奖等等涉及电影、电视剧、音乐一类的颁奖典礼，一般看到资源都会下载下来看一下，虽然我基本不看美剧(国产剧也不怎么看)也不怎么听歌，虽然不是每一个颁奖典礼都必看，也不太执着于是否看，但大部分颁奖礼还是都看了的。
-&lt;/p&gt;
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>linux下java调用matlab</title>
+      <link>http://painterliu.com/post/2014-08-08-linux-java-matlab/</link>
+      <pubDate>Fri, 08 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-08-08-linux-java-matlab/</guid>
+      <description>&lt;p&gt;项目需要迁移到linux环境，准确的说是redhat系统，所以最近研究在redhat下java调用matlab的解决方法，期间遇到了各种问题，卡了好长时间，现在终于解决了。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《沉默的大多数》读后感</title>
+      <link>http://painterliu.com/tag/2014-08-05-silence/</link>
+      <pubDate>Tue, 05 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/tag/2014-08-05-silence/</guid>
+      <description>&lt;p&gt;今天看了《沉默的大多数》里面的《沉默的大多数》，对于文学素养不够高的我来说，杂文确实不好理解，王小波也不好理解。下面主要说一下我自己的感受。怎么想起原来被逼着写读后感的日子？&lt;/p&gt;
 
-&lt;p&gt;最近断断续续的把第66届艾美奖看完了，这里写些感想，主要有两点。&lt;/p&gt;
+&lt;p&gt;首先，看了沉默的大多数，发现自己也一直属于沉默的大多数，还好，是大多数，不过虽然是大多数，但彼此是孤立的，因为沉默，所以还是少数。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>java调用matlab返回值为struct类型的处理</title>
+      <link>http://painterliu.com/post/2014-07-28-javamatlab/</link>
+      <pubDate>Tue, 08 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-07-28-javamatlab/</guid>
+      <description>&lt;p&gt;因为项目要用java，我这初学java的人就要开始试着调用matlab导出的函数了，这里记录一些内容。&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;国外像艾美奖这样中间没什么表演节目的会在主持人嘉宾等台词上下功夫，使得语言很幽默风趣，偶尔找嘉宾开下玩笑，不让人感觉枯燥，而且邻居致辞也很有趣。而音乐类奖项等中间穿插各种表演的现场表演又是精彩纷呈，比如13年41届全美音乐奖的&lt;a href=&#34;http://v.youku.com/v_show/id_XNjM5Mzk1NDAw.html&#34;&gt;say somthing&lt;/a&gt;，确实精彩。国外一般是开发性的舞台，设计的很好，科技程度高，有些舞台深入到观众内部的，互动性强。&lt;/li&gt;
-&lt;li&gt;看艾美奖最感动的就是其中的缅怀环节，美国的大部分颁奖都有这个环节，我不清楚里面出现的人是不是都已逝去或者在这距离上届艾美奖一年的时间里逝去，但这个环节让人们记住、想起那些曾经在这一领域做出贡献的人，不忘老一辈电视人的贡献。虽然里面缅怀的人我基本都不认识，对简介上说的美剧也没印象，但就是很感动，这些人曾对这一领域做出贡献，这些人还不曾被遗忘，我想对一个人工作最好的肯定就是这了吧，当你老去或者死后，你的工作、贡献还能被人提起、回忆，还能留住人们心中。&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;p&gt;具体java调用matlab函数的过程这里不多说，具体可以看这里:&lt;a href=&#34;http://blog.163.com/mxhbj@126/blog/static/1441091702013370343436/&#34;&gt;Java和matlab混合编程&lt;/a&gt;，&lt;a href=&#34;http://xiaolongfeixiang.iteye.com/blog/1893621&#34;&gt;Java调用Matlab方法的三种方式&lt;/a&gt;，&lt;a href=&#34;http://www.cnblogs.com/ellisonDon/archive/2012/10/30/2746457.html&#34;&gt;java中调用Matlab的函数+注意事项&lt;/a&gt;，这3篇博文涉及的问题比较全面，不过需要在实践中结合具体情况考察方案的可行性。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>成功的花儿</title>
+      <link>http://painterliu.com/post/2014-06-23-flower/</link>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-06-23-flower/</guid>
+      <description> 成功的花儿  成功的花儿，
+人们只惊羡她现时的明艳！
+然而当初她的芽儿，
+浸透了奋斗的泪泉，
+洒遍了牺牲的血雨。
+ </description>
+    </item>
+    
+    <item>
+      <title>我对分类的一些理解</title>
+      <link>http://painterliu.com/post/2014-07-02-understanding-of-the-classification/</link>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://painterliu.com/post/2014-07-02-understanding-of-the-classification/</guid>
+      <description>&lt;p&gt;最近一直在做阿里的大数据竞赛，对数据挖掘中的分类问题有了一些自己的理解，在这里总结记录一下。&lt;/p&gt;
+
+&lt;h4 id=&#34;特征&#34;&gt;&lt;strong&gt;特征&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;分类问题中有一个很重要的概念是&lt;code&gt;特征&lt;/code&gt;，特征代表了训练集中数据的各种属性。各种分类器模型以特征为参数进行训练，特征是分类问题中的关键。&lt;/p&gt;
+
+&lt;p&gt;在比赛的进行过程中，我逐渐领悟到&lt;code&gt;特征&lt;/code&gt;才是分类问题中的核心。特征的选取要保证&lt;code&gt;既能有效区别于其他类别的样本，又和所属类别的样本尽量近似或保持一致&lt;/code&gt;，所以特征不是越多越好，也不是越少越好，而是越能代表不同类别的差别越好。如果一个特征在所有类别的样本中是一样的数值，肯定不能使用它来分类，而一个特征在所有类别样本中无规律或者说近似随机，也不能有效的分类。特征的选取直接决定了使用算法或模型对数据进行分类的能达到的极限。
+&lt;/p&gt;</description>
     </item>
     
   </channel>

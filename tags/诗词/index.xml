@@ -2,10 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>诗词 on painterliu的博客</title>
-    <link>http://painterliu.com/tags/%E8%AF%97%E8%AF%8D/index.xml</link>
+    <link>http://painterliu.com/tags/%E8%AF%97%E8%AF%8D/</link>
     <description>Recent content in 诗词 on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <atom:link href="http://painterliu.com/tags/%E8%AF%97%E8%AF%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://painterliu.com/tags/%E8%AF%97%E8%AF%8D/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>成功的花儿</title>
@@ -13,18 +16,12 @@
       <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://painterliu.com/post/2014-06-23-flower/</guid>
-      <description>
-
-&lt;h3 id=&#34;成功的花儿&#34;&gt;成功的花儿&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;成功的花儿，&lt;br /&gt;
-人们只惊羡她现时的明艳！&lt;br /&gt;
-然而当初她的芽儿，&lt;br /&gt;
-浸透了奋斗的泪泉，&lt;br /&gt;
-洒遍了牺牲的血雨。&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
+      <description> 成功的花儿  成功的花儿，
+人们只惊羡她现时的明艳！
+然而当初她的芽儿，
+浸透了奋斗的泪泉，
+洒遍了牺牲的血雨。
+ </description>
     </item>
     
   </channel>

@@ -2,10 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Js on painterliu的博客</title>
-    <link>http://painterliu.com/tags/js/index.xml</link>
+    <link>http://painterliu.com/tags/js/</link>
     <description>Recent content in Js on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <atom:link href="http://painterliu.com/tags/js/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 Nov 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://painterliu.com/tags/js/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>JS自动加载豆瓣相关图书内容</title>
@@ -18,88 +21,7 @@
 &lt;p&gt;下面总结一下:&lt;/p&gt;
 
 &lt;p&gt;首先用到了&lt;a href=&#34;http://developers.douban.com/wiki/?title=guide&#34;&gt;豆瓣API&lt;/a&gt;，另外推荐百度的&lt;a href=&#34;http://apistore.baidu.com/&#34;&gt;API Store&lt;/a&gt;，上面可以查找各个公司的提供的API接口。
-&lt;/p&gt;
-
-&lt;p&gt;其次在&lt;code&gt;book.html&lt;/code&gt;模板里面对要添加的地方&lt;code&gt;div&lt;/code&gt;标签增加类&lt;code&gt;book&lt;/code&gt;属性，并取markdown中&lt;code&gt;subject、image、description、status&lt;/code&gt;的值来设为属性。
-如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;col-md-12 book&amp;quot; subject=&amp;quot;25902102&amp;quot; image=&amp;quot;/public/img/s27299192.jpg&amp;quot; description=&amp;quot;&amp;quot; status=&amp;quot;在读&amp;quot;&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下面把book.js代码贴上&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$(document).ready(function(){
-    var url = &#39;https://api.douban.com/v2/book/&#39;//API地址
-    $(&amp;quot;.book&amp;quot;).each(//对html页面中class是book的每个标签执行以下操作
-        function(){
-       var subject=$(this).attr(&amp;quot;subject&amp;quot;);//取得subjec属性
-       var image=$(this).attr(&amp;quot;image&amp;quot;);
-       var description=$(this).attr(&amp;quot;description&amp;quot;);
-       var status=$(this).attr(&amp;quot;status&amp;quot;);
-       var ob=$(this);//获取这个对象
-       //alert(subject);
-        var hml1=&#39;&amp;lt;div class=&amp;quot;panel panel-primary&amp;quot;&amp;gt;&#39;
-            +&#39;&amp;lt;div class=&amp;quot;panel-heading&amp;quot;&amp;gt;&#39;;
-        var hml2=&#39;&amp;lt;/div&amp;gt;&#39;
-            +&#39;&amp;lt;div class=&amp;quot;panel-body&amp;quot;&amp;gt;&#39;
-              +&#39;&amp;lt;div class=&amp;quot;row&amp;quot;&amp;gt;&#39;
-               +&#39;&amp;lt;div class=&amp;quot;col-md-4 col-xs-12 center&amp;quot;&amp;gt;&#39;
-                 +&#39;&amp;lt;img src=&amp;quot;&#39;;
-        var hml3=&#39;&amp;quot; alt=&amp;quot;cover&amp;quot; class=&amp;quot;img-thumbnail&amp;quot;&amp;gt;&#39;
-                +&#39;&amp;lt;/div&amp;gt;&#39;
-                +&#39;&amp;lt;div class=&amp;quot;col-md-8 col-xs-12&amp;quot;&amp;gt;&#39;
-                  +&#39;&amp;lt;table class=&amp;quot;table table-bordered&amp;quot;&amp;gt;&#39;
-                    +&#39;&amp;lt;tbody&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td style=&amp;quot;width:80px;&amp;quot;&amp;gt;作者&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml4=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;出版社&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-
-        var hml5=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                     +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;出版年&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml6=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;ISBN&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml7=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;链接&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;a href=&amp;quot;&#39;;
-        var hml8=&#39;&amp;quot; title=&amp;quot;&#39;;
-        var hml9=&#39;&amp;quot;&amp;gt;图书链接&amp;lt;/a&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-        
-        if(status==&amp;quot;已读&amp;quot;)//判断状态
-          hml9=hml9+&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;状态&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;
-                    +&#39;&amp;lt;span class=&amp;quot;label label-success&amp;quot;&amp;gt;已读&#39;;
-        else if(status==&amp;quot;在读&amp;quot;)
-          hml9=hml9+&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;状态&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;
-                      +&#39;&amp;lt;span class=&amp;quot;label label-info&amp;quot;&amp;gt;在读&#39;;
-        else if(status==&#39;未读&#39;)
-          hml9=hml9+&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;状态&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;
-                      +&#39;&amp;lt;span class=&amp;quot;label label-default&amp;quot;&amp;gt;未读&#39;;
-        hml9 =hml9+&#39;&amp;lt;/span&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-                      +&#39;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;豆瓣评分&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-
-        var hml10=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;评论&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&#39;;
-        var hml11=&#39;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&#39;
-        +&#39;&amp;lt;/tbody&amp;gt;&#39;
-                  +&#39;&amp;lt;/table&amp;gt;&#39;
-                +&#39;&amp;lt;/div&amp;gt;&#39;
-              +&#39;&amp;lt;/div&amp;gt;&#39;
-           +&#39;&amp;lt;/div&amp;gt;&#39;
-          +&#39;&amp;lt;/div&amp;gt; &#39;;
-        $.getJSON(url+subject+&amp;quot;?callback=?&amp;quot;, function(data) {//获取豆瓣数据并拼接html代码
-          ob.append(hml1+data.title+hml2+image+hml3+data.author+hml4+data.publisher+hml5+data.pubdate+hml6+data.isbn13+hml7+data.alt+hml8+data.alt+hml9+data.rating.average+hml10+description+hml11);
-        });
-    } );
-})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通过上面代码列读书清单markdown时，只需要添加豆瓣subject、本地图书封面地址和自己的评价与读书状态就可以了，比原来方便些。&lt;/p&gt;
-
-&lt;p&gt;下面就是处理js代码的引用。
-一开始使用&lt;code&gt;&amp;lt;script src=&amp;quot;/public/js/book.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;放在了&lt;code&gt;footer.html&lt;/code&gt;里面发现不行，只有首次打开能够加载，再点击按钮时，由于ajax的作用，js代码不重新加载执行。后来放到&lt;code&gt;book.html&lt;/code&gt;里，仍然是这个问题。最后没办法，直接把代码加到&lt;code&gt;book.html&lt;/code&gt;的后面，不引用&lt;code&gt;src&lt;/code&gt;了，结果居然好了。
-目前还有一个问题没解决，就是豆瓣限制api的访问次数，调试过程中访问多了都是&lt;code&gt;403禁止访问&lt;/code&gt;，这个真不知道怎么改了，哎！&lt;/p&gt;
-
-&lt;p&gt;因为是初学，中间遇到各种奇葩问题，不一一列举。&lt;/p&gt;
-
-&lt;p&gt;发现写着好简单，做着好难、、、&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -121,50 +43,7 @@ age=33;
 &lt;p&gt;字符串中可以用双引号里面含单引号，单引号里面含双引号，不需要转义，如果单引号里面有单引号，需要转义，如下&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;var mood=&amp;quot;about 5&#39;10\&amp;quot; tall&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
-数组用&lt;code&gt;Array()&lt;/code&gt;声明，可以&lt;code&gt;Array(4)&lt;/code&gt;设置数组长度，或者&lt;code&gt;Array(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;);&lt;/code&gt;直接初始化数组或者
-&lt;code&gt;var year =[1990,1991,1992]&lt;/code&gt;
-字符串、数字、变量、数组、等可以混合存入数组，也可以是变量。&lt;/p&gt;
-
-&lt;p&gt;关联数组(不推荐使用)：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var lennon=Array();
-lennon[&#39;name&#39;]=&amp;quot;John&amp;quot;;
-lennon[&#39;year&#39;]=1940;
-lennon[&#39;living&#39;]=false;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;对象Object&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var lennon=Object();//var lennon={}
-lennon.name=&amp;quot;John&amp;quot;;
-lennon.year=1940
-lennon.living=false;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或者&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var lennon={name:&amp;quot;John&amp;quot;,year:1940,living:false};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;操作&#34;&gt;操作&lt;/h4&gt;
-
-&lt;p&gt;&amp;rdquo;+&amp;ldquo;连接字符串和数字时转为字符串&lt;/p&gt;
-
-&lt;h4 id=&#34;条件语句&#34;&gt;条件语句&lt;/h4&gt;
-
-&lt;p&gt;&amp;rdquo;==&amp;ldquo;不进行严格比较，严格比较用&amp;rdquo;===&amp;ldquo;，同样，“!==”对应于&amp;rdquo;!=&amp;rdquo;&lt;/p&gt;
-
-&lt;h4 id=&#34;函数&#34;&gt;函数&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;function name(arguments){
-     statements;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;函数内部局部变量不影响全局变量要用var声明才行，不声明则影响同名全局变量&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
   </channel>
