@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>技术 on painterliu的博客</title>
-    <link>http://painterliu.com/categories/%E6%8A%80%E6%9C%AF/</link>
-    <description>Recent content in 技术 on painterliu的博客</description>
+    <title>解释器 on painterliu的博客</title>
+    <link>http://painterliu.com/tags/%E8%A7%A3%E9%87%8A%E5%99%A8/</link>
+    <description>Recent content in 解释器 on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 20 Nov 2017 21:00:45 +0800</lastBuildDate>
     
-	<atom:link href="http://painterliu.com/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://painterliu.com/tags/%E8%A7%A3%E9%87%8A%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -31,22 +31,6 @@
 &lt;p&gt;正如我上次向你承诺的那样，今天我将会谈谈我们将在整个系列的其余部分中使用的一个核心数据结构，所以系上安全，咱们出发喽！&lt;/p&gt;
 
 &lt;p&gt;直到现在，我们已经将我们的解释器（interpreter ）和解析器（parser）代码混合在一起，只要解析器识别出像加法，减法，乘法或除法这样的特定语言结构，解释器就会求的表达式的值。 这种解释器被称为语法制导解释器（*syntax-directed interpreters*）。 他们通常对输入进行一次遍历，适用于基本的语言应用程序。 为了分析更复杂的Pascal的编程语言结构，我们需要建立一个&lt;strong&gt;中间表示&lt;/strong&gt;（intermediate representation，&lt;strong&gt;IR&lt;/strong&gt;）。 解析器将负责构建一个IR，而解释器将用来解释表示为IR的输入。
-&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>我对分类的一些理解</title>
-      <link>http://painterliu.com/post/2014-07-02-understanding-of-the-classification/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://painterliu.com/post/2014-07-02-understanding-of-the-classification/</guid>
-      <description>&lt;p&gt;最近一直在做阿里的大数据竞赛，对数据挖掘中的分类问题有了一些自己的理解，在这里总结记录一下。&lt;/p&gt;
-
-&lt;h4 id=&#34;特征&#34;&gt;&lt;strong&gt;特征&lt;/strong&gt;&lt;/h4&gt;
-
-&lt;p&gt;分类问题中有一个很重要的概念是&lt;code&gt;特征&lt;/code&gt;，特征代表了训练集中数据的各种属性。各种分类器模型以特征为参数进行训练，特征是分类问题中的关键。&lt;/p&gt;
-
-&lt;p&gt;在比赛的进行过程中，我逐渐领悟到&lt;code&gt;特征&lt;/code&gt;才是分类问题中的核心。特征的选取要保证&lt;code&gt;既能有效区别于其他类别的样本，又和所属类别的样本尽量近似或保持一致&lt;/code&gt;，所以特征不是越多越好，也不是越少越好，而是越能代表不同类别的差别越好。如果一个特征在所有类别的样本中是一样的数值，肯定不能使用它来分类，而一个特征在所有类别样本中无规律或者说近似随机，也不能有效的分类。特征的选取直接决定了使用算法或模型对数据进行分类的能达到的极限。
 &lt;/p&gt;</description>
     </item>
     

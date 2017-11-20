@@ -5,10 +5,34 @@
     <link>http://painterliu.com/</link>
     <description>Recent content on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 08 Jan 2017 10:03:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Nov 2017 21:00:45 +0800</lastBuildDate>
     
 	<atom:link href="http://painterliu.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一起来写个简单的解释器（7）</title>
+      <link>http://painterliu.com/post/lsbasi-part7/</link>
+      <pubDate>Mon, 20 Nov 2017 21:00:45 +0800</pubDate>
+      
+      <guid>http://painterliu.com/post/lsbasi-part7/</guid>
+      <description>&lt;p&gt;英文出处：&lt;a href=&#34;https://ruslanspivak.com/lsbasi-part7/&#34;&gt;Ruslan&amp;rsquo;s Blog
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/88152/&#34;&gt;《一起来写个简单的解释器（1）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/88347/&#34;&gt;《一起来写个简单的解释器（2）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/90055/&#34;&gt;《一起来写个简单的解释器（3）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/94326/&#34;&gt;《一起来写个简单的解释器（4）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/94686/&#34;&gt;《一起来写个简单的解释器（5）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/95145/&#34;&gt;《一起来写个简单的解释器（6）》&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;正如我上次向你承诺的那样，今天我将会谈谈我们将在整个系列的其余部分中使用的一个核心数据结构，所以系上安全，咱们出发喽！&lt;/p&gt;
+
+&lt;p&gt;直到现在，我们已经将我们的解释器（interpreter ）和解析器（parser）代码混合在一起，只要解析器识别出像加法，减法，乘法或除法这样的特定语言结构，解释器就会求的表达式的值。 这种解释器被称为语法制导解释器（*syntax-directed interpreters*）。 他们通常对输入进行一次遍历，适用于基本的语言应用程序。 为了分析更复杂的Pascal的编程语言结构，我们需要建立一个&lt;strong&gt;中间表示&lt;/strong&gt;（intermediate representation，&lt;strong&gt;IR&lt;/strong&gt;）。 解析器将负责构建一个IR，而解释器将用来解释表示为IR的输入。
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>2017年年度计划</title>
