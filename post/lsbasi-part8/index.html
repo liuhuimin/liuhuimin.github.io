@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Hugo 0.18">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="liuhuimin">
+
+    <title>painterliu</title>
+
+    <link href="http://painterliu.com/index.xml" rel="alternate" type="application/rss+xml" title="painterliu">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="http://painterliu.com/img/@.ico" rel="shortcut icon">
+
+    
+</head>
+<body>
+<div id="wrapper">
+<div id="sidebar-wrapper">
+    <div class="sidebar-title">
+        <h1 id="site-title"><a href="http://painterliu.com/">@</a></h1>
+        <p class="lead blog-description">好好学习, 天天向上</p>
+    </div>
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af">技术</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%9d%82%e7%b1%bb">杂类</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%94%9f%e6%b4%bb">生活</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b">编程</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e8%af%bb%e4%b9%a6">读书</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/tag/">标签</a></li>
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/about/">关于</a></li>
+    </ul>
+</div>
+<div id="content-wrapper">
+    <div class="post">
+      <h1 class="post-title">一起来写个简单的解释器（8）</h1>
+      <div class="post-date">
+      2017年11月24日
+      &nbsp;<a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af"> 技术</a>
+      </div>
+           <p>英文出处：<a href="https://ruslanspivak.com/lsbasi-part8/">Ruslan&rsquo;s Blog
+</a></p>
+
+<ul>
+<li><a href="http://blog.jobbole.com/88152/">《一起来写个简单的解释器（1）》</a></li>
+<li><a href="http://blog.jobbole.com/88347/">《一起来写个简单的解释器（2）》</a></li>
+<li><a href="http://blog.jobbole.com/90055/">《一起来写个简单的解释器（3）》</a></li>
+<li><a href="http://blog.jobbole.com/94326/">《一起来写个简单的解释器（4）》</a></li>
+<li><a href="http://blog.jobbole.com/94686/">《一起来写个简单的解释器（5）》</a></li>
+<li><a href="http://blog.jobbole.com/95145/">《一起来写个简单的解释器（6）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part7/">《一起来写个简单的解释器（7）》</a></li>
+</ul>
+
+<p>今天我们将讨论一元运算符，即一元加(+)和一元减(-)运算符。</p>
+
+<p>现在很多材料都是基于上一篇文章，所以如果你需要复习一下，那么回到<a href="http://painterliu.com/post/lsbasi-part7/">第七部分</a>，再重新翻一遍。记住：重复是所有学习之母。</p>
+
+<p>话虽如此，这就是今天你要做的事情：</p>
+
+<ul>
+<li>扩展语法来处理一元加号和一元减号运算符</li>
+<li>添加一个新的 UnaryOp AST节点类</li>
+<li>扩展解析器以生成带有UnaryOp节点的AST</li>
+<li>扩展解释器并添加一个新的visit_UnaryOp方法来解释一元运算符</li>
+</ul>
+
+<p>我们开始吧！</p>
+
+<p></p>
+
+<p>到目前为止，我们只使用二元运算符(+, -, *, /)，也就是操作两个操作数的运算符。</p>
+
+<p>什么是一元运算符呢？一元运算符是仅在一个操作数上操作的运算符。</p>
+
+<p>这里是一元加号和一元减号运算符的规则：</p>
+
+<ul>
+<li>一元减号 (-) 运算符对其数字操作数的求反</li>
+<li>一元加 (+) 运算符产生的数字操作数没有改变</li>
+<li>一元运算符的优先级高于二元运算符 +， - ，*和/</li>
+</ul>
+
+<p>在表达式“+ - 3”中，第一个“+”运算符表示一元加运算，第二个“ - ”运算符表示一元减运算。表达式“+ - 3”相当于 “+ (- (3))”即等于-3。也可以说表达式中的-3是一个负整数，但在我们的例子中，我们把它作为一个一元减运算符，其中3作为其正整数操作数：</p>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_exp1.png" alt="图1" /></p>
+
+<p>来看看另一个表达式“5 - - 2”：</p>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_exp2.png" alt="图1" /></p>
+
+<p>在表达式“5 - - 2”中，第一个 “-”表示二元减运算符，第二个“-”表示一元减运算符，求反。看下更多的例子：</p>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_exp3.png" alt="图1" /></p>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_exp4.png" alt="图1" /></p>
+
+<p>现在让我们更新我们的语法来包含一元加和一元减运算符。 我们将修改*factor*规则并在那里添加一元运算符，因为一元运算符比二元运算符 +, -,*和/具有更高的优先级。</p>
+
+<p>这是我们当前的*factor*规则：</p>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_factor_before.png" alt="图1" /></p>
+
+<p>这是我们为处理一元加和减运算符而更新后的*factor*规则：</p>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_factor_after.png" alt="图1" /></p>
+
+<p>正如你所看到的，我扩展了factor规则来引用它自己，这使得我们可以推导出像“ - - - + - 3”这样有多个一元运算符的合法表达式。</p>
+
+<p>这里是完整的语法，现在它可以推导出包含一元加法和一元减法运算符的表达式：</p>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_grammar.png" alt="图1" /></p>
+
+<p>下一步是添加一个AST节点类来表示一元运算符。</p>
+
+<p>这个会做：</p>
+
+<pre><code class="language-python">class UnaryOp(AST):
+    def __init__(self, op, expr):
+        self.token = self.op = op
+        self.expr = expr
+</code></pre>
+
+<p>构造函数有两个参数：op表示一元运算符标记（加号或减号）,expr表示一个AST节点。</p>
+
+<p>更新的语法已经改变了factor规则，所以我们要在解析器中修改的factor方法。 我们将在方法中添加代码来处理“(PLUS | MINUS)factor”子规则：</p>
+
+<pre><code class="language-python">def factor(self):
+    &quot;&quot;&quot;factor : (PLUS | MINUS) factor | INTEGER | LPAREN expr RPAREN&quot;&quot;&quot;
+    token = self.current_token
+    if token.type == PLUS:
+        self.eat(PLUS)
+        node = UnaryOp(token, self.factor())
+        return node
+    elif token.type == MINUS:
+        self.eat(MINUS)
+        node = UnaryOp(token, self.factor())
+        return node
+    elif token.type == INTEGER:
+        self.eat(INTEGER)
+        return Num(token)
+    elif token.type == LPAREN:
+        self.eat(LPAREN)
+        node = self.expr()
+        self.eat(RPAREN)
+        return node
+</code></pre>
+
+<p>我们需要扩展Interpreter 类并增加一个visit_UnaryOp 方法来解释一元运算节点：</p>
+
+<pre><code class="language-python">def visit_UnaryOp(self, node):
+    op = node.op.type
+    if op == PLUS:
+        return +self.visit(node.expr)
+    elif op == MINUS:
+        return -self.visit(node.expr)
+</code></pre>
+
+<p>继续！</p>
+
+<p>让我们收到构建表达式“5 - - - 2”的AST，并将它传给解释器来验证新的类并增加一个visit_UnaryOp方法是否工作，这是你在Python终端里的操作：</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; from spi import BinOp, UnaryOp, Num, MINUS, INTEGER, Token
+&gt;&gt;&gt; five_tok = Token(INTEGER, 5)
+&gt;&gt;&gt; two_tok = Token(INTEGER, 2)
+&gt;&gt;&gt; minus_tok = Token(MINUS, '-')
+&gt;&gt;&gt; expr_node = BinOp(
+...     Num(five_tok),
+...     minus_tok,
+...     UnaryOp(minus_token, UnaryOp(minus_token, Num(two_tok)))
+... )
+&gt;&gt;&gt; from spi import Interpreter
+&gt;&gt;&gt; inter = Interpreter(None)
+&gt;&gt;&gt; inter.visit(expr_node)
+3
+</code></pre>
+
+<p>上面的AST长这样：</p>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_ast.png" alt="图1" /></p>
+
+<p>直接从<a href="https://github.com/rspivak/lsbasi/blob/master/part8/python/spi.py">GitHub</a>下载本文解释器的完整源代码。 尝试一下，亲眼看看你更新的基于树的解释器能否正确求得包含一元运算符的算术表达式的值。</p>
+
+<p>以下是一个示例会话：</p>
+
+<pre><code>$ python spi.py
+spi&gt; - 3
+-3
+spi&gt; + 3
+3
+spi&gt; 5 - - - + - 3
+8
+spi&gt; 5 - - - + - (3 + 4) - +2
+10
+</code></pre>
+
+<p>我也更新了<a href="https://github.com/rspivak/lsbasi/blob/master/part8/python/genastdot.py">genastdot.py</a>程序来处理一元运算符。 下面是一元运算符表达式的生成的一些AST图像：</p>
+
+<pre><code class="language-python">$ python genastdot.py &quot;- 3&quot; &gt; ast.dot &amp;&amp; dot -Tpng -o ast.png ast.dot
+</code></pre>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_genastdot_01.png" alt="图1" /></p>
+
+<pre><code>$ python genastdot.py &quot;+ 3&quot; &gt; ast.dot &amp;&amp; dot -Tpng -o ast.png ast.dot
+</code></pre>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_genastdot_02.png" alt="图1" /></p>
+
+<pre><code>$ python genastdot.py &quot;5 - - - + - 3&quot; &gt; ast.dot &amp;&amp; dot -Tpng -o ast.png ast.dot
+</code></pre>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_genastdot_03.png" alt="图1" /></p>
+
+<pre><code>$ python genastdot.py &quot;5 - - - + - (3 + 4) - +2&quot; \
+  &gt; ast.dot &amp;&amp; dot -Tpng -o ast.png ast.dot
+</code></pre>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_genastdot_04.png" alt="图1" /></p>
+
+<p>这里有新的练习给你：</p>
+
+<p><img src="/img/lsbasi8/lsbasi_part8_exercises.png" alt="图1" /></p>
+
+<p>安装<a href="http://www.freepascal.org/">Free Pascal</a>，编译并运行<a href="https://github.com/rspivak/lsbasi/blob/master/part8/python/testunary.pas">testunary.pas</a>，验证与使用<a href="https://github.com/rspivak/lsbasi/blob/master/part8/python/spi.py">spi</a>解释器生成的结果是否相同。</p>
+
+<p>这就是今天的全部内容。 在下一篇文章中，我们将处理赋值语句。 请继续关注，再见！</p>
+
+<p>以下是我推荐的书籍列表，可以帮助你学习解释器和编译器：</p>
+
+<ol>
+<li><a href="https://www.amazon.com/gp/product/193435645X/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=193435645X&amp;linkCode=as2&amp;tag=russblo0b-20&amp;linkId=MP4DCXDV6DJMEJBL">Language Implementation Patterns: Create Your Own Domain-Specific and General Programming Languages (Pragmatic Programmers)</a></li>
+<li><a href="https://ruslanspivak.com/lsbasi-part7/">Writing Compilers and Interpreters: A Software Engineering Approach</a></li>
+<li><a href="https://www.amazon.com/gp/product/052182060X/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=052182060X&amp;linkCode=as2&amp;tag=russblo0b-20&amp;linkId=ZSKKZMV7YWR22NMW">Modern Compiler Implementation in Java</a></li>
+<li><a href="https://www.amazon.com/gp/product/1461446988/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1461446988&amp;linkCode=as2&amp;tag=russblo0b-20&amp;linkId=PAXWJP5WCPZ7RKRD">Modern Compiler Design</a></li>
+<li><a href="https://www.amazon.com/gp/product/0321486811/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0321486811&amp;linkCode=as2&amp;tag=russblo0b-20&amp;linkId=GOEGDQG4HIHU56FQ">Compilers: Principles, Techniques, and Tools (2nd Edition)</a></li>
+</ol>
+
+<p>顺便说一下，我正在编写一本叫《Let’s Build A Web Server: First Steps》的书，解释如何从头开始编写基本的Web服务器。你可以在<a href="https://ruslanspivak.com/lsbaws-part1/">这里</a>，<a href="https://ruslanspivak.com/lsbaws-part2/">这里</a>和<a href="https://ruslanspivak.com/lsbaws-part3/">这里</a>查看这本书。</p>
+    </div>
+    <ul class="pager">
+    
+    
+          &nbsp;<li class="next"><a href="http://painterliu.com/post/lsbasi-part7/"> 一起来写个简单的解释器（7）</a></li>
+
+      
+      
+    </ul>
+    <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'liuhuimin',
+  repo: 'liuhuimin.github.io',
+  oauth: {
+    client_id: 'e25c4f4c43c6ef1f403b',
+    client_secret: '503da73a705d49acd7c3f530436c4fd9af2c1e5d',
+  },
+})
+gitment.render('container')
+</script>
+
+ </div>
+
+
+</body></html>

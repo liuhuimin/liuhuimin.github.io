@@ -349,7 +349,7 @@ class Parser(object):
 
 <p>这是解释器类的源代码，它继承自*NodeVisitor*类，实现了形如*visit_NodeType*的不同方法，其中*NodeType*是节点的类名如*BinOp*，*Num*等：</p>
 
-<pre><code class="language-python">class Interpreter(NodeVisitor):
+<pre><code>class Interpreter(NodeVisitor):
     def __init__(self, parser):
         self.parser = parser
 
@@ -738,6 +738,8 @@ spi&gt; 7 + (((3 + 2)))
     </div>
     <ul class="pager">
     
+         &nbsp;<li class="previous"><a href="http://painterliu.com/post/lsbasi-part8/"> 一起来写个简单的解释器（8）</a></li> 
+        
     
           &nbsp;<li class="next"><a href="http://painterliu.com/post/2017plan/"> 2017年年度计划</a></li>
 

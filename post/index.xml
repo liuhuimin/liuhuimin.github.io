@@ -5,10 +5,47 @@
     <link>http://painterliu.com/post/</link>
     <description>Recent content in Posts on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 20 Nov 2017 21:00:45 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 24 Nov 2017 21:07:45 +0800</lastBuildDate>
     
 	<atom:link href="http://painterliu.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一起来写个简单的解释器（8）</title>
+      <link>http://painterliu.com/post/lsbasi-part8/</link>
+      <pubDate>Fri, 24 Nov 2017 21:07:45 +0800</pubDate>
+      
+      <guid>http://painterliu.com/post/lsbasi-part8/</guid>
+      <description>&lt;p&gt;英文出处：&lt;a href=&#34;https://ruslanspivak.com/lsbasi-part8/&#34;&gt;Ruslan&amp;rsquo;s Blog
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/88152/&#34;&gt;《一起来写个简单的解释器（1）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/88347/&#34;&gt;《一起来写个简单的解释器（2）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/90055/&#34;&gt;《一起来写个简单的解释器（3）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/94326/&#34;&gt;《一起来写个简单的解释器（4）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/94686/&#34;&gt;《一起来写个简单的解释器（5）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/95145/&#34;&gt;《一起来写个简单的解释器（6）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part7/&#34;&gt;《一起来写个简单的解释器（7）》&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;今天我们将讨论一元运算符，即一元加(+)和一元减(-)运算符。&lt;/p&gt;
+
+&lt;p&gt;现在很多材料都是基于上一篇文章，所以如果你需要复习一下，那么回到&lt;a href=&#34;http://painterliu.com/post/lsbasi-part7/&#34;&gt;第七部分&lt;/a&gt;，再重新翻一遍。记住：重复是所有学习之母。&lt;/p&gt;
+
+&lt;p&gt;话虽如此，这就是今天你要做的事情：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;扩展语法来处理一元加号和一元减号运算符&lt;/li&gt;
+&lt;li&gt;添加一个新的 UnaryOp AST节点类&lt;/li&gt;
+&lt;li&gt;扩展解析器以生成带有UnaryOp节点的AST&lt;/li&gt;
+&lt;li&gt;扩展解释器并添加一个新的visit_UnaryOp方法来解释一元运算符&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我们开始吧！&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>一起来写个简单的解释器（7）</title>
