@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Hugo 0.18">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="liuhuimin">
+    <meta name="google-site-verification" content="AVjxJ-BiVo3u3mihbmUQ2LhMWA7YRx9iyiJVkxST93Q" />
+    <title>painterliu</title>
+
+    <link href="http://painterliu.com/index.xml" rel="alternate" type="application/rss+xml" title="painterliu">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="http://painterliu.com/img/@.ico" rel="shortcut icon">
+
+    
+</head>
+<body>
+<div id="wrapper">
+<div id="sidebar-wrapper">
+    <div class="sidebar-title">
+        <h1 id="site-title"><a href="http://painterliu.com/">@</a></h1>
+        <p class="lead blog-description">好好学习, 天天向上</p>
+    </div>
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af">技术</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%9d%82%e7%b1%bb">杂类</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%94%9f%e6%b4%bb">生活</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b">编程</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e8%af%bb%e4%b9%a6">读书</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/tag/">标签</a></li>
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/about/">关于</a></li>
+    </ul>
+</div>
+<div id="content-wrapper">
+    <div class="post">
+      <h1 class="post-title">一起来写个简单的解释器（9）</h1>
+      <div class="post-date">
+      2017年11月25日
+      &nbsp;<a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af"> 技术</a>
+      </div>
+           <p>英文出处：<a href="https://ruslanspivak.com/lsbasi-part9/">Ruslan&rsquo;s Blog
+</a></p>
+
+<ul>
+<li><a href="http://blog.jobbole.com/88152/">《一起来写个简单的解释器（1）》</a></li>
+<li><a href="http://blog.jobbole.com/88347/">《一起来写个简单的解释器（2）》</a></li>
+<li><a href="http://blog.jobbole.com/90055/">《一起来写个简单的解释器（3）》</a></li>
+<li><a href="http://blog.jobbole.com/94326/">《一起来写个简单的解释器（4）》</a></li>
+<li><a href="http://blog.jobbole.com/94686/">《一起来写个简单的解释器（5）》</a></li>
+<li><a href="http://blog.jobbole.com/95145/">《一起来写个简单的解释器（6）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part7/">《一起来写个简单的解释器（7）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part8/">《一起来写个简单的解释器（8）》</a></li>
+</ul>
+
+<p>我记得很久以前在大学学习系统编程时，我相信唯一的“真正的”语言是汇编和C。而Pascal是，怎么说好呢，是那些不想知道底层发生了什么的应用程序开发人员使用的一种高级语言。</p>
+
+<p>当时我不知道我将会用Python编写几乎所有的东西（并且非常喜欢它）来支付我的账单，而且基于本系列的<a href="http://blog.jobbole.com/88152/">第一篇文章</a>里说的原因，我也会为Pascal编写解释器和编译器。</p>
+
+<p>这些天，我认为自己是编程语言爱好者，我对所有的语言和他们独特的特点着迷。话虽如此，我必须指出，相比其他语言我更喜欢用某些语言多一些。我有偏见并且我将会成为第一个承认这一点的人。:)
+</p>
+
+<p>这是之前的我：</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_story_before.png" alt="图1" /></p>
+
+<p>这是现在的我：</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_story_now.png" alt="图1" /></p>
+
+<p>好吧，让我们开始干正事吧。 以下是你今天要学习的内容：</p>
+
+<ol>
+<li>如何解析和解释Pascal程序定义。</li>
+<li>如何解析和解释复合语句。</li>
+<li>如何解析和解释赋值语句，包括变量。</li>
+<li>一点符号表的内容以及如何存储和查找变量。</li>
+</ol>
+
+<p>我将使用下面的类Pascal程序来介绍新的概念：</p>
+
+<pre><code class="language-pascal">BEGIN
+    BEGIN
+        number := 2;
+        a := number;
+        b := 10 * a + 10 * number / 4;
+        c := a - - b
+    END;
+    x := 11;
+END.
+</code></pre>
+
+<p>你可能说，相比你之前写过的这个系列前几篇文章的命令行解释器，这是一个巨大的跳跃，但是我希望会带来一些兴奋。 这不“仅仅是”一个计算器了，在这里我们很认真Pascal认真。:)</p>
+
+<p>让我们深入了解新语言结构的语法图及其相应的语法规则。</p>
+
+<p>各就各位！预备！跑！</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_syntax_diagram_01.png" alt="图1" />
+<img src="/img/lsbasi9/lsbasi_part9_syntax_diagram_02.png" alt="图1" />
+<img src="/img/lsbasi9/lsbasi_part9_syntax_diagram_03.png" alt="图1" /></p>
+
+<ol>
+<li><p>我将从描述什么是Pascal程序开始。一个Pascal程序由一个以点结尾的复合语句组成。这是一个程序的例子：</p>
+
+<pre><code>“BEGIN  END.”
+</code></pre>
+
+<p>我必须解释到，这不是一个完整的程序定义，我们将在后面的章节中对其进行扩展。</p></li>
+
+<li><p>什么是复合语句？复合语句是一个用BEGIN和END标记的块，它可以包含一系列的语句包括其他复合语句（也可能为空）。除了最后一个语句，复合语句中的每个语句都必须以分号结尾。块中的最后一个语句可能有也可能没有终止分号。以下是有效的复合语句的一些例子：</p>
+
+<pre><code>“BEGIN END”
+“BEGIN a := 5; x := 11 END”
+“BEGIN a := 5; x := 11; END”
+“BEGIN BEGIN a := 5 END; x := 11 END”
+</code></pre></li>
+
+<li><p><strong>语句列表</strong>是复合语句中的零个或多个语句的列表。见上面的例子。</p></li>
+
+<li><p>一个<strong>语句</strong>可以是一个复合语句，一个赋值语句，也可以是一个空语句。</p></li>
+
+<li><p>赋值语句是一个变量，后跟一个ASSIGN标记（两个字符，&rsquo;:&lsquo;和&rsquo;=&lsquo;）和一个表达式。</p>
+
+<pre><code>“a := 11”
+“b := a + 9 - 5 * 2”
+</code></pre></li>
+
+<li><p><strong>变量</strong>是一个标识符。我们将使用ID token来表示变量。token的值将是变量的名称，如“a”，“number”等。在下面的代码块中，&rsquo;a&rsquo;和&rsquo;b&rsquo;是变量：</p>
+
+<pre><code>“BEGIN a := 11; b := a + 9 - 5 * 2 END”
+</code></pre></li>
+
+<li><p><strong>空</strong>语句表示没有进一步操作的语法规则。我们使用empty_statement语法规则来表示语法分析器中statement_list的结尾，并且允许像&rsquo;BEGIN END&rsquo;那样的空的复合语句。</p></li>
+
+<li><p><strong>factor</strong>规则被更新以能处理变量。</p></li>
+</ol>
+
+<p>现在来看看完整的语法：</p>
+
+<pre><code>    program : compound_statement DOT
+
+    compound_statement : BEGIN statement_list END
+
+    statement_list : statement
+                   | statement SEMI statement_list
+
+    statement : compound_statement
+              | assignment_statement
+              | empty
+
+    assignment_statement : variable ASSIGN expr
+
+    empty :
+
+    expr: term ((PLUS | MINUS) term)*
+
+    term: factor ((MUL | DIV) factor)*
+
+    factor : PLUS factor
+           | MINUS factor
+           | INTEGER
+           | LPAREN expr RPAREN
+           | variable
+
+    variable: ID
+</code></pre>
+
+<p>您可能注意到，我没有在compound_statement规则中使用星号“*”符号来表示零或多个重复，而是显式指定了statement_list规则，这是表示&rsquo;零或多个&rsquo;操作的另一种方法，当我们在本系列的后面讨论像<a href="http://www.dabeaz.com/ply/">PLY</a>这样的解析器生成器时，它将派上用场。 我也把“(PLUS | MINUS) factor” 子规则分成两个单独的规则。</p>
+
+<p>为了支持更新后的语法，我们需要对词法分析器，解析器和解释器进行一些更改。 让我们挨个地看下这些变化。</p>
+
+<p>以下是词法分析器中的变化总结：</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_lexer.png" alt="图1" /></p>
+
+<ol>
+<li><p>为了支持Pascal程序的定义，复合语句，赋值语句和变量，我们的词法分析器需要返回新的tokens：</p>
+
+<ul>
+<li>BEGIN（标记复合语句的开始）</li>
+<li>END（标记复合语句的结束）</li>
+<li>DOT（Pascal程序定义所要求的点符号“.”）</li>
+<li>ASSIGN（两个字符序列的标记 &lsquo;：=&lsquo;）。在Pascal中，赋值运算符与C，Python，Java，Rust或Go等许多其他语言不同，这些语言中可以使用单个字符 “=” 来赋值</li>
+<li>SEMI（在复合语句中标记语句结尾的分号 “;”的标记）</li>
+<li>ID（一个有效标识符的标记，标识符以字母开头，后跟任意数量的字母或数字）</li>
+</ul></li>
+
+<li><p>有时，为了能够区分以相同字符开始的不同标记（&rsquo;：&rsquo;vs&rsquo;：=&lsquo;或&rsquo;==&lsquo;vs&rsquo;=&gt;&lsquo;），我们需要查看输入缓冲区而不需要实际消耗下一个字符。为了这个特定的目的，这里介绍一个peek方法，它将帮助我们标记赋值语句。这个方法不是严格要求的，但是我会在本系列的靠前位置介绍它，而且它能还会使get_next_token方法变得更清晰。它所做的只是从文本缓冲区中返回下一个字符，而不增加self.pos变量的值。这是方法本身：</p>
+
+<pre><code class="language-python">def peek(self):
+    peek_pos = self.pos + 1
+    if peek_pos &gt; len(self.text) - 1:
+        return None
+    else:
+        return self.text[peek_pos]
+</code></pre></li>
+
+<li><p>因为Pascal变量和保留关键字都是标识符，我们将它们的处理组合成一个名为_id的方法。它的工作方式是词法分析器消耗一系列字母数字字符，然后检查字符序列是否为保留字。如果是，则为该保留关键字返回预构造的标记。如果不是保留关键字，则返回一个新的ID标记，其值是字符串（语义）。我敢打赌你会想，“天哪，给我看代码”:) 这里是：</p>
+
+<pre><code class="language-python">RESERVED_KEYWORDS = {
+    'BEGIN': Token('BEGIN', 'BEGIN'),
+    'END': Token('END', 'END'),
+}
+
+def _id(self):
+    &quot;&quot;&quot;Handle identifiers and reserved keywords&quot;&quot;&quot;
+    result = ''
+    while self.current_char is not None and self.current_char.isalnum():
+        result += self.current_char
+        self.advance()
+
+    token = RESERVED_KEYWORDS.get(result, Token(ID, result))
+    return token
+</code></pre></li>
+
+<li><p>现在让我们来看看主要的词法分析器方法get_next_token的变化：</p>
+
+<pre><code>def get_next_token(self):
+    while self.current_char is not None:
+        ...
+        if self.current_char.isalpha():
+            return self._id()
+
+        if self.current_char == ':' and self.peek() == '=':
+            self.advance()
+            self.advance()
+            return Token(ASSIGN, ':=')
+
+        if self.current_char == ';':
+            self.advance()
+            return Token(SEMI, ';')
+
+        if self.current_char == '.':
+            self.advance()
+            return Token(DOT, '.')
+        ...
+</code></pre>
+
+<p>是时候看看我们闪亮的新词法分析器的所有荣耀和行为。 从<a href="https://github.com/rspivak/lsbasi/tree/master/part9/python">GitHub</a>下载源码，并从保存<a href="https://github.com/rspivak/lsbasi/blob/master/part9/python/spi.py">spi.py</a>文件的相同目录启动您的Python shell：</p>
+
+<pre><code>&gt;&gt;&gt; from spi import Lexer
+&gt;&gt;&gt; lexer = Lexer('BEGIN a := 2; END.')
+&gt;&gt;&gt; lexer.get_next_token()
+Token(BEGIN, 'BEGIN')
+&gt;&gt;&gt; lexer.get_next_token()
+Token(ID, 'a')
+&gt;&gt;&gt; lexer.get_next_token()
+Token(ASSIGN, ':=')
+&gt;&gt;&gt; lexer.get_next_token()
+Token(INTEGER, 2)
+&gt;&gt;&gt; lexer.get_next_token()
+Token(SEMI, ';')
+&gt;&gt;&gt; lexer.get_next_token()
+Token(END, 'END')
+&gt;&gt;&gt; lexer.get_next_token()
+Token(DOT, '.')
+&gt;&gt;&gt; lexer.get_next_token()
+Token(EOF, None)
+&gt;&gt;&gt;
+</code></pre></li>
+</ol>
+
+<p>继续进行解析器的改造。</p>
+
+<p>以下是解析器中的变化总结：</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_parser.png" alt="图1" /></p>
+
+<ol>
+<li><p>我们从新的AST节点开始：</p>
+
+<ul>
+<li>Compound AST节点表示复合语句。它在其子变量中包含一个语句节点列表。
+<code>python
+class Compound(AST):
+    &quot;&quot;&quot;Represents a 'BEGIN ... END' block&quot;&quot;&quot;
+    def __init__(self):
+        self.children = []
+</code></li>
+
+<li><p>Assign AST节点表示一个赋值语句。其左边的变量用于存储Var节点，右边的变量用于存储expr解析器方法返回的节点：</p>
+
+<pre><code class="language-python">class Assign(AST):
+    def __init__(self, left, op, right):
+        self.left = left
+        self.token = self.op = op
+        self.right = right
+</code></pre></li>
+
+<li><p>Var AST节点（你猜对了）表示一个变量。 self.value保存变量的名称。</p>
+
+<pre><code class="language-python">class Var(AST):
+    &quot;&quot;&quot;The Var node is constructed out of ID token.&quot;&quot;&quot;
+    def __init__(self, token):
+        self.token = token
+        self.value = token.value
+</code></pre></li>
+
+<li><p>NoOp节点用来表示一个空的语句。例如&rsquo;BEGIN END&rsquo;是一个没有语句的有效复合语句。</p>
+
+<pre><code class="language-python">class NoOp(AST):
+    pass
+</code></pre></li>
+</ul></li>
+
+<li><p>正如你所记得的那样，语法中的每条规则在我们的递归下降解析器中都有相应的方法。这次我们添加了七个新的方法。这些方法负责解析新的语言结构和构建新的AST节点。他们非常简单：</p>
+
+<pre><code class="language-python">def program(self):
+    &quot;&quot;&quot;program : compound_statement DOT&quot;&quot;&quot;
+    node = self.compound_statement()
+    self.eat(DOT)
+    return node
+
+def compound_statement(self):
+    &quot;&quot;&quot;
+    compound_statement: BEGIN statement_list END
+    &quot;&quot;&quot;
+    self.eat(BEGIN)
+    nodes = self.statement_list()
+    self.eat(END)
+
+    root = Compound()
+    for node in nodes:
+        root.children.append(node)
+
+    return root
+
+def statement_list(self):
+    &quot;&quot;&quot;
+    statement_list : statement
+                | statement SEMI statement_list
+    &quot;&quot;&quot;
+    node = self.statement()
+
+    results = [node]
+
+    while self.current_token.type == SEMI:
+        self.eat(SEMI)
+        results.append(self.statement())
+
+    if self.current_token.type == ID:
+        self.error()
+
+    return results
+
+def statement(self):
+    &quot;&quot;&quot;
+    statement : compound_statement
+            | assignment_statement
+            | empty
+    &quot;&quot;&quot;
+    if self.current_token.type == BEGIN:
+        node = self.compound_statement()
+    elif self.current_token.type == ID:
+        node = self.assignment_statement()
+    else:
+        node = self.empty()
+    return node
+
+def assignment_statement(self):
+    &quot;&quot;&quot;
+    assignment_statement : variable ASSIGN expr
+    &quot;&quot;&quot;
+    left = self.variable()
+    token = self.current_token
+    self.eat(ASSIGN)
+    right = self.expr()
+    node = Assign(left, token, right)
+    return node
+
+def variable(self):
+    &quot;&quot;&quot;
+    variable : ID
+    &quot;&quot;&quot;
+    node = Var(self.current_token)
+    self.eat(ID)
+    return node
+
+def empty(self):
+    &quot;&quot;&quot;An empty production&quot;&quot;&quot;
+    return NoOp()
+</code></pre></li>
+
+<li><p>我们还需要更新现有的factor方法来解析变量</p>
+
+<pre><code class="language-python">def factor(self):
+    &quot;&quot;&quot;factor : PLUS  factor
+            | MINUS factor
+            | INTEGER
+            | LPAREN expr RPAREN
+            | variable
+    &quot;&quot;&quot;
+    token = self.current_token
+    if token.type == PLUS:
+        self.eat(PLUS)
+        node = UnaryOp(token, self.factor())
+        return node
+    ...
+    else:
+        node = self.variable()
+        return node
+</code></pre></li>
+
+<li><p>解析器的parse方法更新以通过解析程序定义来开始解析过程：</p>
+
+<pre><code class="language-python">def parse(self):
+    node = self.program()
+    if self.current_token.type != EOF:
+        self.error()
+
+    return node
+</code></pre></li>
+</ol>
+
+<p>这里是我们的示例程序：</p>
+
+<pre><code class="language-pascal">BEGIN
+    BEGIN
+        number := 2;
+        a := number;
+        b := 10 * a + 10 * number / 4;
+        c := a - - b
+    END;
+    x := 11;
+END.
+</code></pre>
+
+<p>让我们用<a href="https://github.com/rspivak/lsbasi/blob/master/part9/python/genastdot.py">genastdot.py</a>来查看它（为了简洁起见，当显示Var节点时，它只显示节点的变量名，当显示Assign节点时显示&rsquo;：=&lsquo;而不是&rsquo;Assign&rsquo;文本）：</p>
+
+<pre><code>$ python genastdot.py assignments.txt &gt; ast.dot &amp;&amp; dot -Tpng -o ast.png ast.dot
+</code></pre>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_full_ast.png" alt="图1" /></p>
+
+<p>最后，这是需要进行的解释器的更改：</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_interpreter.png" alt="图1" /></p>
+
+<p>为了解释新的AST节点，我们需要为解释器添加相应的visitor方法。 有四种新的visitor方法：</p>
+
+<ul>
+<li>visit_Compound</li>
+<li>visit_Assign</li>
+<li>visit_Var</li>
+<li>visit_NoOp</li>
+</ul>
+
+<p>Compound和NoOp visitor方法非常简单。 visit_Compound方法迭代并依次访问每个子节点，visit_NoOp方法不做任何事情。</p>
+
+<pre><code class="language-python">def visit_Compound(self, node):
+    for child in node.children:
+        self.visit(child)
+
+def visit_NoOp(self, node):
+    pass
+</code></pre>
+
+<p>Assign和Var visitor方法值得仔细检查。</p>
+
+<p>当我们为一个变量赋值的时候，我们需要把它保存到某个地方，以便我们稍后需要它，这正是visit_Assign方法的作用：</p>
+
+<pre><code class="language-python">def visit_Assign(self, node):
+    var_name = node.left.value
+    self.GLOBAL_SCOPE[var_name] = self.visit(node.right)
+</code></pre>
+
+<p>该方法在符号表GLOBAL_SCOPE中保存键-值对（变量名和与该变量相关联的值）。什么是符号表？符号表是用于跟踪源代码中各种符号的抽象数据类型（ADT）。现在唯一的符号类别是变量，我们使用Python字典来实现符号表ADT。现在我只是说在这篇文章中使用符号表的方式非常“hacky”：它不是一个单独的具有特殊方法的类，仅是一个简单的Python字典，它也作为一个内存空间来执行双重任务。在以后的文章中，我将更详细地讨论符号表，同时我们也将删除所有的hacks。</p>
+
+<p>我们来看一下语句“a := 3;”的AST和visit_Assign方法工作前后的符号表：</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_ast_st01.png" alt="图1" /></p>
+
+<p>现在看下语句“b := a + 7;”的AST：</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_ast_only_st02.png" alt="图1" /></p>
+
+<p>正如你所看到的，赋值语句的右边——“a + 7”——引用变量“a”，所以在我们计算表达式“a + 7”之前，我们需要找出“a”的值，这是visit_Var方法的责任：</p>
+
+<pre><code class="language-python">def visit_Var(self, node):
+    var_name = node.value
+    val = self.GLOBAL_SCOPE.get(var_name)
+    if val is None:
+        raise NameError(repr(var_name))
+    else:
+        return val
+</code></pre>
+
+<p>当方法像上面的AST图片一样访问Var节点时，它首先获取变量的名称，然后将该名称用作GLOBAL_SCOPE字典中的键来获取变量的值。 如果可以找到该值，则返回它，否则将引发NameError异常。 在计算赋值语句“b := a + 7;”之前，这里是符号表的内容：</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_ast_st02.png" alt="图1" /></p>
+
+<p>这是今天让我们的解释器更好而需要做的全部变化。在主程序结束时，我们简单的将符号表GLOBAL_SCOPE的内容打印到标准输出。</p>
+
+<p>从Python交互式shell和命令行两种方式中运行我们更新的解释器。确保在测试之前下载了解释器的源代码和<a href="https://github.com/rspivak/lsbasi/blob/master/part9/python/assignments.txt">assignments.txt</a>文件：</p>
+
+<p>启动你的Python shell：</p>
+
+<pre><code>$ python
+&gt;&gt;&gt; from spi import Lexer, Parser, Interpreter
+&gt;&gt;&gt; text = &quot;&quot;&quot;\
+... BEGIN
+...
+...     BEGIN
+...         number := 2;
+...         a := number;
+...         b := 10 * a + 10 * number / 4;
+...         c := a - - b
+...     END;
+...
+...     x := 11;
+... END.
+... &quot;&quot;&quot;
+&gt;&gt;&gt; lexer = Lexer(text)
+&gt;&gt;&gt; parser = Parser(lexer)
+&gt;&gt;&gt; interpreter = Interpreter(parser)
+&gt;&gt;&gt; interpreter.interpret()
+&gt;&gt;&gt; print(interpreter.GLOBAL_SCOPE)
+{'a': 2, 'x': 11, 'c': 27, 'b': 25, 'number': 2}
+</code></pre>
+
+<p>在命令行中，使用资源文件作为解释器的输入：</p>
+
+<pre><code>$ python spi.py assignments.txt
+{'a': 2, 'x': 11, 'c': 27, 'b': 25, 'number': 2}
+</code></pre>
+
+<p>如果你还没试过，现在就试一下，亲自看看解释器是否工作正常。</p>
+
+<p>让我们来总结一下为了扩展本文中的Pascal解释器，你必须做些什么：</p>
+
+<ol>
+<li>将新的规则添加到语法</li>
+<li>向词法分析器添加新的标记和支持方法，并更新get_next_token方法</li>
+<li>为新的语言结构将新的AST节点添加到解析器</li>
+<li>将新的语法规则对应的新方法添加到我们的递归下降分析器中，如果有必要，更新任何现有的方法（factor方法，我在看你:)</li>
+<li>向解释器添加新的visitor方法</li>
+<li>添加一个字典来保存变量以便查找它们</li>
+</ol>
+
+<p>这一部分，我不得不介绍一些随着这个系列继续进行将移除的“hacks”：</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_hacks.png" alt="图1" /></p>
+
+<ol>
+<li>程序语法规则不完整。我们稍后会用额外的元素来扩展它。</li>
+<li>Pascal是一种静态类型语言，你必须在使用变量之前声明变量和它的类型。但是，正如你所看到的，这篇文章中并不是这样。</li>
+<li>目前没有类型检查。这一点不算什么，但我只是想明确的提到它。当我们向解释器添加更多类型时，例如当您尝试把字符串和整数相加时，需要报告错误。</li>
+<li>这部分中的符号表是一个简单的Python字典，它作为一个内存空间执行双重任务。不要担心：符号表是一个如此重要的主题，我会为它专门写几篇文章。而内存空间（运行时管理）有一个它自己的主题。</li>
+<li>我们之前文章的简单计算器中，我们使用正斜杠字符“/”来表示整数除法。但在Pascal中，您必须使用关键字div来表示整数除法（请参阅练习1）。</li>
+<li>我还特意介绍了一个黑客技巧，以便您可以在练习2中修复它：在Pascal中，所有的保留关键字和标识符都大小写不敏感，但本文中的解释器将其作为大小写敏感对待。</li>
+</ol>
+
+<p>为了保持身材，这里有一些新的练习：</p>
+
+<p><img src="/img/lsbasi9/lsbasi_part9_exercises.png" alt="图1" /></p>
+
+<ol>
+<li><p>与许多其他编程语言不同，Pascal变量和保留关键字大小写不敏感，因此BEGIN，begin和BeGin都指向相同的保留关键字。 更新解释器，使变量和保留关键字不区分大小写。使用下面的程序来测试它：</p>
+
+<pre><code class="language-pascal">BEGIN
+
+    BEGIN
+        number := 2;
+        a := NumBer;
+        B := 10 * a + 10 * NUMBER / 4;
+        c := a - - b
+    end;
+
+    x := 11;
+END.
+</code></pre></li>
+
+<li><p>我之前在“hacks”一节中提到过，我们的解释器正使用正斜杠字符“/”来表示整数除法，然而应该使用Pascal的保留关键字div来进行整数除法。 更新解释器使用div关键字进行整数除法，从而消除一个hack。</p></li>
+
+<li><p>更新解释器，使得变量可以像&rsquo;_num：= 5&rsquo;中一样以下划线开始。</p></li>
+</ol>
+
+<p>这就是今天的全部内容。 敬请期待，再见！</p>
+
+<p>以下是我推荐的书籍列表，可以帮助你学习解释器和编译器：</p>
+
+<ol>
+<li><a href="https://www.amazon.com/gp/product/193435645X/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=193435645X&amp;linkCode=as2&amp;tag=russblo0b-20&amp;linkId=MP4DCXDV6DJMEJBL">Language Implementation Patterns: Create Your Own Domain-Specific and General Programming Languages (Pragmatic Programmers)</a></li>
+<li><a href="https://www.amazon.com/gp/product/0321486811/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0321486811&amp;linkCode=as2&amp;tag=russblo0b-20&amp;linkId=GOEGDQG4HIHU56FQ">Compilers: Principles, Techniques, and Tools (2nd Edition)</a></li>
+</ol>
+
+<p>顺便说一下，我正在编写一本叫《Let’s Build A Web Server: First Steps》的书，解释如何从头开始编写基本的Web服务器。你可以在<a href="https://ruslanspivak.com/lsbaws-part1/">这里</a>，<a href="https://ruslanspivak.com/lsbaws-part2/">这里</a>和<a href="https://ruslanspivak.com/lsbaws-part3/">这里</a>查看这本书。</p>
+    </div>
+    <ul class="pager">
+    
+    
+          &nbsp;<li class="next"><a href="http://painterliu.com/post/lsbasi-part8/"> 一起来写个简单的解释器（8）</a></li>
+
+      
+      
+    </ul>
+    <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'liuhuimin',
+  repo: 'liuhuimin.github.io',
+  oauth: {
+    client_id: 'e25c4f4c43c6ef1f403b',
+    client_secret: '503da73a705d49acd7c3f530436c4fd9af2c1e5d',
+  },
+})
+gitment.render('container')
+</script>
+
+ </div>
+
+
+</body></html>

@@ -5,10 +5,38 @@
     <link>http://painterliu.com/categories/%E6%8A%80%E6%9C%AF/</link>
     <description>Recent content in 技术 on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 24 Nov 2017 21:07:45 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 25 Nov 2017 20:07:45 +0800</lastBuildDate>
     
 	<atom:link href="http://painterliu.com/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一起来写个简单的解释器（9）</title>
+      <link>http://painterliu.com/post/lsbasi-part9/</link>
+      <pubDate>Sat, 25 Nov 2017 20:07:45 +0800</pubDate>
+      
+      <guid>http://painterliu.com/post/lsbasi-part9/</guid>
+      <description>&lt;p&gt;英文出处：&lt;a href=&#34;https://ruslanspivak.com/lsbasi-part9/&#34;&gt;Ruslan&amp;rsquo;s Blog
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/88152/&#34;&gt;《一起来写个简单的解释器（1）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/88347/&#34;&gt;《一起来写个简单的解释器（2）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/90055/&#34;&gt;《一起来写个简单的解释器（3）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/94326/&#34;&gt;《一起来写个简单的解释器（4）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/94686/&#34;&gt;《一起来写个简单的解释器（5）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/95145/&#34;&gt;《一起来写个简单的解释器（6）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part7/&#34;&gt;《一起来写个简单的解释器（7）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part8/&#34;&gt;《一起来写个简单的解释器（8）》&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我记得很久以前在大学学习系统编程时，我相信唯一的“真正的”语言是汇编和C。而Pascal是，怎么说好呢，是那些不想知道底层发生了什么的应用程序开发人员使用的一种高级语言。&lt;/p&gt;
+
+&lt;p&gt;当时我不知道我将会用Python编写几乎所有的东西（并且非常喜欢它）来支付我的账单，而且基于本系列的&lt;a href=&#34;http://blog.jobbole.com/88152/&#34;&gt;第一篇文章&lt;/a&gt;里说的原因，我也会为Pascal编写解释器和编译器。&lt;/p&gt;
+
+&lt;p&gt;这些天，我认为自己是编程语言爱好者，我对所有的语言和他们独特的特点着迷。话虽如此，我必须指出，相比其他语言我更喜欢用某些语言多一些。我有偏见并且我将会成为第一个承认这一点的人。:)
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>一起来写个简单的解释器（8）</title>
