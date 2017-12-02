@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Hugo 0.18">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="liuhuimin">
+    <meta name="google-site-verification" content="AVjxJ-BiVo3u3mihbmUQ2LhMWA7YRx9iyiJVkxST93Q" />
+    <title>painterliu</title>
+
+    <link href="http://painterliu.com/index.xml" rel="alternate" type="application/rss+xml" title="painterliu">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="http://painterliu.com/img/@.ico" rel="shortcut icon">
+
+    
+</head>
+<body>
+<div id="wrapper">
+<div id="sidebar-wrapper">
+    <div class="sidebar-title">
+        <h1 id="site-title"><a href="http://painterliu.com/">@</a></h1>
+        <p class="lead blog-description">好好学习, 天天向上</p>
+    </div>
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af">技术</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%9d%82%e7%b1%bb">杂类</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%94%9f%e6%b4%bb">生活</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b">编程</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e8%af%bb%e4%b9%a6">读书</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/tag/">标签</a></li>
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/about/">关于</a></li>
+    </ul>
+</div>
+<div id="content-wrapper">
+    <div class="post">
+      <h1 class="post-title">一起来写个简单的解释器（10）</h1>
+      <div class="post-date">
+      2017年12月02日
+      &nbsp;<a href="http://painterliu.com/categories/"> </a>
+      </div>
+           <p>英文出处：<a href="https://ruslanspivak.com/lsbasi-part10/">Ruslan&rsquo;s Blog
+</a></p>
+
+<ul>
+<li><a href="http://blog.jobbole.com/88152/">《一起来写个简单的解释器（1）》</a></li>
+<li><a href="http://blog.jobbole.com/88347/">《一起来写个简单的解释器（2）》</a></li>
+<li><a href="http://blog.jobbole.com/90055/">《一起来写个简单的解释器（3）》</a></li>
+<li><a href="http://blog.jobbole.com/94326/">《一起来写个简单的解释器（4）》</a></li>
+<li><a href="http://blog.jobbole.com/94686/">《一起来写个简单的解释器（5）》</a></li>
+<li><a href="http://blog.jobbole.com/95145/">《一起来写个简单的解释器（6）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part7/">《一起来写个简单的解释器（7）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part8/">《一起来写个简单的解释器（8）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part9/">《一起来写个简单的解释器（9）》</a></li>
+</ul>
+
+<p>今天，我们将继续缩小和目标之间的差距：实现一个支持全功能Pascal语言子集的解释器。</p>
+
+<p><img src="/img/lsbasi10/lsbasi_part10_intro.png" alt="图1" /></p>
+
+<p>在本文中，我们将更新我们的解释器来解析和解释我们第一个完整的Pascal程序。 该程序也可以由Free Pascal编译器——<a href="http://www.freepascal.org/">fpc</a>编译。
+</p>
+
+<p>这是程序本身：</p>
+
+<pre><code class="language-pascal">PROGRAM Part10;
+VAR
+   number     : INTEGER;
+   a, b, c, x : INTEGER;
+   y          : REAL;
+
+BEGIN {Part10}
+   BEGIN
+      number := 2;
+      a := number;
+      b := 10 * a + 10 * number DIV 4;
+      c := a - - b
+   END;
+   x := 11;
+   y := 20 / 7 + 3.14;
+   { writeln('a = ', a); }
+   { writeln('b = ', b); }
+   { writeln('c = ', c); }
+   { writeln('number = ', number); }
+   { writeln('x = ', x); }
+   { writeln('y = ', y); }
+END.  {Part10}
+</code></pre>
+
+<p>在我们开始深入细节之前，从GitHub下载<a href="https://github.com/rspivak/lsbasi/blob/master/part10/python/spi.py">解释器</a>和上面的Pascal<a href="https://github.com/rspivak/lsbasi/blob/master/part10/python/part10.pas">程序</a>的源码，并在命令行上尝试：</p>
+
+<pre><code>$ python spi.py part10.pas
+a = 2
+b = 25
+c = 27
+number = 2
+x = 11
+y = 5.99714285714
+</code></pre>
+
+<p>如果我删除<a href="https://github.com/rspivak/lsbasi/blob/master/part10/python/part10.pas">part10.pas</a>文件中的writeln语句的注释，用<a href="https://www.freepascal.org/">fpc</a>编译源代码，然后运行生成的可执行文件，这是我在笔记本电脑上得到的结果：</p>
+
+<pre><code>$ fpc part10.pas
+$ ./part10
+a = 2
+b = 25
+c = 27
+number = 2
+x = 11
+y =  5.99714285714286E+000
+</code></pre>
+
+<p>好的，让我们看看今天要做的事情：</p>
+
+<ol>
+<li>学习如何解析和解释Pascal <strong>PROGRAM</strong>头</li>
+<li>学习如何解析Pascal变量声明</li>
+<li>更新解释器，使用<strong>DIV</strong>关键字进行整数除法，使用正斜杠 / 进行浮点除法</li>
+<li>增加对Pascal评论的支持</li>
+</ol>
+
+<p>先来看看语法的变化。今天，我们将添加一些新的规则，并更新一些现有的规则。</p>
+
+<p><img src="/img/lsbasi10/lsbasi_part10_grammar1.png" alt="图1" />
+<img src="/img/lsbasi10/lsbasi_part10_grammar2.png" alt="图1" /></p>
+
+<ol>
+<li><strong>program</strong>定义语法规则被更新以包括<strong>PROGRAM</strong>保留关键字、程序名称和以点结尾的程序块。下面是一个完整的Pascal程序的例子：
+<code>
+PROGRAM Part10;
+BEGIN
+END.
+</code></li>
+
+<li><p><strong>block</strong>规则包含了一个declarations规则和一个compound_statement规则。当我们增加过程声明时，我们也会使用这个规则。这是一个block的例子：</p>
+
+<pre><code class="language-pascal">VAR
+number : INTEGER;
+
+BEGIN
+END
+</code></pre>
+
+<p>这是另一个例子：</p>
+
+<pre><code>BEGIN
+END
+</code></pre></li>
+
+<li><p>Pascal的声明有几个部分，每个部分都是可选的。在这篇文章中，我们只会介绍变量声明部分。<strong>declarations</strong> 规则或者有一个变量声明子规则或者为空。</p></li>
+
+<li><p>Pascal是一种静态类型的语言，这意味着每个变量都需要一个变量声明来显式的指定它的类型。在Pascal中，变量必须在使用之前声明。这是通过使用VAR保留关键字在程序变量声明部分中声明变量来实现的。你可以像这样定义变量：</p>
+
+<pre><code>VAR
+number     : INTEGER;
+a, b, c, x : INTEGER;
+y          : REAL;
+</code></pre></li>
+
+<li><p>type_spec规则用于处理INTEGER和REAL类型，用于变量声明中。在下面的例子中</p>
+
+<pre><code>VAR
+a : INTEGER;
+b : REAL;
+</code></pre>
+
+<p>变量“a”用INTEGER类型声明，变量“b”用REAL（float）类型声明。在本文中，我们不会强制进行类型检查，但是我们将在本系列的后面添加类型检查。</p></li>
+
+<li><p><strong>term</strong>规则更新为使用<strong>DIV</strong>关键字进行整数除法和正斜杠 / 进行浮点除法。</p>
+
+<p>之前，20除7使用正斜杠将产生一个INTEGER 2：</p>
+
+<pre><code>20 / 7 = 2
+</code></pre>
+
+<p>现在，20除以7使用正斜杠将产生一个REAL（浮点数）2.85714285714：</p>
+
+<pre><code>20 / 7 = 2.85714285714
+</code></pre>
+
+<p>从现在开始，要获得INTEGER而不是REAL，您需要使用DIV关键字：</p>
+
+<pre><code>20 DIV 7 = 2
+</code></pre></li>
+
+<li><p><strong>factor</strong>规则被更新来处理整数和实数（float）常量。我还删除了INTEGER子规则，因为常量将由INTEGER_CONST和REAL_CONST标记表示，而INTEGER标记将用于表示整数类型。在下面的例子中，词法分析器将为20和7生成一个INTEGER_CONST标记，为3.14生成一个REAL_CONST标记：</p>
+
+<pre><code>y := 20 / 7 + 3.14;
+</code></pre></li>
+</ol>
+
+<p>这是今天完整的语法：</p>
+
+<pre><code>program : PROGRAM variable SEMI block DOT
+
+    block : declarations compound_statement
+
+    declarations : VAR (variable_declaration SEMI)+
+                 | empty
+
+    variable_declaration : ID (COMMA ID)* COLON type_spec
+
+    type_spec : INTEGER
+
+    compound_statement : BEGIN statement_list END
+
+    statement_list : statement
+                   | statement SEMI statement_list
+
+    statement : compound_statement
+              | assignment_statement
+              | empty
+
+    assignment_statement : variable ASSIGN expr
+
+    empty :
+
+    expr : term ((PLUS | MINUS) term)*
+
+    term : factor ((MUL | INTEGER_DIV | FLOAT_DIV) factor)*
+
+    factor : PLUS factor
+           | MINUS factor
+           | INTEGER_CONST
+           | REAL_CONST
+           | LPAREN expr RPAREN
+           | variable
+
+    variable: ID
+</code></pre>
+
+<p>在文章的其余部分，我们将经历上篇相同的步骤：</p>
+
+<ol>
+<li>更新词法分析器</li>
+<li>更新解析器</li>
+<li>更新解释器</li>
+</ol>
+
+<p><strong>更新Lexer词法分析器</strong></p>
+
+<p>这里是词法变化的总结：</p>
+
+<ol>
+<li>新的标记</li>
+<li>新的和更新的保留关键字</li>
+<li>新的skip_comments方法来处理Pascla的注释</li>
+<li>重命名integer方法，并对方法本身进行一些更改</li>
+<li>更新get_next_token方法以返回新的标记</li>
+</ol>
+
+<p>让我们深入到上面提到的变化中：</p>
+
+<ol>
+<li><p>为了处理程序头，变量声明，整数和浮点常量以及整数和浮点除法，我们需要添加一些新的标记（其中一些是保留的关键字），我们还需要更新INTEGER标记的含义来表示整数类型，而不是一个整数常量。以下是新的和更新的标记的完整列表：</p>
+
+<ul>
+<li>PROGRAM (保留关键字)</li>
+<li>VAR (保留关键字)</li>
+<li>COLON (:)</li>
+<li>COMMA (,)</li>
+<li>INTEGER (我们将其更改为表示整数类型，而不是像3或5那样的整数常量)</li>
+<li>REAL(对应Pascal REAL类型)</li>
+<li>INTEGER_CONST(例如3或5)</li>
+<li>REAL_CONST(例如3.14等)</li>
+<li>INTEGER_DIV用于整数除法 (DIV保留关键字)</li>
+<li>FLOAT_DIV浮点除法 (正斜杠/)</li>
+</ul></li>
+
+<li><p>以下是保留关键字到标记的完整映射：</p>
+
+<pre><code class="language-python">RESERVED_KEYWORDS = {
+    'PROGRAM': Token('PROGRAM', 'PROGRAM'),
+    'VAR': Token('VAR', 'VAR'),
+    'DIV': Token('INTEGER_DIV', 'DIV'),
+    'INTEGER': Token('INTEGER', 'INTEGER'),
+    'REAL': Token('REAL', 'REAL'),
+    'BEGIN': Token('BEGIN', 'BEGIN'),
+    'END': Token('END', 'END'),
+}
+</code></pre></li>
+
+<li><p>增加skip_comment方法来处理Pascal注释。该方法非常基础，它所做的就是忽略所有字符，直到找到闭合大括号。</p>
+
+<pre><code class="language-python">def skip_comment(self):
+    while self.current_char != '}':
+        self.advance()
+    self.advance()  # the closing curly brace
+</code></pre></li>
+
+<li><p>重命名integer方法为number方法。 它可以同时处理整数常量和浮点常量，如3和3.14：</p>
+
+<pre><code class="language-python">def number(self):
+    &quot;&quot;&quot;Return a (multidigit) integer or float consumed from the input.&quot;&quot;&quot;
+    result = ''
+    while self.current_char is not None and self.current_char.isdigit():
+        result += self.current_char
+        self.advance()
+
+    if self.current_char == '.':
+        result += self.current_char
+        self.advance()
+
+        while (
+            self.current_char is not None and
+            self.current_char.isdigit()
+        ):
+            result += self.current_char
+            self.advance()
+
+        token = Token('REAL_CONST', float(result))
+    else:
+        token = Token('INTEGER_CONST', int(result))
+
+    return token
+</code></pre></li>
+
+<li><p>更新get_next_token方法来返回新的标记：</p>
+
+<pre><code class="language-python">def get_next_token(self):
+    while self.current_char is not None:
+        ...
+        if self.current_char == '{':
+            self.advance()
+            self.skip_comment()
+            continue
+        ...
+        if self.current_char.isdigit():
+            return self.number()
+
+        if self.current_char == ':':
+            self.advance()
+            return Token(COLON, ':')
+
+        if self.current_char == ',':
+            self.advance()
+            return Token(COMMA, ',')
+        ...
+        if self.current_char == '/':
+            self.advance()
+            return Token(FLOAT_DIV, '/')
+        ...
+</code></pre></li>
+</ol>
+
+<p><strong>更新解析器</strong></p>
+
+<p>现在进入到解析器的变化。</p>
+
+<p>以下是更改的总结：</p>
+
+<ol>
+<li>新的AST节点：Program, Block, VarDecl, Type</li>
+<li>对应于新语法规则的新方法：block, declarations, variable_declaration, 和 type_spec.</li>
+<li>更新现有的解析器方法： program, term, 和 factor</li>
+</ol>
+
+<p>让我们一个一个地去看看这些变化：</p>
+
+<ol>
+<li><p>我们将首先从新的AST节点开始。有四个新节点：</p>
+
+<ul>
+<li><p>Program AST节点代表一个程序，将成为我们的根节点</p>
+
+<pre><code class="language-python">class Program(AST):
+    def __init__(self, name, block):
+        self.name = name
+        self.block = block
+</code></pre></li>
+
+<li><p>Block AST节点包含声明和复合语句：</p>
+
+<pre><code class="language-python">class Block(AST):
+    def __init__(self, declarations, compound_statement):
+        self.declarations = declarations
+        self.compound_statement = compound_statement
+</code></pre></li>
+
+<li><p>VarDecl AST节点表示一个变量声明。它包含一个变量节点和一个类型节点：</p>
+
+<pre><code class="language-python">class VarDecl(AST):
+    def __init__(self, var_node, type_node):
+        self.var_node = var_node
+        self.type_node = type_node
+</code></pre></li>
+
+<li><p>Type AST节点表示变量类型（INTEGER或REAL）：</p>
+
+<pre><code class="language-python">class Type(AST):
+    def __init__(self, token):
+        self.token = token
+        self.value = token.value
+</code></pre></li>
+</ul></li>
+
+<li><p>正如您记的那样，语法中的每个规则在我们的递归下降解析器中都有相应的方法。今天，我们添加四个新的方法：block, declarations, variable_declaration, 和 type_spec。这些方法负责解析新的语言结构和构建新的AST节点：</p>
+
+<pre><code class="language-python">def block(self):
+    &quot;&quot;&quot;block : declarations compound_statement&quot;&quot;&quot;
+    declaration_nodes = self.declarations()
+    compound_statement_node = self.compound_statement()
+    node = Block(declaration_nodes, compound_statement_node)
+    return node
+
+def declarations(self):
+    &quot;&quot;&quot;declarations : VAR (variable_declaration SEMI)+
+                    | empty
+    &quot;&quot;&quot;
+    declarations = []
+    if self.current_token.type == VAR:
+        self.eat(VAR)
+        while self.current_token.type == ID:
+            var_decl = self.variable_declaration()
+            declarations.extend(var_decl)
+            self.eat(SEMI)
+
+    return declarations
+
+def variable_declaration(self):
+    &quot;&quot;&quot;variable_declaration : ID (COMMA ID)* COLON type_spec&quot;&quot;&quot;
+    var_nodes = [Var(self.current_token)]  # first ID
+    self.eat(ID)
+
+    while self.current_token.type == COMMA:
+        self.eat(COMMA)
+        var_nodes.append(Var(self.current_token))
+        self.eat(ID)
+
+    self.eat(COLON)
+
+    type_node = self.type_spec()
+    var_declarations = [
+        VarDecl(var_node, type_node)
+        for var_node in var_nodes
+    ]
+    return var_declarations
+
+def type_spec(self):
+    &quot;&quot;&quot;type_spec : INTEGER
+                | REAL
+    &quot;&quot;&quot;
+    token = self.current_token
+    if self.current_token.type == INTEGER:
+        self.eat(INTEGER)
+    else:
+        self.eat(REAL)
+    node = Type(token)
+    return node
+</code></pre></li>
+
+<li><p>我们还需要更新program、 term和factor方法以适应语法变化：</p>
+
+<pre><code class="language-python">def program(self):
+    &quot;&quot;&quot;program : PROGRAM variable SEMI block DOT&quot;&quot;&quot;
+    self.eat(PROGRAM)
+    var_node = self.variable()
+    prog_name = var_node.value
+    self.eat(SEMI)
+    block_node = self.block()
+    program_node = Program(prog_name, block_node)
+    self.eat(DOT)
+    return program_node
+
+def term(self):
+    &quot;&quot;&quot;term : factor ((MUL | INTEGER_DIV | FLOAT_DIV) factor)*&quot;&quot;&quot;
+    node = self.factor()
+
+    while self.current_token.type in (MUL, INTEGER_DIV, FLOAT_DIV):
+        token = self.current_token
+        if token.type == MUL:
+            self.eat(MUL)
+        elif token.type == INTEGER_DIV:
+            self.eat(INTEGER_DIV)
+        elif token.type == FLOAT_DIV:
+            self.eat(FLOAT_DIV)
+
+        node = BinOp(left=node, op=token, right=self.factor())
+
+    return node
+
+def factor(self):
+    &quot;&quot;&quot;factor : PLUS factor
+            | MINUS factor
+            | INTEGER_CONST
+            | REAL_CONST
+            | LPAREN expr RPAREN
+            | variable
+    &quot;&quot;&quot;
+    token = self.current_token
+    if token.type == PLUS:
+        self.eat(PLUS)
+        node = UnaryOp(token, self.factor())
+        return node
+    elif token.type == MINUS:
+        self.eat(MINUS)
+        node = UnaryOp(token, self.factor())
+        return node
+    elif token.type == INTEGER_CONST:
+        self.eat(INTEGER_CONST)
+        return Num(token)
+    elif token.type == REAL_CONST:
+        self.eat(REAL_CONST)
+        return Num(token)
+    elif token.type == LPAREN:
+        self.eat(LPAREN)
+        node = self.expr()
+        self.eat(RPAREN)
+        return node
+    else:
+        node = self.variable()
+        return node
+</code></pre></li>
+</ol>
+
+<p>现在，让我们来看看使用新节点后<strong>抽象语法树</strong>的样子。这是一个小的可工作的Pascal程序：</p>
+
+<pre><code class="language-pascal">PROGRAM Part10AST;
+VAR
+   a, b : INTEGER;
+   y    : REAL;
+
+BEGIN {Part10AST}
+   a := 2;
+   b := 10 * a + 10 * a DIV 4;
+   y := 20 / 7 + 3.14;
+END.  {Part10AST}
+</code></pre>
+
+<p>用<a href="https://github.com/rspivak/lsbasi/blob/master/part10/python/genastdot.py">genastdot.py</a>产生AST并观察它：</p>
+
+<pre><code>$ python genastdot.py part10ast.pas &gt; ast.dot &amp;&amp; dot -Tpng -o ast.png ast.dot
+</code></pre>
+
+<p><img src="/img/lsbasi10/lsbasi_part10_ast.png" alt="图1" /></p>
+
+<p>在图片中可以看到我们增加的新的节点。</p>
+
+<p><strong>更新解释器</strong></p>
+
+<p>我们完成了词法分析器和解析器的更改。剩下的就是为Interpreter类添加新的访问者方法。将会有四种新的方法来访问我们的新节点：</p>
+
+<ul>
+<li>visit_Program</li>
+<li>visit_Block</li>
+<li>visit_VarDecl</li>
+<li>visit_Type</li>
+</ul>
+
+<p>他们非常简单。可以看到Interpreter对VarDecl和Type节点没有任何操作：</p>
+
+<pre><code class="language-python">def visit_Program(self, node):
+    self.visit(node.block)
+
+def visit_Block(self, node):
+    for declaration in node.declarations:
+        self.visit(declaration)
+    self.visit(node.compound_statement)
+
+def visit_VarDecl(self, node):
+    # Do nothing
+    pass
+
+def visit_Type(self, node):
+    # Do nothing
+    pass
+</code></pre>
+
+<p>我们还需要更新visit_BinOp方法来分开正确解释整型和浮点型：</p>
+
+<pre><code class="language-python">def visit_BinOp(self, node):
+    if node.op.type == PLUS:
+        return self.visit(node.left) + self.visit(node.right)
+    elif node.op.type == MINUS:
+        return self.visit(node.left) - self.visit(node.right)
+    elif node.op.type == MUL:
+        return self.visit(node.left) * self.visit(node.right)
+    elif node.op.type == INTEGER_DIV:
+        return self.visit(node.left) // self.visit(node.right)
+    elif node.op.type == FLOAT_DIV:
+        return float(self.visit(node.left)) / float(self.visit(node.right))
+</code></pre>
+
+<p>总结一下我们在本文中扩展Pascal解释器所需做的事情：</p>
+
+<ul>
+<li>将新规则添加到语法并更新一些现有的规则</li>
+<li>向词法分析器添加新的标记和支持方法，更新和修改一些现有的方法</li>
+<li>为新的语言结构在解析器添加新的AST节点</li>
+<li>将与新语法规则对应的新方法添加到我们的递归下降分析器中，并更新一些现有的方法</li>
+<li>向解释器添加新的访问者方法并更新现有的访问者方法</li>
+</ul>
+
+<p>由于我们的变化，我们也摆脱了我在<a href="http://painterliu.com/post/lsbasi-part9/">第9部分</a>介绍的一些hacks行为，即：</p>
+
+<ul>
+<li>解释器现在可以处理PROGRAM头</li>
+<li>现在可以使用VAR关键字来声明变量</li>
+<li>DIV关键字用于整数除法，正斜杠用于浮点除法</li>
+</ul>
+
+<p>作为练习，不看源码重新实现本文中的解释器，并使用<a href="https://github.com/rspivak/lsbasi/blob/master/part10/python/part10.pas">part10.pas</a>作为测试输入文件。</p>
+
+<p>这就是今天的全部内容。在下一篇文章中，我将更详细地讨论符号表管理,敬请期待，再见！</p>
+
+<p>顺便说一下，我正在编写一本叫《Let’s Build A Web Server: First Steps》的书，解释如何从头开始编写基本的Web服务器。你可以在<a href="https://ruslanspivak.com/lsbaws-part1/">这里</a>，<a href="https://ruslanspivak.com/lsbaws-part2/">这里</a>和<a href="https://ruslanspivak.com/lsbaws-part3/">这里</a>查看这本书。</p>
+    </div>
+    <ul class="pager">
+    
+    
+          &nbsp;<li class="next"><a href="http://painterliu.com/post/lsbasi-part9/"> 一起来写个简单的解释器（9）</a></li>
+
+      
+      
+    </ul>
+    <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'liuhuimin',
+  repo: 'liuhuimin.github.io',
+  oauth: {
+    client_id: 'e25c4f4c43c6ef1f403b',
+    client_secret: '503da73a705d49acd7c3f530436c4fd9af2c1e5d',
+  },
+})
+gitment.render('container')
+</script>
+
+ </div>
+
+
+</body></html>
