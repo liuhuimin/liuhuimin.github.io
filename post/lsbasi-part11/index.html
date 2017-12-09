@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Hugo 0.18">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="liuhuimin">
+    <meta name="google-site-verification" content="AVjxJ-BiVo3u3mihbmUQ2LhMWA7YRx9iyiJVkxST93Q" />
+    <title>painterliu</title>
+
+    <link href="http://painterliu.com/index.xml" rel="alternate" type="application/rss+xml" title="painterliu">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="http://painterliu.com/img/@.ico" rel="shortcut icon">
+
+    
+</head>
+<body>
+<div id="wrapper">
+<div id="sidebar-wrapper">
+    <div class="sidebar-title">
+        <h1 id="site-title"><a href="http://painterliu.com/">@</a></h1>
+        <p class="lead blog-description">好好学习, 天天向上</p>
+    </div>
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af">技术</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%9d%82%e7%b1%bb">杂类</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%94%9f%e6%b4%bb">生活</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b">编程</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e8%af%bb%e4%b9%a6">读书</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/tag/">标签</a></li>
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/about/">关于</a></li>
+    </ul>
+</div>
+<div id="content-wrapper">
+    <div class="post">
+      <h1 class="post-title">一起来写个简单的解释器（11）</h1>
+      <div class="post-date">
+      2017年12月09日
+      &nbsp;<a href="http://painterliu.com/categories/"> </a>
+      </div>
+           <p>英文出处：<a href="https://ruslanspivak.com/lsbasi-part11/">Ruslan&rsquo;s Blog
+</a></p>
+
+<ul>
+<li><a href="http://blog.jobbole.com/88152/">《一起来写个简单的解释器（1）》</a></li>
+<li><a href="http://blog.jobbole.com/88347/">《一起来写个简单的解释器（2）》</a></li>
+<li><a href="http://blog.jobbole.com/90055/">《一起来写个简单的解释器（3）》</a></li>
+<li><a href="http://blog.jobbole.com/94326/">《一起来写个简单的解释器（4）》</a></li>
+<li><a href="http://blog.jobbole.com/94686/">《一起来写个简单的解释器（5）》</a></li>
+<li><a href="http://blog.jobbole.com/95145/">《一起来写个简单的解释器（6）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part7/">《一起来写个简单的解释器（7）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part8/">《一起来写个简单的解释器（8）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part9/">《一起来写个简单的解释器（9）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part10/">《一起来写个简单的解释器（10）》</a></li>
+</ul>
+
+<p>我前几天坐在房间里，思考我们已经覆盖了多少解释器相关的知识点，我想我会扼要概述下到目前为止所学到的知识，以及我们将要学习的内容。</p>
+
+<p><img src="/img/lsbasi11/lsbasi_part11_recap.png" alt="图1" /></p>
+
+<p>
+到目前为止，我们已经学习了：</p>
+
+<ul>
+<li>如何将句子分解成标记，这个过程被称为<strong>词法分析（lexical analysis）</strong>，解释器的这部分被称为<strong>词法分析器（lexical analyzer）</strong>, <strong>词法分析器lexer</strong>, <strong>扫描器（scanner）</strong> 或 <strong>标记器（tokenizer）</strong> 。我们已经学会了如何从头开始编写我们自己的词法分析器，而不使用正则表达式或<a href="https://en.wikipedia.org/wiki/Lex_(software)">Lex</a>等工具。</li>
+<li>如何识别标记流中的短语。在标记流中识别短语的过程，或者换言之，在标记流中找到结构的过程称为 <strong>解析（parsing）</strong> 或 <strong>语法分析（syntax analysis）</strong> 。解释器或编译器中执行这部分任务的部分被称为 <strong>解析器（parser）</strong> 或 <strong>语法分析器（syntax analyzer）</strong>。</li>
+<li>如何用 <strong>语法图（syntax diagrams）</strong> 表示编程语言的语法规则，语法图是编程语言语法规则的图形表示。语法图可视化地显示我们的编程语言允许有哪些语句，不允许有哪些语句。</li>
+<li>如何使用另一个广泛使用的符号来指定编程语言的语法。它被称为 <strong>上下文无关语法（context-free grammars ）</strong>，简称 <strong>语法（grammars）</strong> 或 <strong>BNF</strong> （巴克斯 - 诺尔形式）。</li>
+<li>如何将语法映射到代码以及如何编写 <strong>递归下降解析器（recursive-descent parser）</strong> 。</li>
+<li>如何写一个真正的基本的解释器。</li>
+<li>运算符的 <strong>结合性（associativity）</strong> 和 <strong>优先级（precedence）</strong> 如何工作，以及如何使用优先级表构造语法。</li>
+<li>如何构建一个解析句子的 <strong>抽象语法树</strong> （Abstract Syntax Tree，AST），以及如何将Pascal中的整个源程序表示为一个大的<strong>AST</strong>。</li>
+<li>如何遍历一个AST，以及如何作为一个AST节点的访问者实现我们的解释器。</li>
+</ul>
+
+<p>凭借我们所掌握的所有知识和经验，我们建立了一个解释器，可以扫描、解析和构建AST，并通过遍历AST，解释我们第一个完整的Pascal程序。女士们，先生们，我诚恳地想，如果你已经达到这个目标，你应该得到鼓掌，但不要高兴过头。继续前进，即使我们已经涵盖了很多地方，未来道路上还有更令人兴奋的部分。</p>
+
+<p>通过到目前为止所做的一切，我们已经准备好处理如下主题：</p>
+
+<ul>
+<li>嵌套的程序和函数</li>
+<li>过程和函数调用</li>
+<li>语义分析（类型检查，确保变量在使用之前被声明，并简单检查程序是否有意义）</li>
+<li>控制流程元素（如IF语句）</li>
+<li>聚合数据类型（记录）</li>
+<li>更多的内置类型</li>
+<li>源码级调试器</li>
+<li>杂项，所有其他上面没有提到的 :)</li>
+</ul>
+
+<p>但在我们讨论这些话题之前，我们需要建立一个坚实的基础。</p>
+
+<p><img src="/img/lsbasi11/lsbasi_part11_foundation.png" alt="图1" /></p>
+
+<p>这是我们开始深入探索符号，符号表和范围这个超级重要话题的地方。这个话题本身将包括几篇文章。你将看到为什么这很重要。好吧，我们开始打好这个基础吧！</p>
+
+<p>首先，让我们来谈谈符号以及为什么我们需要跟踪它们。什么是 <strong>符号（symbol）</strong> ？出于我们的目的，我们非正式地将符号定义为一些程序实体的标识符，如变量，子例程或内置类型。为使符号有用，它们至少需要具有关于它们识别的程序实体的以下信息：</p>
+
+<ul>
+<li>名称（例如&rsquo;x&rsquo;，&rsquo;y&rsquo;，&rsquo;number&rsquo;）</li>
+<li>类别（它是一个变量，子程序或内置类型？）</li>
+<li>类型（INTEGER，REAL）</li>
+</ul>
+
+<p>今天我们将解决变量符号和内置类型符号，因为我们以前已经使用过变量和类型。顺便说一下，“内置”类型意味着一种没有被你自己定义的类型，并且可以立即使用，比如之前见过和使用过的INTEGER和REAL类型。</p>
+
+<p>让我们来看看下面的Pascal程序，特别是在变量声明部分。您可以在下面的图片中看到该部分有四个符号：两个变量符号（x和y）和两个内置类型符号（INTEGER和REAL）。</p>
+
+<p><img src="/img/lsbasi11/lsbasi_part11_prog_symbols.png" alt="图1" /></p>
+
+<p>我们如何在代码中表示符号？让我们在Python中创建一个基类Symbol类：</p>
+
+<pre><code class="language-python">class Symbol(object):
+    def __init__(self, name, type=None):
+        self.name = name
+        self.type = type
+</code></pre>
+
+<p>正如你所看到的，这个类接受了 <em>name</em> 参数和一个可选的 <em>type</em> 参数（并不是所有的符号都可能有一个与之相关的类型）。那符号的类别呢？我们将在类名称本身中对符号的类别进行编码，这意味着将创建单独的类来表示不同的符号类别。</p>
+
+<p>我们从基本的内置类型开始。目前为止，我们已经看到了两个内置类型,声明变量时的：INTEGER和REAL。我们如何在代码中表示一个内置的类型符号？这里有一个选项：</p>
+
+<pre><code class="language-python">class BuiltinTypeSymbol(Symbol):
+    def __init__(self, name):
+        super(BuiltinTypeSymbol, self).__init__(name)
+
+    def __str__(self):
+        return self.name
+
+    __repr__ = __str__
+</code></pre>
+
+<p>该类继承自 <em>Symbol</em> 类，构造函数只需要该类型的名称。类别在类名中编码，而内置类型符号的基类的 <em>type</em> 参数是 <em>None</em> 。双下划线或dunder（为“Double UNDERscore”）方法 <strong>str</strong>和<strong>repr</strong>是特殊的Python方法，定义它们使得当您打印符号对象时，具有友好的格式化消息。</p>
+
+<p>下载解释器文件并将其保存为<a href="https://github.com/rspivak/lsbasi/blob/master/part11/python/spi.py">spi.py</a>；从保存spi.py文件的相同目录启动python shell，并使用我们刚才定义的类来交互：</p>
+
+<pre><code class="language-python">$ python
+&gt;&gt;&gt; from spi import BuiltinTypeSymbol
+&gt;&gt;&gt; int_type = BuiltinTypeSymbol('INTEGER')
+&gt;&gt;&gt; int_type
+INTEGER
+&gt;&gt;&gt; real_type = BuiltinTypeSymbol('REAL')
+&gt;&gt;&gt; real_type
+REAL
+</code></pre>
+
+<p>我们怎样才能表示一个可变的符号？我们来创建一个 <em>VarSymbol</em> 类：</p>
+
+<pre><code class="language-python">class VarSymbol(Symbol):
+    def __init__(self, name, type):
+        super(VarSymbol, self).__init__(name, type)
+
+    def __str__(self):
+        return '&lt;{name}:{type}&gt;'.format(name=self.name, type=self.type)
+
+    __repr__ = __str__
+</code></pre>
+
+<p>在类中，我们使 <em>name</em> 和 <em>type</em> 为必须参数，类名 <em>VarSymbol</em> 清楚地表明类的一个实例将标识一个变量符号（该类别是可变的）。</p>
+
+<p>回到交互式python shell，看看如何为我们的变量符号手动构建实例，我们已经知道如何构建 <em>BuiltinTypeSymbol</em> 类实例：</p>
+
+<pre><code class="language-python">$ python
+&gt;&gt;&gt; from spi import BuiltinTypeSymbol, VarSymbol
+&gt;&gt;&gt; int_type = BuiltinTypeSymbol('INTEGER')
+&gt;&gt;&gt; real_type = BuiltinTypeSymbol('REAL')
+&gt;&gt;&gt;
+&gt;&gt;&gt; var_x_symbol = VarSymbol('x', int_type)
+&gt;&gt;&gt; var_x_symbol
+&lt;x:INTEGER&gt;
+&gt;&gt;&gt; var_y_symbol = VarSymbol('y', real_type)
+&gt;&gt;&gt; var_y_symbol
+&lt;y:REAL&gt;
+</code></pre>
+
+<p>如您所见，我们首先创建一个内置类型符号的实例，然后将其作为参数传递给 <em>VarSymbol</em> 的构造函数。</p>
+
+<p>以下是定义的符号的层次结构：</p>
+
+<p><img src="/img/lsbasi11/lsbasi_part11_symbol_hierarchy.png" alt="图1" /></p>
+
+<p>一切都还不错，但我们还没有回答这个问题，为什么我们需要首先跟踪这些符号。</p>
+
+<p>这里是一些原因：</p>
+
+<ul>
+<li>为了确保当我们为变量赋值时，类型是正确的（类型检查）</li>
+<li>确保变量在使用前被声明</li>
+</ul>
+
+<p>看看下面不正确的Pascal程序，例如：</p>
+
+<p><img src="/img/lsbasi11/lsbasi_part11_symtracking.png" alt="图1" /></p>
+
+<p>上面的程序有两个问题（你可以自己用<a href="http://www.freepascal.org/">fpc</a>编译它看看）：</p>
+
+<ol>
+<li>在表达式 “x := 2 + y;” 中，我们为被声明为整数的变量 “x” 赋予了一个小数值。 这不会编译，因为类型是不兼容的。</li>
+<li>在赋值语句 “x := a;” 中，我们引用了未声明的变量“a” —— 错误！</li>
+</ol>
+
+<p>为了能够运行时在解释/运算程序的源代码之前识别这种情况，我们需要跟踪程序符号。 在哪里存储跟踪的符号？ 我想你已经猜到了——在符号表中！</p>
+
+<p>什么是 <strong>符号表</strong> ？ 符号表是用于跟踪源代码中的各种符号的抽象数据类型（ <strong>ADT</strong> ）。 今天我们将符号表作为一个单独的类来实现并实现一些有用的方法：</p>
+
+<pre><code class="language-python">class SymbolTable(object):
+    def __init__(self):
+        self._symbols = OrderedDict()
+
+    def __str__(self):
+        s = 'Symbols: {symbols}'.format(
+            symbols=[value for value in self._symbols.values()]
+        )
+        return s
+
+    __repr__ = __str__
+
+    def define(self, symbol):
+        print('Define: %s' % symbol)
+        self._symbols[symbol.name] = symbol
+
+    def lookup(self, name):
+        print('Lookup: %s' % name)
+        symbol = self._symbols.get(name)
+        # 'symbol' is either an instance of the Symbol class or 'None'
+        return symbol
+</code></pre>
+
+<p>我们将用符号表执行两个主要操作：存储符号并按名称查找。因此，我们需要两个辅助方法 - define 和 lookup。</p>
+
+<p>方法define将符号作为参数，并将其作为参数存储内部_symbols有序字典中，使用符号的名称作为键，符号实例作为值。 方法lookup将一个符号名称作为参数，如果找到它，则返回一个符号，否则返回“None”。</p>
+
+<p>让我们为最近使用的，手动创建变量和内置类型符号的Pascal程序，手动填充符号表：</p>
+
+<pre><code class="language-python">PROGRAM Part11;
+VAR
+   x : INTEGER;
+   y : REAL;
+
+BEGIN
+
+END.
+</code></pre>
+
+<p>重新启动一个Python shell并执行一下内容：</p>
+
+<pre><code class="language-python">$ python
+&gt;&gt;&gt; from spi import SymbolTable, BuiltinTypeSymbol, VarSymbol
+&gt;&gt;&gt; symtab = SymbolTable()
+&gt;&gt;&gt; int_type = BuiltinTypeSymbol('INTEGER')
+&gt;&gt;&gt; symtab.define(int_type)
+Define: INTEGER
+&gt;&gt;&gt; symtab
+Symbols: [INTEGER]
+&gt;&gt;&gt;
+&gt;&gt;&gt; var_x_symbol = VarSymbol('x', int_type)
+&gt;&gt;&gt; symtab.define(var_x_symbol)
+Define: &lt;x:INTEGER&gt;
+&gt;&gt;&gt; symtab
+Symbols: [INTEGER, &lt;x:INTEGER&gt;]
+&gt;&gt;&gt;
+&gt;&gt;&gt; real_type = BuiltinTypeSymbol('REAL')
+&gt;&gt;&gt; symtab.define(real_type)
+Define: REAL
+&gt;&gt;&gt; symtab
+Symbols: [INTEGER, &lt;x:INTEGER&gt;, REAL]
+&gt;&gt;&gt;
+&gt;&gt;&gt; var_y_symbol = VarSymbol('y', real_type)
+&gt;&gt;&gt; symtab.define(var_y_symbol)
+Define: &lt;y:REAL&gt;
+&gt;&gt;&gt; symtab
+Symbols: [INTEGER, &lt;x:INTEGER&gt;, REAL, &lt;y:REAL&gt;]
+</code></pre>
+
+<p>如果你看了 <em>_symbols</em>  字典的内容，它将和下面的内容相似：</p>
+
+<p><img src="/img/lsbasi11/lsbasi_part11_symtab.png" alt="图1" /></p>
+
+<p>我们如何自动化构建符号表的过程？ 我们将仅仅编写另一个节点访问者，访问我们的解析器构建的AST！ 这是另一个有像AST这样的中间表示是多么有用的例子。 我们不用扩展解析器来处理符号表，而是分离关注点并编写一个新的节点访问者类。 简洁漂亮。:)</p>
+
+<p>在这之前，让我们扩展我们的 <em>SymbolTable</em> 类，以在符号表实例化时初始化内置类型。 以下是SymbolTable类的完整源代码：</p>
+
+<pre><code class="language-python">class SymbolTable(object):
+    def __init__(self):
+        self._symbols = OrderedDict()
+        self._init_builtins()
+
+    def _init_builtins(self):
+        self.define(BuiltinTypeSymbol('INTEGER'))
+        self.define(BuiltinTypeSymbol('REAL'))
+
+    def __str__(self):
+        s = 'Symbols: {symbols}'.format(
+            symbols=[value for value in self._symbols.values()]
+        )
+        return s
+
+    __repr__ = __str__
+
+    def define(self, symbol):
+        print('Define: %s' % symbol)
+        self._symbols[symbol.name] = symbol
+
+    def lookup(self, name):
+        print('Lookup: %s' % name)
+        symbol = self._symbols.get(name)
+        # 'symbol' is either an instance of the Symbol class or 'None'
+        return symbol
+</code></pre>
+
+<p>现在看看AST节点访问者 <em>SymbolTableBuilder</em> ：</p>
+
+<pre><code class="language-python">class SymbolTableBuilder(NodeVisitor):
+    def __init__(self):
+        self.symtab = SymbolTable()
+
+    def visit_Block(self, node):
+        for declaration in node.declarations:
+            self.visit(declaration)
+        self.visit(node.compound_statement)
+
+    def visit_Program(self, node):
+        self.visit(node.block)
+
+    def visit_BinOp(self, node):
+        self.visit(node.left)
+        self.visit(node.right)
+
+    def visit_Num(self, node):
+        pass
+
+    def visit_UnaryOp(self, node):
+        self.visit(node.expr)
+
+    def visit_Compound(self, node):
+        for child in node.children:
+            self.visit(child)
+
+    def visit_NoOp(self, node):
+        pass
+
+    def visit_VarDecl(self, node):
+        type_name = node.type_node.value
+        type_symbol = self.symtab.lookup(type_name)
+        var_name = node.var_node.value
+        var_symbol = VarSymbol(var_name, type_symbol)
+        self.symtab.define(var_symbol)
+</code></pre>
+
+<p>你已经在Interpreter类中看到过大多数方法，但 <em>visit_VarDecl</em> 方法值得特别关注。再看一遍：</p>
+
+<pre><code class="language-python">def visit_VarDecl(self, node):
+    type_name = node.type_node.value
+    type_symbol = self.symtab.lookup(type_name)
+    var_name = node.var_node.value
+    var_symbol = VarSymbol(var_name, type_symbol)
+    self.symtab.define(var_symbol)
+</code></pre>
+
+<p>此方法负责访问VarDecl AST节点，并将相应的符号存储在符号表中。 首先，该方法在符号表中按名称查找内置的类型符号，然后创建VarSymbol类的一个实例并将其存储（定义）到符号表中。</p>
+
+<p>在实际情况下来试试我们的SymbolTableBuilder AST访问方法：</p>
+
+<pre><code class="language-python">$ python
+&gt;&gt;&gt; from spi import Lexer, Parser, SymbolTableBuilder
+&gt;&gt;&gt; text = &quot;&quot;&quot;
+... PROGRAM Part11;
+... VAR
+...    x : INTEGER;
+...    y : REAL;
+...
+... BEGIN
+...
+... END.
+... &quot;&quot;&quot;
+&gt;&gt;&gt; lexer = Lexer(text)
+&gt;&gt;&gt; parser = Parser(lexer)
+&gt;&gt;&gt; tree = parser.parse()
+&gt;&gt;&gt; symtab_builder = SymbolTableBuilder()
+Define: INTEGER
+Define: REAL
+&gt;&gt;&gt; symtab_builder.visit(tree)
+Lookup: INTEGER
+Define: &lt;x:INTEGER&gt;
+Lookup: REAL
+Define: &lt;y:REAL&gt;
+&gt;&gt;&gt; # Let’s examine the contents of our symbol table
+…
+&gt;&gt;&gt; symtab_builder.symtab
+Symbols: [INTEGER, REAL, &lt;x:INTEGER&gt;, &lt;y:REAL&gt;]
+</code></pre>
+
+<p>在上面的交互式会话中，您可以看到“Define：&hellip;”和“Lookup：&hellip;”消息的序列，这些消息显示了在符号表中定义和查找符号的顺序。 会话中的最后一个命令将打印符号表的内容，您可以看到它与之前手动构建的符号表的内容完全相同。 AST节点访客的神奇之处在于他们几乎为你做了所有的工作。:)</p>
+
+<p>我们已经可以很好地使用我们的符号表和符号表生成器：我们可以使用它们来验证变量是否在赋值和表达式中使用之前被声明。 我们所需要做的就是用另外两种方法扩展访问者： <em>visit_Assign</em> 和 <em>visit_Var</em> ：</p>
+
+<pre><code class="language-python">def visit_Assign(self, node):
+    var_name = node.left.value
+    var_symbol = self.symtab.lookup(var_name)
+    if var_symbol is None:
+        raise NameError(repr(var_name))
+
+    self.visit(node.right)
+
+def visit_Var(self, node):
+    var_name = node.value
+    var_symbol = self.symtab.lookup(var_name)
+
+    if var_symbol is None:
+        raise NameError(repr(var_name))
+</code></pre>
+
+<p>如果在符号表中找不到符号，这些方法将引发NameError异常。</p>
+
+<p>看看下面的程序，我们引用尚未声明的变量“b”：</p>
+
+<pre><code class="language-pascal">PROGRAM NameError1;
+VAR
+   a : INTEGER;
+
+BEGIN
+   a := 2 + b;
+END.
+</code></pre>
+
+<p>让我们看看会发生什么，如果我们为程序构建一个AST并将其传递给符号表生成器来访问：</p>
+
+<pre><code class="language-python">$ python
+&gt;&gt;&gt; from spi import Lexer, Parser, SymbolTableBuilder
+&gt;&gt;&gt; text = &quot;&quot;&quot;
+... PROGRAM NameError1;
+... VAR
+...    a : INTEGER;
+...
+... BEGIN
+...    a := 2 + b;
+... END.
+... &quot;&quot;&quot;
+&gt;&gt;&gt; lexer = Lexer(text)
+&gt;&gt;&gt; parser = Parser(lexer)
+&gt;&gt;&gt; tree = parser.parse()
+&gt;&gt;&gt; symtab_builder = SymbolTableBuilder()
+Define: INTEGER
+Define: REAL
+&gt;&gt;&gt; symtab_builder.visit(tree)
+Lookup: INTEGER
+Define: &lt;a:INTEGER&gt;
+Lookup: a
+Lookup: b
+Traceback (most recent call last):
+  ...
+  File &quot;spi.py&quot;, line 674, in visit_Var
+    raise NameError(repr(var_name))
+NameError: 'b'
+</code></pre>
+
+<p>正是我们期待的！</p>
+
+<p>这里还有一个错误的例子，我们试图给一个尚未定义的变量赋值，在这个例子中是变量“a”：</p>
+
+<pre><code class="language-pascal">PROGRAM NameError2;
+VAR
+   b : INTEGER;
+
+BEGIN
+   b := 1;
+   a := b + 2;
+END.
+</code></pre>
+
+<p>同时，在Python shell中：</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; from spi import Lexer, Parser, SymbolTableBuilder
+&gt;&gt;&gt; text = &quot;&quot;&quot;
+... PROGRAM NameError2;
+... VAR
+...    b : INTEGER;
+...
+... BEGIN
+...    b := 1;
+...    a := b + 2;
+... END.
+... &quot;&quot;&quot;
+&gt;&gt;&gt; lexer = Lexer(text)
+&gt;&gt;&gt; parser = Parser(lexer)
+&gt;&gt;&gt; tree = parser.parse()
+&gt;&gt;&gt; symtab_builder = SymbolTableBuilder()
+Define: INTEGER
+Define: REAL
+&gt;&gt;&gt; symtab_builder.visit(tree)
+Lookup: INTEGER
+Define: &lt;b:INTEGER&gt;
+Lookup: b
+Lookup: a
+Traceback (most recent call last):
+  ...
+  File &quot;spi.py&quot;, line 665, in visit_Assign
+    raise NameError(repr(var_name))
+NameError: 'a'
+</code></pre>
+
+<p>太好了，我们的新访问者方法捕捉到了这个问题！</p>
+
+<p>我想强调的一点是，我们的SymbolTableBuilder AST访问者所做的所有检查都是在运行时之前完成的，所以在我们的解释器实际执行源程序之前。如果要解释下面的程序，要把这个观点带回家：</p>
+
+<pre><code class="language-pascal">PROGRAM Part11;
+VAR
+   x : INTEGER;
+BEGIN
+   x := 2;
+END.
+</code></pre>
+
+<p>程序退出前，符号表和运行时GLOBAL_MEMORY的内容如下所示：</p>
+
+<p><img src="/img/lsbasi11/lsbasi_part11_symtab_vs_globmem.png" alt="图1" /></p>
+
+<p>你看到差别了吗？ 你能看到符号表不保存变量“x”的值2吗？ 这完全是解释者的工作。</p>
+
+<p>记住<a href="http://painterliu.com/post/lsbasi-part9/">第9篇</a>中将符号表用作全局内存的图片了吗？</p>
+
+<p><img src="/img/lsbasi11/lsbasi_part9_ast_st02.png" alt="图1" /></p>
+
+<p>没了！ 我们有效地摆脱了符号表作为全局内存的双重责任。</p>
+
+<p>让我们把它放在一起，用下面的程序来测试我们的新解释器：</p>
+
+<pre><code class="language-pascal">PROGRAM Part11;
+VAR
+   number : INTEGER;
+   a, b   : INTEGER;
+   y      : REAL;
+
+BEGIN {Part11}
+   number := 2;
+   a := number ;
+   b := 10 * a + 10 * number DIV 4;
+   y := 20 / 7 + 3.14
+END.  {Part11}
+</code></pre>
+
+<p>以part11.pas保存程序并启动解释器：</p>
+
+<pre><code class="language-python">$ python spi.py part11.pas
+Define: INTEGER
+Define: REAL
+Lookup: INTEGER
+Define: &lt;number:INTEGER&gt;
+Lookup: INTEGER
+Define: &lt;a:INTEGER&gt;
+Lookup: INTEGER
+Define: &lt;b:INTEGER&gt;
+Lookup: REAL
+Define: &lt;y:REAL&gt;
+Lookup: number
+Lookup: a
+Lookup: number
+Lookup: b
+Lookup: a
+Lookup: number
+Lookup: y
+
+Symbol Table contents:
+Symbols: [INTEGER, REAL, &lt;number:INTEGER&gt;, &lt;a:INTEGER&gt;, &lt;b:INTEGER&gt;, &lt;y:REAL&gt;]
+
+Run-time GLOBAL_MEMORY contents:
+a = 2
+b = 25
+number = 2
+y = 5.99714285714
+</code></pre>
+
+<p>请你注意到 <em>Interpreter</em> 类与构建符号表无关的事实，它依赖于 <em>SymbolTableBuilder</em> 以确保源码中的变量在被解释器使用前被正确的声明。</p>
+
+<p><strong>检查你的理解</strong></p>
+
+<ul>
+<li>什么是符号？</li>
+<li>为什么我们需要跟踪符号？</li>
+<li>什么是符号表？</li>
+<li>定义符号和解析/查找符号有什么区别？</li>
+
+<li><p>给定下面这个小的Pascal程序，符号表的内容是什么，全局内存呢？（GLOBAL_MEMORY字典是解释器的一部分）</p>
+
+<pre><code class="language-pascal">PROGRAM Part11;
+VAR
+x, y : INTEGER;
+BEGIN
+x := 2;
+y := 3 + x;
+END.
+</code></pre></li>
+</ul>
+
+<p>这就是今天。在下一篇文章中，我将讨论作用域，我们将动手解决解析嵌套过程的问题。敬请期待，再见！请记住，无论如何，“继续前进！”</p>
+
+<p><img src="/img/lsbasi11/lsbasi_part11_keep_going.png" alt="图1" /></p>
+
+<p>P.S：我对符号和符号表管理主题的解释深受Terence Parr的<a href="https://www.amazon.com/gp/product/193435645X/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=russblo0b-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=193435645X&amp;linkId=d71dccf645f064b1a15ff215857c518b">《Language Implementation Patterns》</a>一书影响。这是一本了不起的书。我认为它是我所见过的对符号表最清晰的解释，它也涵盖了类范围，这是我不打算在本系列中讨论的一个话题，因为我们不会讨论面向对象的Pascal。</p>
+
+<p>P.P.S .:如果你等不及想开始深入了解编译器，我强烈推荐Jack Crenshaw的免费经典 <a href="https://compilers.iecc.com/crenshaw/">“Let’s Build a Compiler.”</a>。</p>
+
+<p>顺便说一下，我正在编写一本叫《Let’s Build A Web Server: First Steps》的书，解释如何从头开始编写基本的Web服务器。你可以在<a href="https://ruslanspivak.com/lsbaws-part1/">这里</a>，<a href="https://ruslanspivak.com/lsbaws-part2/">这里</a>和<a href="https://ruslanspivak.com/lsbaws-part3/">这里</a>查看这本书。</p>
+    </div>
+    <ul class="pager">
+    
+    
+          &nbsp;<li class="next"><a href="http://painterliu.com/post/lsbasi-part10/"> 一起来写个简单的解释器（10）</a></li>
+
+      
+      
+    </ul>
+    <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'liuhuimin',
+  repo: 'liuhuimin.github.io',
+  oauth: {
+    client_id: 'e25c4f4c43c6ef1f403b',
+    client_secret: '503da73a705d49acd7c3f530436c4fd9af2c1e5d',
+  },
+})
+gitment.render('container')
+</script>
+
+ </div>
+
+
+</body></html>
