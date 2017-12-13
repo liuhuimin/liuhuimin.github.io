@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Hugo 0.18">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="liuhuimin">
+    <meta name="google-site-verification" content="AVjxJ-BiVo3u3mihbmUQ2LhMWA7YRx9iyiJVkxST93Q" />
+    <title>painterliu</title>
+
+    <link href="http://painterliu.com/index.xml" rel="alternate" type="application/rss+xml" title="painterliu">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="http://painterliu.com/img/@.ico" rel="shortcut icon">
+
+    
+</head>
+<body>
+<div id="wrapper">
+<div id="sidebar-wrapper">
+    <div class="sidebar-title">
+        <h1 id="site-title"><a href="http://painterliu.com/">@</a></h1>
+        <p class="lead blog-description">好好学习, 天天向上</p>
+    </div>
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af">技术</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%9d%82%e7%b1%bb">杂类</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%94%9f%e6%b4%bb">生活</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b">编程</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e8%af%bb%e4%b9%a6">读书</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/tag/">标签</a></li>
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/about/">关于</a></li>
+    </ul>
+</div>
+<div id="content-wrapper">
+    <div class="post">
+      <h1 class="post-title">一起来写个简单的解释器（12）</h1>
+      <div class="post-date">
+      2017年12月13日
+      &nbsp;<a href="http://painterliu.com/categories/"> </a>
+      </div>
+           <p>英文出处：<a href="https://ruslanspivak.com/lsbasi-part12/">Ruslan&rsquo;s Blog
+</a></p>
+
+<ul>
+<li><a href="http://blog.jobbole.com/88152/">《一起来写个简单的解释器（1）》</a></li>
+<li><a href="http://blog.jobbole.com/88347/">《一起来写个简单的解释器（2）》</a></li>
+<li><a href="http://blog.jobbole.com/90055/">《一起来写个简单的解释器（3）》</a></li>
+<li><a href="http://blog.jobbole.com/94326/">《一起来写个简单的解释器（4）》</a></li>
+<li><a href="http://blog.jobbole.com/94686/">《一起来写个简单的解释器（5）》</a></li>
+<li><a href="http://blog.jobbole.com/95145/">《一起来写个简单的解释器（6）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part7/">《一起来写个简单的解释器（7）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part8/">《一起来写个简单的解释器（8）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part9/">《一起来写个简单的解释器（9）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part10/">《一起来写个简单的解释器（10）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part11/">《一起来写个简单的解释器（11）》</a></li>
+</ul>
+
+<p>“不怕慢， 只怕停。“
+——中国谚语。</p>
+
+<p>你好，欢迎回来！</p>
+
+<p>今天，我们将要用更多的婴儿步伐，来学习如何解析Pascal过程声明。</p>
+
+<p><img src="/img/lsbasi12/lsbasi_part12_babysteps.png" alt="图1" /></p>
+
+<p>
+什么是<strong>过程声明</strong>？ 过程声明是定义一个标识符（过程名称）并将其与一个Pascal代码块相关联的语言结构，</p>
+
+<p>在我们介绍之前，先谈谈一下Pascal过程及其声明：</p>
+
+<ul>
+<li>Pascal过程没有返回语句。 当到达相应区块的结束位置时，它们退出。</li>
+<li>Pascal过程可以嵌套在一起。</li>
+<li>为了简单起见，本文中的过程声明不会有任何形式参数。 但别担心，我们将在后面的章节中介绍。</li>
+</ul>
+
+<p>这是我们今天的测试程序：</p>
+
+<pre><code class="language-pascal">PROGRAM Part12;
+VAR
+   a : INTEGER;
+
+PROCEDURE P1;
+VAR
+   a : REAL;
+   k : INTEGER;
+
+   PROCEDURE P2;
+   VAR
+      a, z : INTEGER;
+   BEGIN {P2}
+      z := 777;
+   END;  {P2}
+
+BEGIN {P1}
+
+END;  {P1}
+
+BEGIN {Part12}
+   a := 10;
+END.  {Part12}
+</code></pre>
+
+<p>如上所见，我们已经定义了两个过程（P1和P2），P2被嵌套在P1中。 在上面的代码中，我使用了一个过程名的注释来清楚地指出每个过程的主体在哪里开始以及在哪里结束。</p>
+
+<p>我们今天的目标非常明确：学习如何解析这样的代码。</p>
+
+<p>首先，我们需要对语法做一些修改来添加过程声明。 搞起！</p>
+
+<p>这是更新的声明语法规则：</p>
+
+<p><img src="/img/lsbasi12/lsbasi_part12_grammar.png" alt="图1" /></p>
+
+<p>过程声明子规则包含保留关键字PROCEDURE，后跟一个标识符（过程名称），后跟一个分号，接着跟一个以分号结尾的 <em>block</em> 规则。哇！ 前面的句子又是一个我认为一图胜千言的例子  :)</p>
+
+<p>以下是声明规则的更新语法图：</p>
+
+<p><img src="/img/lsbasi12/lsbasi_part12_syntaxdiagram.png" alt="图1" /></p>
+
+<p>从上面的语法和图表你可以看到，你可以在同一个层次上想有多少过程声明就有多少。 例如，在下面的代码片段中，我们定义了两个过程声明P1和P1A，它们在同一个层次上：</p>
+
+<pre><code class="language-pascal">PROGRAM Test;
+VAR
+   a : INTEGER;
+
+PROCEDURE P1;
+BEGIN {P1}
+
+END;  {P1}
+
+PROCEDURE P1A;
+BEGIN {P1A}
+
+END;  {P1A}
+
+BEGIN {Test}
+   a := 10;
+END.  {Test}
+</code></pre>
+
+<p>上面的图表和语法规则还表明，过程声明可以是嵌套的，因为过程声明子规则引用了 <em>block</em> 规则， <em>block</em> 规则又包含了的声明（declarations）规则，声明规则又包含过程声明子规则。 提醒一下，下面是<a href="http://painterliu.com/post/lsbasi-part10/">第10部分</a> <em>block</em> 规则的语法图和语法：</p>
+
+<p><img src="/img/lsbasi12/lsbasi_part12_block_rule_from_part10.png" alt="图1" /></p>
+
+<p>好的，现在让我们把重点放在需要更新以支持过程声明的解释器组件上：</p>
+
+<p><strong>更新词法分析器</strong></p>
+
+<p>我们所需要做的就是添加一个名为PROCEDURE的新标记：</p>
+
+<pre><code class="language-pascal">PROCEDURE = 'PROCEDURE'
+</code></pre>
+
+<p>并将“PROCEDURE”添加到保留关键字。 以下是保留关键字到标记的完整映射：</p>
+
+<pre><code class="language-python">RESERVED_KEYWORDS = {
+    'PROGRAM': Token('PROGRAM', 'PROGRAM'),
+    'VAR': Token('VAR', 'VAR'),
+    'DIV': Token('INTEGER_DIV', 'DIV'),
+    'INTEGER': Token('INTEGER', 'INTEGER'),
+    'REAL': Token('REAL', 'REAL'),
+    'BEGIN': Token('BEGIN', 'BEGIN'),
+    'END': Token('END', 'END'),
+    'PROCEDURE': Token('PROCEDURE', 'PROCEDURE'),
+}
+</code></pre>
+
+<p><strong>更新解析器</strong></p>
+
+<p>以下是解析器更改的总结：</p>
+
+<ol>
+<li>新的ProcedureDecl AST节点</li>
+<li>更新解析器的声明方法以支持过程声明</li>
+</ol>
+
+<p>来看看这些变化。</p>
+
+<ol>
+<li><p>ProcedureDecl AST节点表示一个过程声明。 类构造函数将过程名称和过程引用代码块的AST节点作为参数。</p>
+
+<pre><code class="language-python">class ProcedureDecl(AST):
+    def __init__(self, proc_name, block_node):
+        self.proc_name = proc_name
+        self.block_node = block_node
+</code></pre></li>
+
+<li><p>这里是Parser类的更新的 <em>declarations</em> 方法</p>
+
+<pre><code class="language-python">def declarations(self):
+    &quot;&quot;&quot;declarations : VAR (variable_declaration SEMI)+
+                    | (PROCEDURE ID SEMI block SEMI)*
+                    | empty
+    &quot;&quot;&quot;
+    declarations = []
+
+    if self.current_token.type == VAR:
+        self.eat(VAR)
+        while self.current_token.type == ID:
+            var_decl = self.variable_declaration()
+            declarations.extend(var_decl)
+            self.eat(SEMI)
+
+    while self.current_token.type == PROCEDURE:
+        self.eat(PROCEDURE)
+        proc_name = self.current_token.value
+        self.eat(ID)
+        self.eat(SEMI)
+        block_node = self.block()
+        proc_decl = ProcedureDecl(proc_name, block_node)
+        declarations.append(proc_decl)
+        self.eat(SEMI)
+
+    return declarations
+</code></pre>
+
+<p>希望上面的代码是不言自明的。 它遵循本文前面的过程声明的语法/语法图。</p></li>
+</ol>
+
+<p><strong>更新符号表构建器</strong></p>
+
+<p>因为我们还没有准备好处理嵌套的过程范围，所以我们只需在SymbolTreeBuilder AST访问者类中添加一个空的visit_ProcedureDecl方法即可。 我们将在下一篇文章中填写。</p>
+
+<pre><code class="language-python">def visit_ProcedureDecl(self, node):
+    pass
+</code></pre>
+
+<p><strong>更新解释器</strong></p>
+
+<p>我们还需要在Interpreter类中添加一个空的visit_ProcedureDecl方法，这将导致我们的解释器默默地忽略我们所有的过程声明。</p>
+
+<p>一切还好！</p>
+
+<p>现在我们已经做了所有必要的修改，让我们看看有新的ProcedureDecl节点的抽象语法树是什么样的。</p>
+
+<p>这里是我们的Pascal程序（可以直接从<a href="https://github.com/rspivak/lsbasi/blob/master/part12/python/part12.pas">GitHub</a>下载）：</p>
+
+<pre><code class="language-pascal">PROGRAM Part12;
+VAR
+   a : INTEGER;
+
+PROCEDURE P1;
+VAR
+   a : REAL;
+   k : INTEGER;
+
+   PROCEDURE P2;
+   VAR
+      a, z : INTEGER;
+   BEGIN {P2}
+      z := 777;
+   END;  {P2}
+
+BEGIN {P1}
+
+END;  {P1}
+
+BEGIN {Part12}
+   a := 10;
+END.  {Part12}
+</code></pre>
+
+<p>让我们用<a href="https://github.com/rspivak/lsbasi/blob/master/part12/python/genastdot.py">genastdot.py</a>程序看看产生的AST：</p>
+
+<pre><code>$ python genastdot.py part12.pas &gt; ast.dot &amp;&amp; dot -Tpng -o ast.png ast.dot
+</code></pre>
+
+<p><img src="/img/lsbasi12/lsbasi_part12_procdecl_ast.png" alt="图1" /></p>
+
+<p>在上图中可以看到两个ProcedureDecl节点：ProcDecl：P1和ProcDecl：P2，分别对应于程序P1和P2。 任务完成。:)</p>
+
+<p>作为今天的最后一项，让我们快速检查一下，当Pascal程序中有过程声明的时候，我们更新的解释器能否像以前一样工作。 如果还没有这样做，下载<a href="https://github.com/rspivak/lsbasi/blob/master/part12/python/spi.py">解释器</a>和<a href="https://github.com/rspivak/lsbasi/blob/master/part12/python/part12.pas">测试程序</a>，并在命令行上运行它。 你的输出应该看起来类似于这个：</p>
+
+<pre><code class="language-shell">$ python spi.py part12.pas
+Define: INTEGER
+Define: REAL
+Lookup: INTEGER
+Define: &lt;a:INTEGER&gt;
+Lookup: a
+
+Symbol Table contents:
+Symbols: [INTEGER, REAL, &lt;a:INTEGER&gt;]
+
+Run-time GLOBAL_MEMORY contents:
+a = 10
+</code></pre>
+
+<p>好，凭借我们所掌握的所有知识和经验，我们已经准备好处理我们需要了解的嵌套范围的主题，以便能够分析嵌套过程并准备处理过程和函数调用，而这正是我们下一篇文章要做的：深入嵌套的范围。 所以下次别忘了带上你的游泳装备！ 敬请期待，再见！</p>
+    </div>
+    <ul class="pager">
+    
+    
+          &nbsp;<li class="next"><a href="http://painterliu.com/post/lsbasi-part11/"> 一起来写个简单的解释器（11）</a></li>
+
+      
+      
+    </ul>
+    <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'liuhuimin',
+  repo: 'liuhuimin.github.io',
+  oauth: {
+    client_id: 'e25c4f4c43c6ef1f403b',
+    client_secret: '503da73a705d49acd7c3f530436c4fd9af2c1e5d',
+  },
+})
+gitment.render('container')
+</script>
+
+ </div>
+
+
+</body></html>
