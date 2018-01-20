@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="Hugo 0.18">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="liuhuimin">
+    <meta name="google-site-verification" content="AVjxJ-BiVo3u3mihbmUQ2LhMWA7YRx9iyiJVkxST93Q" />
+    <title>painterliu</title>
+
+    <link href="http://painterliu.com/index.xml" rel="alternate" type="application/rss+xml" title="painterliu">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="http://painterliu.com/img/@.ico" rel="shortcut icon">
+
+    
+</head>
+<body>
+<div id="wrapper">
+<div id="sidebar-wrapper">
+    <div class="sidebar-title">
+        <h1 id="site-title"><a href="http://painterliu.com/">@</a></h1>
+        <p class="lead blog-description">好好学习, 天天向上</p>
+    </div>
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%8a%80%e6%9c%af">技术</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e6%9d%82%e7%b1%bb">杂类</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%94%9f%e6%b4%bb">生活</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e7%bc%96%e7%a8%8b">编程</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/categories/%e8%af%bb%e4%b9%a6">读书</a></li>
+
+        
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/tag/">标签</a></li>
+        <li class="sidebar-nav-item"><a href="http://painterliu.com/about/">关于</a></li>
+    </ul>
+</div>
+<div id="content-wrapper">
+    <div class="post">
+      <h1 class="post-title">一起来写个简单的解释器（13）语义分析</h1>
+      <div class="post-date">
+      2018年01月20日
+      &nbsp;<a href="http://painterliu.com/categories/"> </a>
+      </div>
+           <p>英文出处：<a href="https://ruslanspivak.com/lsbasi-part13/">Ruslan&rsquo;s Blog
+</a></p>
+
+<ul>
+<li><a href="http://blog.jobbole.com/88152/">《一起来写个简单的解释器（1）》</a></li>
+<li><a href="http://blog.jobbole.com/88347/">《一起来写个简单的解释器（2）》</a></li>
+<li><a href="http://blog.jobbole.com/90055/">《一起来写个简单的解释器（3）》</a></li>
+<li><a href="http://blog.jobbole.com/94326/">《一起来写个简单的解释器（4）》</a></li>
+<li><a href="http://blog.jobbole.com/94686/">《一起来写个简单的解释器（5）》</a></li>
+<li><a href="http://blog.jobbole.com/95145/">《一起来写个简单的解释器（6）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part7/">《一起来写个简单的解释器（7）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part8/">《一起来写个简单的解释器（8）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part9/">《一起来写个简单的解释器（9）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part10/">《一起来写个简单的解释器（10）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part11/">《一起来写个简单的解释器（11）》</a></li>
+<li><a href="http://painterliu.com/post/lsbasi-part12/">《一起来写个简单的解释器（12）》</a></li>
+</ul>
+
+<p><code>任何值得做的事都应该全力以赴。</code></p>
+
+<p>
+在深入研究作用域的主题之前，我想先进行一个“快速”的绕路，详细谈谈符号、符号表和语义分析。本着“任何值得做的事都值得全力以赴”的精神，我希望你能在应对嵌套的作用域之前发现有用的材料来建立更坚实的基础。今天我们将继续增加对如何编写解释器和编译器的知识。您将会看到，相比<a href="http://painterliu.com/post/lsbasi-part11/">第11部分</a>中讨论的符号和符号表。本文中介绍的一些内容具有更好的扩展性。</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img01.png" alt="图1" /></p>
+
+<p>在本系列的最后四篇文章中，我们将讨论剩余的部分。您可以在下面图中看到我们将要讨论的主要议题和时间表：</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img02.png" alt="图1" /></p>
+
+<p>好的，让我们开始吧！</p>
+
+<h4 id="语义分析介绍">语义分析介绍</h4>
+
+<p>虽然我们的Pascal程序在语法上是正确的，并且解析器可以成功地构建一个抽象语法树，但程序仍然可能包含一些非常严重的错误。为了捕获这些错误，我们需要使用抽象语法树和符号表中的信息。</p>
+
+<p>为什么我们不能在解析过程中检查这些错误，也就是在语法分析过程中？为什么我们必须建立一个AST和一个叫符号表的东西来做到这一点？</p>
+
+<p>简而言之，为了方便和分离关注点。通过将这些额外的检查移动到一个单独的阶段，我们可以一次专注于一项任务，而不会使解析器和解释器做更多额外的工作。</p>
+
+<p>当解析器完成AST的构建时，我们知道程序在语法上是正确的;也就是说，根据我们的语法规则，它的语法是正确的，现在我们可以单独重点检查那些错误，这些错误需要额外的上下文和信息，而解析器在构建AST时没有这些内容。为了更具体一些，让我们来看看下面的Pascal赋值语句：</p>
+
+<pre><code class="language-pascal">x := x + y;
+</code></pre>
+
+<p>解析器将会正确处理它，因为在语法上，声明是正确的（根据我们之前定义的赋值语句和表达式的语法规则）。但是这还不是故事的结尾，因为Pascal有一个要求，即变量在使用之前必须用相应的类型声明。解析器如何知道x和y是否已被声明？</p>
+
+<p>嗯，它没声明，这就是为什么我们需要一个单独的语义分析阶段来回答这个变量是否在使用之前已经被声明的问题。</p>
+
+<p>什么是 <strong>语义分析</strong> ？简单的说，，它只是帮助我们确定一个程序根据语言定义是否有意义的过程。</p>
+
+<p>对于一个程序有意义意味着什么呢？这在很大程度上取决于语言的定义和语言要求。</p>
+
+<p>Pascal语言，特别是Free Pascal的编译器，有特定的要求，如果程序中没有遵循，会导致fpc编译器的错误，说明程序没有“有意义（make sense）”，即使语法可能看起来没问题它也是不正确的。以下是一些要求：</p>
+
+<ul>
+<li>变量必须在使用前声明</li>
+<li>在算术表达式中使用时，变量必须具有匹配的类型（这是语义分析的一个重要组成部分，称为类型检查，我们将分别进行介绍）</li>
+<li>不应该有重复的声明（例如，Pascal禁止使用与过程的形式参数同名的局部变量）</li>
+<li>过程调用中的名称引用必须引用实际声明的过程（如果在过程调用foo()中,名称foo引用基本类型INTEGER的变量foo，则在Pascal中没有意义）</li>
+<li>过程调用必须具有正确的参数个数，参数的类型必须与过程声明中的形式参数的类型相匹配</li>
+</ul>
+
+<p>当我们有足够的关于程序的上下文时，执行上述要求就会容易得多，也就是，AST形式的中间表示以及带有不同程序实体（如变量，过程和函数）信息的符号表。</p>
+
+<p>在我们执行语义分析阶段后，我们的Pascal解释器的结构将如下所示：</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img03.png" alt="图1" /></p>
+
+<p>从上图可以看出，我们的词法分析器将源代码作为输入，将其转换为解析器将消费和使用的以验证程序在语法上是否正确的令牌，然后将生成一个抽象语法树，语义分析阶段将用它来强制执行不同的Pascal语言要求。在语义分析阶段，语义分析器也将建立和使用符号表。语义分析后，我们的翻译将采取AST，通过遍历AST来计算程序，并产生程序输出。</p>
+
+<p>让我们进入语义分析阶段的细节</p>
+
+<h4 id="符号和符号表">符号和符号表</h4>
+
+<p>在下一节中，我们将讨论如何实现一些语义检查以及如何构建符号表：换句话说，我们将讨论如何对我们的Pascal程序进行语义分析。请记住，即使语义分析听起来很花哨和深刻，它只是在解析程序和创建AST后用来检查源程序一些额外错误的一个过程，语法分析由于缺乏额外的信息（上下文）不能捕获这种错误。</p>
+
+<p>今天我们将重点关注以下两个静态语义检查：</p>
+
+<ol>
+<li>这些变量在使用之前被声明</li>
+
+<li><p>没有重复的变量声明</p>
+
+<p>ASIDE：静态语义检查是我们在解释（运行）程序之前所做的检查，即在对Interpreter类的一个实例调用interpret 方法之前。以前提到的所有Pascal要求都可以使用静态语义检查来执行，方法是使用AST并使用符号表中的信息。</p>
+
+<p>动态语义检查将需要在程序的解释（运行）期间执行检查。例如，检查没有被零除，数组索引不超出边界，这些是动态语义检查。我们今天的重点是静态语义检查。</p></li>
+</ol>
+
+<p>让我们从第一次检查开始，以确保在我们的Pascal程序中变量在使用之前被声明。看看下面的语法正确，但语义不正确的程序。</p>
+
+<pre><code class="language-pascal">program Main;
+   var x : integer;
+
+begin
+    x := y;
+end.
+</code></pre>
+
+<p>上面的程序有一个变量声明和两个变量引用。您可以在下面的图片中看到：</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img04.png" alt="图1" /></p>
+
+<p>让我们来验证程序在语法上是否正确，解析器在解析时不会抛出错误。就像他们说的那样，相信但是确认。 :) 下载<a href="https://github.com/rspivak/lsbasi/blob/master/part13/spi.py">spi.py</a>，打开一个Python shell，并亲自查看：</p>
+
+<pre><code class="language-shell">&gt;&gt;&gt; from spi import Lexer, Parser
+&gt;&gt;&gt; text = &quot;&quot;&quot;
+program Main;
+   var x : integer;
+
+begin
+    x := y;
+end.
+&quot;&quot;&quot;
+&gt;&gt;&gt;
+&gt;&gt;&gt; lexer = Lexer(text)
+&gt;&gt;&gt; parser = Parser(lexer)
+&gt;&gt;&gt; tree = parser.parse()
+&gt;&gt;&gt;
+</code></pre>
+
+<p>看到了没？没有错误。我们甚至可以使用<a href="https://github.com/rspivak/lsbasi/blob/master/part13/genastdot.py">genastdot.py</a>为该程序生成一个AST图。首先，将源代码保存到一个文件，命名为semanticerror01.pas，并运行以下命令：</p>
+
+<pre><code>$ python genastdot.py semanticerror01.pas &gt; semanticerror01.dot
+$ dot -Tpng -o ast.png semanticerror01.dot
+</code></pre>
+
+<p>这里是AST图：</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img05.png" alt="图1" /></p>
+
+<p>所以，这是一个语法（句法）正确的程序，但程序没有意义，因为我们甚至不知道变量y有什么类型（这就是为什么我们需要声明），将y赋给X是否有意义。如果y是一个字符串，那么把一个字符串赋给一个整数是否有意义呢？没有，至少在Pascal中没有。</p>
+
+<p>所以上面的程序有一个语义错误，因为变量y没有被声明，我们不知道它的类型。为了能够捕捉到这样的错误，我们需要学习如何检查变量是否在使用之前被声明。所以让我们学习如何做到这一点。</p>
+
+<p>让我们仔细看看下面的语法和语义正确的示例程序：</p>
+
+<pre><code>program Main;
+   var x, y : integer;
+
+begin
+    x := x + y;
+end.
+</code></pre>
+
+<ul>
+<li>它有两个变量声明：x和y</li>
+<li>它还在赋值语句<code>x := x + y;</code>中有三个变量引用（x，另一个x和y）</li>
+</ul>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img06.png" alt="图1" /></p>
+
+<p>程序在语法上是正确的，所有的变量都被声明了，我们可以看到两个整数相加并将结果赋值给一个整数是非常有意义的。这很好，但是我们如何以编程方式检查赋值语句 x := x +y; 中的变量（变量引用）x和y已被声明？</p>
+
+<p>我们可以通过执行以下算法做到这一点：</p>
+
+<ol>
+<li>遍历所有变量声明</li>
+<li>对于遇到的每个变量声明，收集有关声明变量的所有必要信息</li>
+<li>将收集到的信息存储在某个地方，以便将来使用该变量的名称作为关键字引用该变量</li>
+<li>当你看到一个变量引用时，比如在赋值语句x := x + y中，通过变量的名字来搜索存储，看看存储中是否有关于变量的任何信息。如果有，变量已被声明。如果没有，变量还没有被声明，这是一个语义错误。</li>
+</ol>
+
+<p>这是我们算法的流程图：</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img07.png" alt="图1" /></p>
+
+<p>在我们实现算法之前，需要回答几个问题：</p>
+
+<ul>
+<li>A.我们需要收集哪些关于变量的信息？</li>
+<li>B.我们在哪里以及如何存储收集到的信息？</li>
+<li>C.我们如何实现“遍历所有变量声明”步骤？</li>
+</ul>
+
+<p>我们的进攻计划如下：</p>
+
+<ol>
+<li>找出上面问题A，B和C的答案。</li>
+<li>使用A，B和C的答案来实现我们的第一个静态语义检查算法中的步骤：检查变量在使用之前是否被声明。</li>
+</ol>
+
+<p>好的，让我们开始吧。</p>
+
+<p><strong>让我们找到问题的答案：“我们需要收集哪些关于变量的信息？”</strong></p>
+
+<p>那么，我们需要收集哪些有关变量的必要信息？这里是重要的部分：</p>
+
+<ul>
+<li>名字（我们需要知道一个被声明的变量的名字，因为后面我们将通过它们的名字来查找变量）</li>
+<li>类别（我们需要知道它是一个什么样的标识符：变量，类型，过程等等）</li>
+<li>类型（我们需要这些信息用于类型检查）</li>
+</ul>
+
+<p>符号将保存关于我们变量的信息（名称，类别和类型）。什么是符号？符号是一些程序实体的标识符，如变量，子程序或内置类型。</p>
+
+<p>在下面的示例程序中，有两个变量声明，我们将使用它们来创建两个变量符号：x和y。</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img08.png" alt="图1" /></p>
+
+<p>在代码中，我们将用一个名为 <em>Symbol</em> 的类表示符号，它具有字段 <em>name</em> 和 <em>type</em> ：</p>
+
+<pre><code class="language-python">class Symbol(object):
+    def __init__(self, name, type=None):
+        self.name = name
+        self.type = type
+</code></pre>
+
+<p>正如你所看到的，这个类接受了 <em>name</em> 参数和一个可选的 <em>type</em> 参数（不是所有的符号都有与之相关的类型信息，我们马上就会看到）。</p>
+
+<p>那类别呢？我们将 <em>category</em> 编码到类名中。或者，我们可以将符号的类别存储在Symbol类的专用 <em>category</em> 字段中，如下所示：</p>
+
+<pre><code class="language-python">class Symbol(object):
+    def __init__(self, name, type=None):
+        self.name = name
+        self.type = type
+        self.category = category
+</code></pre>
+
+<p>但是，创建类的层次结构，用类的名称表示其类别更清晰。</p>
+
+<p>到目前为止，我绕过了内置类型的话题。如果你再看看我们的示例程序：</p>
+
+<pre><code class="language-pascal">program Main;
+   var x, y : integer;
+
+begin
+    x := x + y;
+end.
+</code></pre>
+
+<p>你可以看到变量x和y被声明为整数。什么是整数类型？整数类型是另一种符号，一个内置的类型符号。它被称为内置的，因为它不必在Pascal程序中显式的声明。我们的解释器有责任声明这种类型的符号，并将其提供给程序员：</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img09.png" alt="图1" /></p>
+
+<p>我们将为内置类型创建一个单独的类 <em>BuiltinTypeSymbol</em> 。以下是内置类型的类定义：</p>
+
+<pre><code class="language-python">class BuiltinTypeSymbol(Symbol):
+    def __init__(self, name):
+        super(BuiltinTypeSymbol, self).__init__(name)
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return &quot;&lt;{class_name}(name='{name}')&gt;&quot;.format(
+            class_name=self.__class__.__name__,
+            name=self.name,
+        )
+</code></pre>
+
+<p>类 <em>BuiltinTypeSymbol</em> 继承自 <em>Symbol</em> 类，其构造函数仅需要类型的名称，如 <em>integer</em> 或 <em>real</em> 。正如我们前面讨论的那样，“内建类型”类别编码在类名称中，而当我们创建 <em>BuiltinTypeSymbol</em> 类的新实例时，基类的 <em>type</em> 参数自动设置为 <em>None</em> 。</p>
+
+<pre><code>ASIDE
+
+双下划线或dunder（“Double UNDERscore”）方法 __str__和 __repr__ 是特殊的Python方法。当我们将符号对象打印到标准输出时，定义了它们会有一个很好的格式化消息。
+</code></pre>
+
+<p>顺便说一下，内置类型是 <em>Scope</em> 类构造函数中的类型参数是可选参数的原因。</p>
+
+<p>这是迄今为止符号类的层次结构：</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img10.png" alt="图1" /></p>
+
+<p>让我们在Python shell中的玩一下内建类型。下载<a href="https://github.com/rspivak/lsbasi/blob/master/part13/spi.py">解释器文件</a>并将其保存为 spi.py，从保存spi.py文件的相同目录启动python shell，并使用我们刚才定义的类来玩：</p>
+
+<pre><code class="language-shell">$ python
+&gt;&gt;&gt; from spi import BuiltinTypeSymbol
+&gt;&gt;&gt; int_type = BuiltinTypeSymbol('integer')
+&gt;&gt;&gt; int_type
+&lt;BuiltinTypeSymbol(name='integer')&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; real_type = BuiltinTypeSymbol('real')
+&gt;&gt;&gt; real_type
+&lt;BuiltinTypeSymbol(name='real')&gt;
+</code></pre>
+
+<p>这就是现在所有的内置类型符号。现在回到我们的变量符号。</p>
+
+<p>我们如何用代码来表示它们？我们来创建一个 <em>VarSymbol</em> 类：</p>
+
+<pre><code class="language-python">class VarSymbol(Symbol):
+    def __init__(self, name, type):
+        super(VarSymbol, self).__init__(name, type)
+
+    def __str__(self):
+        return &quot;&lt;{class_name}(name='{name}', type='{type}')&gt;&quot;.format(
+            class_name=self.__class__.__name__,
+            name=self.name,
+            type=self.type,
+        )
+
+    __repr__ = __str__
+</code></pre>
+
+<p>在这个类中，名称和类型参数是必须的，类名 <em>VarSymbol</em> 清楚地表明类的一个实例将标识一个变量符号（类别是 <em>variable</em> ）。 <em>type</em> 参数是 <em>BuiltinTypeSymbol</em> 类的一个实例。</p>
+
+<p>让我们回到交互式 Python shell，看看如何手动构建变量符号的实例，我们已经知道如何构建 BuiltinTypeSymbol 类实例：</p>
+
+<pre><code class="language-shell">$ python
+&gt;&gt;&gt; from spi import BuiltinTypeSymbol, VarSymbol
+&gt;&gt;&gt; int_type = BuiltinTypeSymbol('integer')
+&gt;&gt;&gt; real_type = BuiltinTypeSymbol('real')
+&gt;&gt;&gt;
+&gt;&gt;&gt; var_x_symbol = VarSymbol('x', int_type)
+&gt;&gt;&gt; var_x_symbol
+&lt;VarSymbol(name='x', type='integer')&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; var_y_symbol = VarSymbol('y', real_type)
+&gt;&gt;&gt; var_y_symbol
+&lt;VarSymbol(name='y', type='real')&gt;
+&gt;&gt;&gt;
+</code></pre>
+
+<p>正如你所看到的，我们首先创建一个内置的类型符号的实例，然后将其作为第二个参数传递给 <em>VarSymbol</em> 的构造函数：变量符号必须同时具有与它们相关的名称和类型，就像你在变量声明 var x : integer; 看到的那样</p>
+
+<p>这里是我们迄今为止定义的完整的符号层次结构：</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img11.png" alt="图1" /></p>
+
+<p><strong>好了，现在回答“我们在哪里以及如何存储收集的信息？”的问题。</strong></p>
+
+<p>现在我们已经有了所有能表示所有变量声明的符号，我们应该在哪里存储这些符号，以便我们在遇到变量引用（名称）时能够搜索它们？</p>
+
+<p>答案是，你可能已经知道了，在符号表中。</p>
+
+<p>什么是符号表？ <strong>符号表</strong> 是用于跟踪源代码中的各种符号的抽象数据类型。把它看作是一个字典，其中键是符号的名称，值是符号类（或它的一个子类）的一个实例。为了在代码中表示符号表，我们将使用一个专用的类命名为 <em>SymbolTable</em> 。 :) 为了将符号存储在符号表中，我们将把 <em>insert</em> 方法添加到符号表类中。方法 <em>insert</em> 将使用符号作为参数，并将其存储在内部使用符号名称作为键和符号实例作为值的名为 <em>_symbols</em> 有序字典中，：</p>
+
+<pre><code class="language-python">class SymbolTable(object):
+    def __init__(self):
+        self._symbols = OrderedDict()
+
+    def __str__(self):
+        symtab_header = 'Symbol table contents'
+        lines = ['\n', symtab_header, '_' * len(symtab_header)]
+        lines.extend(
+            ('%7s: %r' % (key, value))
+            for key, value in self._symbols.items()
+        )
+        lines.append('\n')
+        s = '\n'.join(lines)
+        return s
+
+    __repr__ = __str__
+
+    def insert(self, symbol):
+        print('Insert: %s' % symbol.name)
+        self._symbols[symbol.name] = symbol
+</code></pre>
+
+<p>让我们手动构建下面示例程序的符号表。由于还不知道如何搜索符号表，我们的程序将不包含任何变量引用，只包含变量声明：</p>
+
+<pre><code class="language-pascal">program SymTab1;
+   var x, y : integer;
+
+begin
+
+end.
+</code></pre>
+
+<p>下载<a href="https://github.com/rspivak/lsbasi/blob/master/part13/symtab01.py">symtab01.py</a>，它包含了我们新的 <em>SymbolTable</em> 类，在命令行上运行它。这是上面程序的输出结果：</p>
+
+<pre><code>$ python symtab01.py
+Insert: INTEGER
+Insert: x
+Insert: y
+
+
+Symbol table contents
+_____________________
+INTEGER: &lt;BuiltinTypeSymbol(name='INTEGER')&gt;
+      x: &lt;VarSymbol(name='x', type='INTEGER')&gt;
+      y: &lt;VarSymbol(name='y', type='INTEGER')&gt;
+</code></pre>
+
+<p>现在让我们在Python shell中手动构建和填充符号表：</p>
+
+<pre><code>$ python
+&gt;&gt;&gt; from symtab01 import SymbolTable, BuiltinTypeSymbol, VarSymbol
+&gt;&gt;&gt; symtab = SymbolTable()
+&gt;&gt;&gt; int_type = BuiltinTypeSymbol('INTEGER')
+&gt;&gt;&gt; # now let's store the built-in type symbol in the symbol table
+...
+&gt;&gt;&gt; symtab.insert(int_type)
+Insert: INTEGER
+&gt;&gt;&gt;
+&gt;&gt;&gt; symtab
+
+
+Symbol table contents
+_____________________
+INTEGER: &lt;BuiltinTypeSymbol(name='INTEGER')&gt;
+
+
+&gt;&gt;&gt; var_x_symbol = VarSymbol('x', int_type)
+&gt;&gt;&gt; symtab.insert(var_x_symbol)
+Insert: x
+&gt;&gt;&gt; symtab
+
+
+Symbol table contents
+_____________________
+INTEGER: &lt;BuiltinTypeSymbol(name='INTEGER')&gt;
+      x: &lt;VarSymbol(name='x', type='INTEGER')&gt;
+
+
+&gt;&gt;&gt; var_y_symbol = VarSymbol('y', int_type)
+&gt;&gt;&gt; symtab.insert(var_y_symbol)
+Insert: y
+&gt;&gt;&gt; symtab
+
+
+Symbol table contents
+_____________________
+INTEGER: &lt;BuiltinTypeSymbol(name='INTEGER')&gt;
+      x: &lt;VarSymbol(name='x', type='INTEGER')&gt;
+      y: &lt;VarSymbol(name='y', type='INTEGER')&gt;
+
+
+&gt;&gt;&gt;
+</code></pre>
+
+<p>在这一点上，我们已经回答了前面提到的两个问题：</p>
+
+<ul>
+<li><p>A.我们需要收集哪些关于变量的信息？</p>
+
+<p>名称，类别和类型。我们用符号来保存这些信息。</p></li>
+
+<li><p>B.我们在哪里以及如何存储收集到的信息？</p>
+
+<p>我们使用插入方法将收集的符号存储在符号表中。</p></li>
+</ul>
+
+<p>现在让我们找到第三个问题的答案： <strong>‘我们如何实现“遍历所有变量声明”的步骤？’</strong></p>
+
+<p>这是一个非常简单的问题。因为我们已经有了一个由解析器构建的AST，所以我们只需要创建一个新的AST访问者类，它将负责在树上游走，并在访问 <em>VarDecl</em> AST节点时执行不同的操作！</p>
+
+<p>现在我们有了三个问题的答案：</p>
+
+<ul>
+<li><p>A.我们需要收集哪些关于变量的信息？</p>
+
+<p>名称，类别和类型。我们用符号来保存这些信息。</p></li>
+
+<li><p>B.我们在哪里以及如何存储收集到的信息？</p>
+
+<p>我们使用插入方法将收集的符号存储在符号表中。</p></li>
+
+<li><p>C.我们如何实现“遍历所有变量声明”步骤？</p>
+
+<p>我们将创建一个新的AST访问者，在访问 <em>VarDecl</em> AST节点时做一些操作。</p></li>
+</ul>
+
+<p>让我们创建一个新的树访问者类，并命名为 <em>SemanticAnalyzer</em> 。看看下面的示例程序，例如：</p>
+
+<pre><code class="language-pascal">program SymTab2;
+   var x, y : integer;
+
+begin
+
+end.
+</code></pre>
+
+<p>为了能够分析上面的程序，我们不需要实现所有的 <em>visit_xxx</em> 方法，仅子集就够了。下面是 <em>SemanticAnalyzer</em> 类的框架，它有足够的 <em>visit_xxx</em> 方法来成功地游走上面示例程序的AST：</p>
+
+<pre><code class="language-python">class SemanticAnalyzer(NodeVisitor):
+    def __init__(self):
+        self.symtab = SymbolTable()
+
+    def visit_Block(self, node):
+        for declaration in node.declarations:
+            self.visit(declaration)
+        self.visit(node.compound_statement)
+
+    def visit_Program(self, node):
+        self.visit(node.block)
+
+    def visit_Compound(self, node):
+        for child in node.children:
+            self.visit(child)
+
+    def visit_NoOp(self, node):
+        pass
+
+    def visit_VarDecl(self, node):
+        #  Actions go here
+        pass
+</code></pre>
+
+<p>现在，我们已经完成了第一个静态语义检查算法的前三个步骤，检查变量在使用之前是否被声明。</p>
+
+<p>下面再提下算法的步骤：</p>
+
+<ol>
+<li>遍历所有变量声明</li>
+<li>对于遇到的每个变量声明，收集有关声明变量的所有必要信息</li>
+<li>将收集到的信息存储在某个地方，以便将来使用该变量的名称作为关键字引用该变量</li>
+<li>当你看到一个变量引用时，比如在赋值语句x := x + y中，通过变量的名字来搜索存储，看看存储中是否有关于变量的任何信息。如果有，变量已被声明。如果没有，变量还没有被声明，这是一个语义错误。</li>
+</ol>
+
+<p>我们来实现这些步骤。实际上，我们唯一需要做的就是填充 <em>SemanticAnalyzer</em> 类的 <em>visit_VarDecl</em> 方法。在这里，填写：</p>
+
+<pre><code class="language-python">def visit_VarDecl(self, node):
+    # For now, manually create a symbol for the INTEGER built-in type
+    # and insert the type symbol in the symbol table.
+    type_symbol = BuiltinTypeSymbol('INTEGER')
+    self.symtab.insert(type_symbol)
+
+    # We have all the information we need to create a variable symbol.
+    # Create the symbol and insert it into the symbol table.
+    var_name = node.var_node.value
+    var_symbol = VarSymbol(var_name, type_symbol)
+    self.symtab.insert(var_symbol)
+</code></pre>
+
+<p>如果你看看这个方法的内容，可以看到它实际上包含了所有的三个步骤：</p>
+
+<ol>
+<li>一旦我们调用了 <em>SemanticAnalyzer</em> 实例的 <em>visit</em> 方法，就会为每个变量声明调用该方法。这包括算法的第一步：“遍历所有变量声明”</li>
+<li>对于每个变量声明，方法 <em>visit_VarDecl</em> 将收集必要的信息并创建一个变量符号实例。这包括算法的第2步：“对于遇到的每个变量声明，收集关于声明变量的所有必要信息”</li>
+<li>方法 <em>visit_VarDecl</em> 将使用符号表的insert方法将收集的关于变量声明的信息存储在符号表中。这包括算法的步骤3：“通过使用变量的名称作为关键字将收集到的信息存储在某个地方中以备将来引用”</li>
+</ol>
+
+<p>要查看所有这些步骤，请先下载文件<a href="https://github.com/rspivak/lsbasi/blob/master/part13/symtab02.py">symtab02.py</a>并研究其源代码。然后在命令行上运行它并检查输出：</p>
+
+<pre><code>$ python symtab02.py
+Insert: INTEGER
+Insert: x
+Insert: INTEGER
+Insert: y
+
+
+Symbol table contents
+_____________________
+INTEGER: &lt;BuiltinTypeSymbol(name='INTEGER')&gt;
+      x: &lt;VarSymbol(name='x', type='INTEGER')&gt;
+      y: &lt;VarSymbol(name='y', type='INTEGER')&gt;
+</code></pre>
+
+<p>您可能已经注意到，有两行说 Insert: INTEGER。我们将在下面的章节中解决这个问题，下面章节将讨论语义检查算法的最后一步（步骤4）的实现。</p>
+
+<p>好的，让我们来实现算法的第4步。下面是步骤4的更新版本，以反映符号和符号表的引入：当你看到一个变量引用时，比如在赋值语句x := x + y中，通过变量的名字来搜索存储，看看存储中是否有关于变量的任何信息。如果有，变量已被声明。如果没有，变量还没有被声明，这是一个语义错误。</p>
+
+<p>为了实现步骤4，我们需要对符号表和语义分析器进行一些修改：</p>
+
+<ol>
+<li>我们需要在符号表中添加一个方法，以便能够按名称查找符号。</li>
+<li>我们需要更新语义分析器，以便在每次遇到变量引用时在符号表中查找名称。</li>
+</ol>
+
+<p>首先，我们通过添加按名称搜索符号的 <em>lookup</em> 方法来更新的 <em>SymbolTable</em> 类。换句话说， <em>lookup</em> 方法将负责解析变量名称（变量引用）到它的声明。将变量引用映射到其声明的过程称为 <strong>名称解析</strong> 。这是我们的 <em>lookup</em> 方法，仅做名称解析：</p>
+
+<pre><code class="language-python">def lookup(self, name):
+    print('Lookup: %s' % name)
+    symbol = self._symbols.get(name)
+    # 'symbol' is either an instance of the Symbol class or None
+    return symbol
+</code></pre>
+
+<p>该方法将符号名称作为参数，如果找到它，则返回符号，否则返回None。就是如此简单。</p>
+
+<p>既然在这里，让我们也更新下 <em>SymbolTable</em> 类来初始化内置类型。我们将通过添加 <em>_init_builtins</em> 方法并在 <em>SymbolTable</em> 的构造函数中调用它。 <em>_init_builtins</em> 方法将在符号表中插入一个 <em>integer</em> 的类型符号和一个 <em>real</em> 的类型符号。</p>
+
+<p>以下是我们更新的 <em>SymbolTable</em> 类的完整代码：</p>
+
+<pre><code class="language-pythyon">class SymbolTable(object):
+    def __init__(self):
+        self._symbols = OrderedDict()
+        self._init_builtins()
+
+    def _init_builtins(self):
+        self.insert(BuiltinTypeSymbol('INTEGER'))
+        self.insert(BuiltinTypeSymbol('REAL'))
+
+    def __str__(self):
+        symtab_header = 'Symbol table contents'
+        lines = ['\n', symtab_header, '_' * len(symtab_header)]
+        lines.extend(
+            ('%7s: %r' % (key, value))
+            for key, value in self._symbols.items()
+        )
+        lines.append('\n')
+        s = '\n'.join(lines)
+        return s
+
+    __repr__ = __str__
+
+    def insert(self, symbol):
+        print('Insert: %s' % symbol.name)
+        self._symbols[symbol.name] = symbol
+
+    def lookup(self, name):
+        print('Lookup: %s' % name)
+        symbol = self._symbols.get(name)
+        # 'symbol' is either an instance of the Symbol class or None
+        return symbol
+</code></pre>
+
+<p>现在有了内置类型符号和查找方法当遇到变量名称（和其他名称像类型名称）时来搜索符号表。让我们更新 <em>SemanticAnalyzer</em> 的 <em>visit_VarDecl</em> 方法，并用查找INTEGER类型符号的方法替换手动创建INTEGER内置类型符号并手动将其插入到符号表中的代码。</p>
+
+<p>该更改也将解决以前见过的两行 Insert：INTEGER 输出的问题。</p>
+
+<p>这是更改之前的visit_VarDecl方法：</p>
+
+<pre><code class="language-python">def visit_VarDecl(self, node):
+    # For now, manually create a symbol for the INTEGER built-in type
+    # and insert the type symbol in the symbol table.
+    type_symbol = BuiltinTypeSymbol('INTEGER')
+    self.symtab.insert(type_symbol)
+
+    # We have all the information we need to create a variable symbol.
+    # Create the symbol and insert it into the symbol table.
+    var_name = node.var_node.value
+    var_symbol = VarSymbol(var_name, type_symbol)
+    self.symtab.insert(var_symbol)
+</code></pre>
+
+<p>改变之后：</p>
+
+<pre><code class="language-python">def visit_VarDecl(self, node):
+    type_name = node.type_node.value
+    type_symbol = self.symtab.lookup(type_name)
+
+    # We have all the information we need to create a variable symbol.
+    # Create the symbol and insert it into the symbol table.
+    var_name = node.var_node.value
+    var_symbol = VarSymbol(var_name, type_symbol)
+    self.symtab.insert(var_symbol)
+</code></pre>
+
+<p>让我们将这些更改应用于仅具有变量声明的熟悉的Pascal程序：</p>
+
+<pre><code class="language-pascal">program SymTab3;
+   var x, y : integer;
+
+begin
+
+end.
+</code></pre>
+
+<p>下载<a href="https://github.com/rspivak/lsbasi/blob/master/part13/symtab03.py">symtab03.py</a>文件，它包含了我们刚讨论过的所有更改，在命令行上运行它，并看到程序输出中不再有重复的Insert：INTEGER行：</p>
+
+<pre><code>$ python symtab03.py
+Insert: INTEGER
+Insert: REAL
+Lookup: INTEGER
+Insert: x
+Lookup: INTEGER
+Insert: y
+
+
+Symbol table contents
+_____________________
+INTEGER: &lt;BuiltinTypeSymbol(name='INTEGER')&gt;
+   REAL: &lt;BuiltinTypeSymbol(name='REAL')&gt;
+      x: &lt;VarSymbol(name='x', type='INTEGER')&gt;
+      y: &lt;VarSymbol(name='y', type='INTEGER')&gt;
+</code></pre>
+
+<p>您还可以在上面的输出中看到，我们的语义分析器查找了两次INTEGER内置类型：第一个用于声明变量x，第二个用于声明变量y。</p>
+
+<p>现在将注意力转向变量引用（名称），以及如何在算术表达式中将变量名称解析为其变量声明（变量符号）。让我们来看看下面的示例程序，例如，它有一个赋值语句 x := x + y; 有三个变量引用：x，另一个x和y：</p>
+
+<pre><code class="language-pascal">program SymTab4;
+    var x, y : integer;
+
+begin
+    x := x + y;
+end.
+</code></pre>
+
+<p>我们在符号表实现中已经有了 <em>lookup</em> 方法。现在需要做的是扩展我们的语义分析器，以便每次遇到变量引用时，都会使用符号表的 <em>lookup</em> 通过变量引用名称来搜索符号表。每次分析器游走AST时遇到变量引用，都会调用 <em>SemanticAnalyzer</em> 的哪个方法？ <em>visit_Var</em> 方法。把它添加到我们的类中。很简单：只要按名称查找变量符号即可：</p>
+
+<pre><code class="language-python">def visit_Var(self, node):
+    var_name = node.value
+    var_symbol = self.symtab.lookup(var_name)
+</code></pre>
+
+<p>因为示例程序 <em>SymTab4</em> 中有一个右边有算术运算符加号的赋值语句，我们需要在 <em>SemanticAnalyzer</em> 中添加两个方法，以便它可以实际运行SymTab4程序的AST，并调用所有Var节点的 <em>visit_Var</em> 方法。需要添加的方法是 <em>visit_Assign</em> 和 <em>visit_BinOp</em> 。它们并不是什么新东西：你以前见过这些方法。他们来了：</p>
+
+<pre><code class="language-python">def visit_Assign(self, node):
+    # right-hand side
+    self.visit(node.right)
+    # left-hand side
+    self.visit(node.left)
+
+def visit_BinOp(self, node):
+    self.visit(node.left)
+    self.visit(node.right)
+</code></pre>
+
+<p>你可以在文件<a href="https://github.com/rspivak/lsbasi/blob/master/part13/symtab04.py">symtab04.py</a>中找到我们刚刚讨论过的更改的完整源代码。下载文件，在命令行上运行该文件，并使用赋值语句的示例程序SymTab4检查生成的输出。</p>
+
+<p>这是我的笔记本上的输出：</p>
+
+<pre><code>$ python symtab04.py
+Insert: INTEGER
+Insert: REAL
+Lookup: INTEGER
+Insert: x
+Lookup: INTEGER
+Insert: y
+Lookup: x
+Lookup: y
+Lookup: x
+
+
+Symbol table contents
+_____________________
+INTEGER: &lt;BuiltinTypeSymbol(name='INTEGER')&gt;
+   REAL: &lt;BuiltinTypeSymbol(name='REAL')&gt;
+      x: &lt;VarSymbol(name='x', type='INTEGER')&gt;
+      y: &lt;VarSymbol(name='y', type='INTEGER')&gt;
+</code></pre>
+
+<p>花一些时间分析输出，并确保您理解如何以及为什么按此顺序生成输出。</p>
+
+<p>在这一点上，我们已经实现了静态语义检查算法的所有步骤，验证程序中的所有变量在使用之前是否被声明了！</p>
+
+<p>#### 语义错误 ####</p>
+
+<p>到目前为止，我们已经看到了声明它们变量的程序，但是如果我们的程序有一个变量引用不能解析到任何声明呢？也就是说，它没有被声明？这是一个语义错误，我们需要扩展我们的语义分析器来指示错误。</p>
+
+<p>看看下面的语义错误的程序，其中变量y没有声明，但在赋值语句中使用：</p>
+
+<pre><code class="language-pascal">program SymTab5;
+    var x : integer;
+
+begin
+    x := y;
+end.
+</code></pre>
+
+<p>要发出错误信号，我们需要修改 <em>SemanticAnalyzer</em> 的 <em>visit_Var</em> 方法，以便在 <em>lookup</em> 方法无法将名称解析为符号并返回None时抛出异常。这里是 <em>visit_Var</em> 的更新代码：</p>
+
+<pre><code class="language-python">def visit_Var(self, node):
+    var_name = node.value
+    var_symbol = self.symtab.lookup(var_name)
+    if var_symbol is None:
+        raise Exception(
+            &quot;Error: Symbol(identifier) not found '%s'&quot; % var_name
+        )
+</code></pre>
+
+<p>下载<a href="https://github.com/rspivak/lsbasi/blob/master/part13/symtab05.py">symtab05.py</a>，在命令行上运行它，看看会发生什么：</p>
+
+<pre><code>$ python symtab05.py
+Insert: INTEGER
+Insert: REAL
+Lookup: INTEGER
+Insert: x
+Lookup: y
+Error: Symbol(identifier) not found 'y'
+
+
+Symbol table contents
+_____________________
+INTEGER: &lt;BuiltinTypeSymbol(name='INTEGER')&gt;
+   REAL: &lt;BuiltinTypeSymbol(name='REAL')&gt;
+      x: &lt;VarSymbol(name='x', type='INTEGER')&gt;
+</code></pre>
+
+<p>您可以看到错误消息 <strong><em>Error: Symbol(identifier) not found ‘y’</em></strong> 和符号表的内容。</p>
+
+<p>恭喜您完成我们的语义分析器的当前版本，它可以静态检查程序中的变量是否在使用之前被声明，如果不是，则抛出一个表示语义错误的异常！</p>
+
+<p>让我们暂停一下，庆祝这个重要的里程碑。好的，暂停结束，我们需要进行另一个静态语义检查。为了娱乐和利益，让我们扩展语义分析器来检查声明中的重复标识符。</p>
+
+<p>我们来看看下面的程序SymTab6：</p>
+
+<pre><code>program SymTab6;
+   var x, y : integer;
+   var y : real;
+begin
+   x := x + y;
+end.
+</code></pre>
+
+<p>变量y被声明了两次：第一次是整数，第二次是实数。</p>
+
+<p>为了捕获这个语义错误，我们需要修改 <em>visit_VarDecl</em> 方法来检查符号表是否已经在插入一个新符号之前有一个同名的符号。这是我们的新方法：</p>
+
+<pre><code class="language-python">def visit_VarDecl(self, node):
+    type_name = node.type_node.value
+    type_symbol = self.symtab.lookup(type_name)
+
+    # We have all the information we need to create a variable symbol.
+    # Create the symbol and insert it into the symbol table.
+    var_name = node.var_node.value
+    var_symbol = VarSymbol(var_name, type_symbol)
+
+    # Signal an error if the table alrady has a symbol
+    # with the same name
+    if self.symtab.lookup(var_name) is not None:
+        raise Exception(
+            &quot;Error: Duplicate identifier '%s' found&quot; % var_name
+        )
+
+    self.symtab.insert(var_symbol)
+</code></pre>
+
+<p>文件<a href="https://github.com/rspivak/lsbasi/blob/master/part13/symtab06.py">symtab06.py</a>具有所有更改。下载并在命令行上运行它：</p>
+
+<pre><code>$ python symtab06.py
+Insert: INTEGER
+Insert: REAL
+Lookup: INTEGER
+Lookup: x
+Insert: x
+Lookup: INTEGER
+Lookup: y
+Insert: y
+Lookup: REAL
+Lookup: y
+Error: Duplicate identifier 'y' found
+
+
+Symbol table contents
+_____________________
+INTEGER: &lt;BuiltinTypeSymbol(name='INTEGER')&gt;
+   REAL: &lt;BuiltinTypeSymbol(name='REAL')&gt;
+      x: &lt;VarSymbol(name='x', type='INTEGER')&gt;
+      y: &lt;VarSymbol(name='y', type='INTEGER')&gt;
+</code></pre>
+
+<p>研究符号表的输出和内容。确保你明白发生了什么事。</p>
+
+<h4 id="概要">概要</h4>
+
+<p>让我们快速回顾一下我们今天学到的东西：</p>
+
+<ul>
+<li>我们学习了更多的符号，符号表和语义分析的内容</li>
+<li>我们学习了名称解析以及语义分析器如何将名称解析为其声明</li>
+<li>我们学习了如何编写一个语义分析器，它可以遍历AST，建立符号表，并进行基本的语义检查</li>
+</ul>
+
+<p>而且，提醒一下，我们解释器的结构现在看起来像这样：</p>
+
+<p><img src="/img/lsbasi13/lsbasi_part13_img03.png" alt="图1" /></p>
+
+<p>我们已经完成了今天的语义检查，并且终于准备好处理作用域的话题。作用域如何与符号表相关联，以及在嵌套作用域的情况下进行语义检查的主题，这些将成为下一篇文章的核心话题。敬请期待，再见！</p>
+    </div>
+    <ul class="pager">
+    
+    
+          &nbsp;<li class="next"><a href="http://painterliu.com/post/lsbasi-part12/"> 一起来写个简单的解释器（12）</a></li>
+
+      
+      
+    </ul>
+    <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'liuhuimin',
+  repo: 'liuhuimin.github.io',
+  oauth: {
+    client_id: 'e25c4f4c43c6ef1f403b',
+    client_secret: '503da73a705d49acd7c3f530436c4fd9af2c1e5d',
+  },
+})
+gitment.render('container')
+</script>
+
+ </div>
+
+
+</body></html>

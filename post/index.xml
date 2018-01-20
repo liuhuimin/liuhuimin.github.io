@@ -5,10 +5,37 @@
     <link>http://painterliu.com/post/</link>
     <description>Recent content in Posts on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 13 Dec 2017 20:14:34 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jan 2018 20:42:05 +0800</lastBuildDate>
     
 	<atom:link href="http://painterliu.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一起来写个简单的解释器（13）语义分析</title>
+      <link>http://painterliu.com/post/lsbasi-part13/</link>
+      <pubDate>Sat, 20 Jan 2018 20:42:05 +0800</pubDate>
+      
+      <guid>http://painterliu.com/post/lsbasi-part13/</guid>
+      <description>&lt;p&gt;英文出处：&lt;a href=&#34;https://ruslanspivak.com/lsbasi-part13/&#34;&gt;Ruslan&amp;rsquo;s Blog
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/88152/&#34;&gt;《一起来写个简单的解释器（1）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/88347/&#34;&gt;《一起来写个简单的解释器（2）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/90055/&#34;&gt;《一起来写个简单的解释器（3）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/94326/&#34;&gt;《一起来写个简单的解释器（4）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/94686/&#34;&gt;《一起来写个简单的解释器（5）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/95145/&#34;&gt;《一起来写个简单的解释器（6）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part7/&#34;&gt;《一起来写个简单的解释器（7）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part8/&#34;&gt;《一起来写个简单的解释器（8）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part9/&#34;&gt;《一起来写个简单的解释器（9）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part10/&#34;&gt;《一起来写个简单的解释器（10）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part11/&#34;&gt;《一起来写个简单的解释器（11）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part12/&#34;&gt;《一起来写个简单的解释器（12）》&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;任何值得做的事都应该全力以赴。&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>一起来写个简单的解释器（12）</title>
