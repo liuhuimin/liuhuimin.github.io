@@ -5,10 +5,39 @@
     <link>http://painterliu.com/</link>
     <description>Recent content on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 20 Jan 2018 20:42:05 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jan 2018 10:00:34 +0800</lastBuildDate>
     
 	<atom:link href="http://painterliu.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一起来写个简单的解释器（14）嵌套作用域和源到源编译器</title>
+      <link>http://painterliu.com/post/lsbasi-part14/</link>
+      <pubDate>Sat, 27 Jan 2018 10:00:34 +0800</pubDate>
+      
+      <guid>http://painterliu.com/post/lsbasi-part14/</guid>
+      <description>&lt;p&gt;英文出处：&lt;a href=&#34;https://ruslanspivak.com/lsbasi-part14/&#34;&gt;Ruslan&amp;rsquo;s Blog
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/88152/&#34;&gt;《一起来写个简单的解释器（1）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/88347/&#34;&gt;《一起来写个简单的解释器（2）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/90055/&#34;&gt;《一起来写个简单的解释器（3）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/94326/&#34;&gt;《一起来写个简单的解释器（4）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/94686/&#34;&gt;《一起来写个简单的解释器（5）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.jobbole.com/95145/&#34;&gt;《一起来写个简单的解释器（6）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part7/&#34;&gt;《一起来写个简单的解释器（7）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part8/&#34;&gt;《一起来写个简单的解释器（8）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part9/&#34;&gt;《一起来写个简单的解释器（9）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part10/&#34;&gt;《一起来写个简单的解释器（10）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part11/&#34;&gt;《一起来写个简单的解释器（11）》&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part12/&#34;&gt;《一起来写个简单的解释器（12）》&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://painterliu.com/post/lsbasi-part13/&#34;&gt;《一起来写个简单的解释器（13）》&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;只有死鱼才随波逐流。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>一起来写个简单的解释器（13）语义分析</title>
