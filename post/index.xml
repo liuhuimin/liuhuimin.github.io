@@ -5,10 +5,20 @@
     <link>http://painterliu.com/post/</link>
     <description>Recent content in Posts on painterliu的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 27 Jan 2018 10:00:34 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 27 May 2018 17:47:37 +0800</lastBuildDate>
     
 	<atom:link href="http://painterliu.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>外管局数据报送系统二期项目第一阶段总结</title>
+      <link>http://painterliu.com/post/falt_summary/</link>
+      <pubDate>Sun, 27 May 2018 17:47:37 +0800</pubDate>
+      
+      <guid>http://painterliu.com/post/falt_summary/</guid>
+      <description>&lt;p&gt;外管局新申报制度数据报送系统二期项目第一阶段成功上线，这里总结下经验教训。这算是我作为技术经理做的第一个研发项目，带着4个外协人员进行，虽然之前自己做为项目经理带过小的科维，但比较小，研发和科维的考核严格情况和要求也不同，比较有纪念意义。本次主要总结经验教训。
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>一起来写个简单的解释器（14）嵌套作用域和源到源编译器</title>
